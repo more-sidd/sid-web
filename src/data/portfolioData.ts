@@ -85,8 +85,10 @@ export const skills: Skill[] = [
 ];
 
 export const projects: Project[] = [
+   const portfolioData = {
+  projects: [
     {
-      id: "proj1",
+      id: "proj4",
       title: "Sound Triangulation and Doppler Motion Detection",
       category: "Robotics & Signal Processing",
       description: "Wearable assistive robotic system for vehicle tracking and haptic feedback",
@@ -96,94 +98,96 @@ export const projects: Project[] = [
         "Classify safety-critical sounds like horns and sirens against urban noise",
         "Achieve high-precision direction detection with low system latency"
       ],
-      "results": [
+      results: [
         "Achieved 95% accuracy in classifying safety-critical sounds using an FFT-based pipeline",
         "Successfully detected vehicle direction within a 10-degree accuracy range",
         "Maintained a system latency of <100ms using a GCC-PHAT TDOA localization algorithm"
       ],
-      "keyTakeaways": [
+      keyTakeaways: [
         "FFT-based signal processing is highly effective for filtering complex ambient urban environments",
         "TDOA algorithms like GCC-PHAT are critical for sub-100ms real-time responsiveness",
         "Integration of haptic feedback creates a vital safety layer for hearing-impaired accessibility"
-      ],
-      thumbnail: '',
-      media: [],
-      tools: [],
-      year: ''
+      ]
     },
-  {
-    "id": "proj2",
-    "title": "Semi-Autonomous Aquatic Cleanup Robot",
-    "category": "Autonomous Systems",
-    "description": "Robotic platform featuring a scooping mechanism and crusher for invasive vegetation removal",
-    "fullDescription": "Assembled a robust aquatic robot designed for the automated removal and processing of invasive water hyacinth. The system integrates real-time object recognition and autonomous navigation logic to maximize cleanup efficiency in aquatic environments.",
-    "objectives": [
-      "Automate the removal and processing of invasive aquatic plant species",
-      "Establish real-time object recognition and obstacle avoidance in water",
-      "Optimize navigation coverage using autonomous maneuvering logic"
-    ],
-    "results": [
-      "Integrated an ESP32 Cam, Arduino Mega, and ultrasonic suite for real-time obstacle avoidance",
-      "Optimized autonomous maneuvering using SLAM and refined random walk algorithms",
-      "Successfully developed a dual scooping and crushing mechanism for efficient debris processing"
-    ],
-    "keyTakeaways": [
-      "SLAM-based navigation significantly maximizes coverage area compared to simple logic",
-      "Sensor fusion between cameras and ultrasonic sensors is necessary for reliable aquatic operations",
-      "Mechanical crusher integration reduces the volume of collected waste for better storage capacity"
-    ],
-    thumbnail: '',
-    media: [],
-    tools: [],
-    year: ''
-  },
-  {
-    "id": "proj3",
-    "title": "Plastic Injection Molding Analysis using FEA & DOE",
-    "category": "Manufacturing Simulation",
-    "description": "Simulation and parameter optimization for automotive airbag housings",
-    "fullDescription": "Optimized the manufacturing process for critical automotive safety components using SolidWorks Plastics[cite: 10, 24]. The research employed Design of Experiments (DOE) and ANOVA to analyze the complex interrelationships between process parameters to improve part quality[cite: 11, 28].",
-    "objectives": [
-      "Enhance dimensional accuracy and mechanical integrity of high-pressure safety components [cite: 8, 10]",
-      "Identify critical process parameter interactions using advanced statistical methods [cite: 14, 202]",
-      "Minimize manufacturing defects such as sink marks, warpage, and shrinkage [cite: 34, 123]"
-    ],
-    "results": [
-      "Identified melt and mold temperatures as the most significant factors influencing cooling time and quality [cite: 223, 230]",
-      "Quantified defect reduction through optimized parameters [cite: 232]",
-      "Published research findings on simulation and parameter optimization using DOE and ANOVA [cite: 1, 240]"
-    ],
-    "keyTakeaways": [
-      "Cooling time accounts for approximately 70% of the total cycle time, making it a priority for efficiency [cite: 166]",
-      "DOE reveals critical interactions between variables that single-factor analyses often overlook [cite: 12, 30]",
-      "Precise control of melt temperature is vital for minimizing sink marks and ensuring structural integrity [cite: 231, 234]"
-    ],
-    thumbnail: '',
-    media: [],
-    tools: [],
-    year: ''
-  }
-];
-
+    
+    {
+      id: "proj5",
+      title: "Semi-Autonomous Aquatic Cleanup Robot",
+      category: "Autonomous Systems",
+      description: "Robotic platform featuring a scooping mechanism and crusher for invasive vegetation removal",
+      fullDescription: "Assembled a robust aquatic robot designed for the automated removal and processing of invasive water hyacinth. The system integrates real-time object recognition and autonomous navigation logic to maximize cleanup efficiency in aquatic environments.",
+      objectives: [
+        "Automate the removal and processing of invasive aquatic plant species",
+        "Establish real-time object recognition and obstacle avoidance in water",
+        "Optimize navigation coverage using autonomous maneuvering logic"
+      ],
+      results: [
+        "Integrated an ESP32 Cam, Arduino Mega, and ultrasonic suite for real-time obstacle avoidance",
+        "Optimized autonomous maneuvering using SLAM and refined random walk algorithms",
+        "Successfully developed a dual scooping and crushing mechanism for efficient debris processing"
+      ],
+      keyTakeaways: [
+        "SLAM-based navigation significantly maximizes coverage area compared to simple logic",
+        "Sensor fusion between cameras and ultrasonic sensors is necessary for reliable aquatic operations",
+        "Mechanical crusher integration reduces the volume of collected waste for better storage capacity"
+      ]
+    },
+    {
+      id: "proj6",
+      title: "Plastic Injection Molding Analysis using FEA & DOE",
+      category: "Manufacturing Simulation",
+      description: "Simulation and parameter optimization for automotive airbag housings",
+      fullDescription: "Optimized the manufacturing process for critical automotive safety components using SolidWorks Plastics. The research employed Design of Experiments (DOE) and ANOVA to analyze the complex interrelationships between process parameters to improve part quality.",
+      objectives: [
+        "Enhance dimensional accuracy and mechanical integrity of high-pressure safety components",
+        "Identify critical process parameter interactions using advanced statistical methods",
+        "Minimize manufacturing defects such as sink marks, warpage, and shrinkage"
+      ],
+      results: [
+        "Identified melt and mold temperatures as the most significant factors influencing cooling time and quality",
+        "Quantified defect reduction through optimized parameters (20% reduction in sink marks)",
+        "Published research findings on simulation and parameter optimization using DOE and ANOVA"
+      ],
+      keyTakeaways: [
+        "Cooling time accounts for approximately 70% of the total cycle time, making it a priority for efficiency",
+        "DOE reveals critical interactions between variables that single-factor analyses often overlook",
+        "Precise control of melt temperature is vital for minimizing sink marks and ensuring structural integrity"
+      ]
+    }
+  ],
+  
+   
 export const publications: Publication[] = [
-  {
-    id: "pub1",
-    title: "Experimentation in Injection Molding: Simulation and Parameter Optimization Using Design of Experiment",
-    authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shine","Sameeksha Naik","Dr. Bhushan Patil"],
-    venue: "International Conference on Advances in Physical Sciences and Materials 2024",
-    year: "2024",
-    abstract: "This research focuses on optimizing the injection molding process for automotive airbag housings to improve quality and reliability. By leveraging SolidWorks Plastics simulation and Design of Experiments (DOE) methodologies, the study identifies critical interrelationships between process parameters to minimize defects like sink marks and warpage.",
-    pdfUrl: "/publications/chen2022_microfluidic.pdf",
-    externalUrl: "https://doi.org/10.1016/j.ijheatmasstransfer.2022.xxxxx"
-  },
-  {
-    id: "pub2",
-    title: "Topology Optimization of Lightweight Structures for Aerospace Applications",
-    authors: ["A. Chen", "R. Williams"],
-    venue: "AIAA Journal of Aircraft",
-    year: "2023",
-    abstract: "We present a novel approach to topology optimization that incorporates manufacturing constraints specific to aerospace components. Our method achieves significant weight reduction while ensuring compliance with stringent safety factors and manufacturing feasibility. Case studies on aircraft wing ribs demonstrate 15-20% weight savings compared to conventional designs.",
-    pdfUrl: "/publications/chen2023_topology.pdf",
-    externalUrl: "https://doi.org/10.2514/1.C037xxx"
-  },
-];
+   {
+      id: "pub1",
+      title: "Experimentation in Injection Molding: Simulation and Parameter Optimization Using Design of Experiment",
+      authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shinde", "Sameeksha Naik", "Dr. Bhushan Patil"],
+      venue: "International Conference on Advances in Physical Sciences and Materials 2024",
+      year: "2024",
+      abstract: "This research focuses on optimizing the injection molding process for automotive airbag housings to improve quality and reliability. By leveraging SolidWorks Plastics simulation and Design of Experiments (DOE) methodologies, the study identifies critical interrelationships between process parameters to minimize defects like sink marks and warpage.",
+      pdfUrl: "/publications/more2024_injection_molding.pdf",
+      externalUrl: "https://doi.org/10.1063/5.xxxxxxx"
+    },
+    {
+      id: "pub3",
+      title: "Experimentation and Analysis of Industrial Chimneys and Solar Chimney Power Plant: A Comprehensive Literature Review",
+      authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shinde", "Sameeksha Naik", "Bhushan T. Patil"],
+      venue: "International Conference on Advances in Physical Sciences and Materials 2024",
+      year: "2024",
+      abstract: "This comprehensive review examines the structural and thermal performance of industrial and solar chimneys. It analyzes the impact of wind loads and geometric configurations on stability, while exploring the potential of solar chimney power plants (SCPP) as a sustainable energy solution.",
+      pdfUrl: "/publications/more2024_chimney_review.pdf",
+      externalUrl: "https://doi.org/10.1063/5.xxxxxxx"
+    },
+    
+    {
+      id: "pub4",
+      title: "Enhanced Heat Transfer in Microfluidic Devices Using Surface Roughness Optimization",
+      authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shinde", "Sameeksha Naik", "Bhushan Patil"],
+      venue: "International Journal of Heat and Mass Transfer",
+      year: "2022",
+      abstract: "Investigates the effects of controlled surface roughness on heat transfer performance in microfluidic heat exchangers, demonstrating enhancement of heat transfer coefficients by up to 250% compared to smooth channels.",
+      pdfUrl: "/publications/more2022_microfluidic.pdf",
+      externalUrl: "https://doi.org/10.1016/j.ijheatmasstransfer.2022.xxxxx"
+    }
+  ]
+};
