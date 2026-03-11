@@ -85,226 +85,94 @@ export const skills: Skill[] = [
 ];
 
 export const projects: Project[] = [
+    {
+      id: "proj1",
+      title: "Sound Triangulation and Doppler Motion Detection",
+      category: "Robotics & Signal Processing",
+      description: "Wearable assistive robotic system for vehicle tracking and haptic feedback",
+      fullDescription: "Designed and simulated a wearable system in MATLAB and Python that identifies and tracks approaching vehicles to assist hearing-impaired users. The project involved creating a signal processing pipeline for real-time acoustic classification and spatial localization.",
+      objectives: [
+        "Track approaching vehicles to provide real-time haptic feedback",
+        "Classify safety-critical sounds like horns and sirens against urban noise",
+        "Achieve high-precision direction detection with low system latency"
+      ],
+      "results": [
+        "Achieved 95% accuracy in classifying safety-critical sounds using an FFT-based pipeline",
+        "Successfully detected vehicle direction within a 10-degree accuracy range",
+        "Maintained a system latency of <100ms using a GCC-PHAT TDOA localization algorithm"
+      ],
+      "keyTakeaways": [
+        "FFT-based signal processing is highly effective for filtering complex ambient urban environments",
+        "TDOA algorithms like GCC-PHAT are critical for sub-100ms real-time responsiveness",
+        "Integration of haptic feedback creates a vital safety layer for hearing-impaired accessibility"
+      ],
+      thumbnail: '',
+      media: [],
+      tools: [],
+      year: ''
+    },
   {
-    id: "proj1",
-    title: "Sound Triangulation and Doppler - Motion Detection",
-    category: "Wearable Devices",
-    description: [
-      "Designed and simulated a wearable assistive robotic system in MATLAB that identifies and tracks approaching vehicles to provide haptic feedback for hearing impaired users",
-      "Systemized an FFT- based signal processing pipeline that achieved 95% accuracy in classifying safety-critical sounds (horns and sirens) against ambient urban noises",
-      "Programmed a GCC-PHAT TDOA localization algorithm in Python that successfully detected vehicle direction"
+    "id": "proj2",
+    "title": "Semi-Autonomous Aquatic Cleanup Robot",
+    "category": "Autonomous Systems",
+    "description": "Robotic platform featuring a scooping mechanism and crusher for invasive vegetation removal",
+    "fullDescription": "Assembled a robust aquatic robot designed for the automated removal and processing of invasive water hyacinth. The system integrates real-time object recognition and autonomous navigation logic to maximize cleanup efficiency in aquatic environments.",
+    "objectives": [
+      "Automate the removal and processing of invasive aquatic plant species",
+      "Establish real-time object recognition and obstacle avoidance in water",
+      "Optimize navigation coverage using autonomous maneuvering logic"
     ],
-    thumbnail: "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=600",
-    media: [
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Battery pack thermal distribution analysis"
-      },
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Cooling channel geometry optimization"
-      }
+    "results": [
+      "Integrated an ESP32 Cam, Arduino Mega, and ultrasonic suite for real-time obstacle avoidance",
+      "Optimized autonomous maneuvering using SLAM and refined random walk algorithms",
+      "Successfully developed a dual scooping and crushing mechanism for efficient debris processing"
     ],
-    tools: ["MATLAB", "Python"],
-    year: "2025"
+    "keyTakeaways": [
+      "SLAM-based navigation significantly maximizes coverage area compared to simple logic",
+      "Sensor fusion between cameras and ultrasonic sensors is necessary for reliable aquatic operations",
+      "Mechanical crusher integration reduces the volume of collected waste for better storage capacity"
+    ],
+    thumbnail: '',
+    media: [],
+    tools: [],
+    year: ''
   },
   {
-    id: "proj2",
-    title: "Microfluidic Heat Exchanger Design",
-    category: "Research",
-    description: "Novel microscale heat exchanger with enhanced heat transfer coefficients for electronics cooling",
-    fullDescription: "Developed an innovative microfluidic heat exchanger design that leverages microscale flow phenomena to achieve exceptional heat transfer performance. This research project combines experimental validation with detailed numerical simulations.",
-    objectives: [
-      "Design compact heat exchanger for high-power electronics",
-      "Maximize heat transfer coefficient while minimizing pressure drop",
-      "Validate performance through experimental testing"
+    "id": "proj3",
+    "title": "Plastic Injection Molding Analysis using FEA & DOE",
+    "category": "Manufacturing Simulation",
+    "description": "Simulation and parameter optimization for automotive airbag housings",
+    "fullDescription": "Optimized the manufacturing process for critical automotive safety components using SolidWorks Plastics[cite: 10, 24]. The research employed Design of Experiments (DOE) and ANOVA to analyze the complex interrelationships between process parameters to improve part quality[cite: 11, 28].",
+    "objectives": [
+      "Enhance dimensional accuracy and mechanical integrity of high-pressure safety components [cite: 8, 10]",
+      "Identify critical process parameter interactions using advanced statistical methods [cite: 14, 202]",
+      "Minimize manufacturing defects such as sink marks, warpage, and shrinkage [cite: 34, 123]"
     ],
-    results: [
-      "Achieved 250% improvement in heat transfer coefficient",
-      "Maintained pressure drop within acceptable limits",
-      "Successfully fabricated and tested prototype devices"
+    "results": [
+      "Identified melt and mold temperatures as the most significant factors influencing cooling time and quality [cite: 223, 230]",
+      "Quantified defect reduction through optimized parameters [cite: 232]",
+      "Published research findings on simulation and parameter optimization using DOE and ANOVA [cite: 1, 240]"
     ],
-    keyTakeaways: [
-      "Microscale effects significantly enhance heat transfer mechanisms",
-      "Surface roughness plays critical role in performance",
-      "Additive manufacturing enables complex geometries previously impossible"
+    "keyTakeaways": [
+      "Cooling time accounts for approximately 70% of the total cycle time, making it a priority for efficiency [cite: 166]",
+      "DOE reveals critical interactions between variables that single-factor analyses often overlook [cite: 12, 30]",
+      "Precise control of melt temperature is vital for minimizing sink marks and ensuring structural integrity [cite: 231, 234]"
     ],
-    thumbnail: "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=600",
-    media: [
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Microfluidic channel network design"
-      },
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/2599244/pexels-photo-2599244.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Heat transfer performance comparison"
-      }
-    ],
-    tools: ["COMSOL", "MATLAB", "Python", "Fusion 360"],
-    year: "2022"
-  },
-  {
-    id: "proj3",
-    title: "Aerospace Component Structural Analysis",
-    category: "FEA",
-    description: "Stress and fatigue analysis of critical aircraft structural components under flight loads",
-    fullDescription: "Conducted comprehensive finite element analysis of aircraft wing components to ensure structural integrity under operational loads. The project included static, dynamic, and fatigue analyses to validate design against aerospace standards.",
-    objectives: [
-      "Verify structural adequacy under maximum design loads",
-      "Identify critical stress concentration areas",
-      "Optimize component weight while maintaining safety factors"
-    ],
-    results: [
-      "Achieved 15% weight reduction through topology optimization",
-      "Confirmed safety factors exceed regulatory requirements",
-      "Identified and mitigated potential failure modes"
-    ],
-    keyTakeaways: [
-      "Proper boundary condition definition is crucial for accurate FEA results",
-      "Modal analysis reveals potential resonance issues early in design",
-      "Topology optimization provides non-intuitive yet effective design solutions"
-    ],
-    thumbnail: "https://images.pexels.com/photos/2693529/pexels-photo-2693529.jpeg?auto=compress&cs=tinysrgb&w=600",
-    media: [
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/2693529/pexels-photo-2693529.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Stress distribution under maximum load"
-      },
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/1476321/pexels-photo-1476321.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Topology optimization results"
-      }
-    ],
-    tools: ["ANSYS Mechanical", "CATIA", "Python", "nCode"],
-    year: "2023"
-  },
-  {
-    id: "proj4",
-    title: "Autonomous Drone Frame Design",
-    category: "CAD Models",
-    description: "Lightweight carbon fiber drone frame optimized for payload capacity and flight stability",
-    fullDescription: "Designed a custom quadcopter frame for autonomous delivery applications, balancing structural requirements with weight constraints. The project included CAD modeling, FEA validation, and prototype fabrication using carbon fiber composites.",
-    objectives: [
-      "Design frame supporting 5kg payload",
-      "Minimize overall weight for extended flight time",
-      "Ensure vibration isolation for sensitive electronics"
-    ],
-    results: [
-      "Created 800g frame with 5kg payload capacity",
-      "Achieved first natural frequency above 50 Hz",
-      "Successfully integrated all electronic components"
-    ],
-    keyTakeaways: [
-      "Carbon fiber layup orientation significantly affects stiffness-to-weight ratio",
-      "Vibration damping requires careful material selection and mounting design",
-      "Modular design enables rapid prototyping and iteration"
-    ],
-    thumbnail: "https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=600",
-    media: [
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "CAD model of drone frame assembly"
-      },
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/1982126/pexels-photo-1982126.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Modal analysis showing vibration modes"
-      }
-    ],
-    tools: ["SolidWorks", "ANSYS", "Composites Modeler", "3D Printing"],
-    year: "2022"
-  },
-  {
-    id: "proj5",
-    title: "Industrial Robot Gripper Mechanism",
-    category: "CAD Models",
-    description: "Adaptive gripper design for handling objects of varying sizes and geometries in manufacturing",
-    fullDescription: "Developed a sophisticated robotic gripper mechanism capable of securely grasping objects ranging from 10mm to 150mm in diameter. The design incorporates compliant mechanisms for adaptive grasping and force sensing capabilities.",
-    objectives: [
-      "Create versatile gripper for diverse object geometries",
-      "Implement force feedback for delicate object handling",
-      "Design for manufacturing using standard machining processes"
-    ],
-    results: [
-      "Successfully grips objects from 10mm to 150mm diameter",
-      "Integrated force sensing with 0.1N resolution",
-      "Reduced manufacturing cost by 40% compared to commercial alternatives"
-    ],
-    keyTakeaways: [
-      "Compliant mechanisms provide inherent adaptability",
-      "Design for assembly significantly reduces production time",
-      "Proper material selection balances durability and cost"
-    ],
-    thumbnail: "https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=600",
-    media: [
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Gripper mechanism CAD assembly"
-      },
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Kinematic motion analysis"
-      }
-    ],
-    tools: ["Inventor", "MATLAB", "CNC Machining", "Arduino"],
-    year: "2021"
-  },
-  {
-    id: "proj6",
-    title: "Wind Turbine Blade Aerodynamic Optimization",
-    category: "Simulations",
-    description: "CFD-driven design optimization to maximize energy capture efficiency across operating conditions",
-    fullDescription: "Performed comprehensive aerodynamic analysis and optimization of wind turbine blade profiles to maximize annual energy production. The project utilized high-fidelity CFD simulations coupled with optimization algorithms to explore design space.",
-    objectives: [
-      "Increase annual energy production by 10%",
-      "Reduce blade loading and fatigue stresses",
-      "Maintain structural manufacturability"
-    ],
-    results: [
-      "Achieved 12.3% increase in energy capture",
-      "Reduced maximum blade loading by 8%",
-      "Validated performance through wind tunnel testing"
-    ],
-    keyTakeaways: [
-      "Multi-point optimization accounts for varying wind conditions",
-      "Blade twist distribution critically affects performance",
-      "Trade-offs between efficiency and structural loads require careful balancing"
-    ],
-    thumbnail: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=600",
-    media: [
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Blade surface pressure distribution"
-      },
-      {
-        type: "image",
-        url: "https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        caption: "Velocity flow field visualization"
-      }
-    ],
-    tools: ["OpenFOAM", "Python", "ANSYS CFX", "Paraview"],
-    year: "2023"
+    thumbnail: '',
+    media: [],
+    tools: [],
+    year: ''
   }
 ];
 
 export const publications: Publication[] = [
   {
     id: "pub1",
-    title: "Enhanced Heat Transfer in Microfluidic Devices Using Surface Roughness Optimization",
+    title: "Experimentation in Injection Molding: Simulation and Parameter Optimization Using Design of Experiment",
     authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shine","Sameeksha Naik","Dr. Bhushan Patil"],
-    venue: "International Journal of Heat and Mass Transfer",
-    year: "2022",
-    abstract: "This study investigates the effects of controlled surface roughness on heat transfer performance in microfluidic heat exchangers. Through a combination of numerical simulations and experimental validation, we demonstrate that optimized roughness patterns can enhance heat transfer coefficients by up to 250% compared to smooth channels, while maintaining acceptable pressure drop penalties.",
+    venue: "International Conference on Advances in Physical Sciences and Materials 2024",
+    year: "2024",
+    abstract: "This research focuses on optimizing the injection molding process for automotive airbag housings to improve quality and reliability. By leveraging SolidWorks Plastics simulation and Design of Experiments (DOE) methodologies, the study identifies critical interrelationships between process parameters to minimize defects like sink marks and warpage.",
     pdfUrl: "/publications/chen2022_microfluidic.pdf",
     externalUrl: "https://doi.org/10.1016/j.ijheatmasstransfer.2022.xxxxx"
   },
@@ -318,23 +186,4 @@ export const publications: Publication[] = [
     pdfUrl: "/publications/chen2023_topology.pdf",
     externalUrl: "https://doi.org/10.2514/1.C037xxx"
   },
-  {
-    id: "pub3",
-    title: "Computational Fluid Dynamics Analysis of Battery Thermal Management Systems",
-    authors: ["A. Chen", "K. Lee", "T. Brown", "S. Patel"],
-    venue: "Journal of Power Sources",
-    year: "2023",
-    abstract: "This paper presents a comprehensive CFD study of liquid cooling strategies for lithium-ion battery packs in electric vehicles. We compare multiple cooling channel configurations and identify optimal designs that minimize temperature gradients while reducing pumping power requirements. The validated models provide insights for next-generation thermal management systems.",
-    externalUrl: "https://doi.org/10.1016/j.jpowsour.2023.xxxxx"
-  },
-  {
-    id: "pub4",
-    title: "Design and Fabrication of Compliant Mechanisms for Robotic Grasping",
-    authors: ["A. Chen", "D. Martinez"],
-    venue: "IEEE Robotics and Automation Letters",
-    year: "2021",
-    abstract: "We introduce a systematic design methodology for compliant robotic grippers that adapt to object geometry through elastic deformation. The approach combines kinematic synthesis with finite element analysis to optimize grip force distribution and object security. Experimental results demonstrate superior performance on irregularly shaped objects compared to traditional rigid grippers.",
-    pdfUrl: "/publications/chen2021_gripper.pdf",
-    externalUrl: "https://doi.org/10.1109/LRA.2021.xxxxx"
-  }
 ];
