@@ -33,7 +33,7 @@ export const education: Education[] = [
     institution: "Northeastern University",
     location: "Boston, MA",
     graduationDate: "May 2027",
-    gpa: "3.5/4.0",
+    gpa: "3.6/4.0",
     honors: ["Global Learner's Award"]
   },
   {
@@ -51,15 +51,15 @@ export const experience: Experience[] = [
   {
     id: "exp1",
     title: "Robotics intern",
-    company: "1stop & IIT Bombay",
+    company: "IIT Bombay and 1Stop.ai",
     location: "Mumbai, India",
     startDate: "Feb 2022",
     endDate: "Apr 2022",
     responsibilities: [ // <-- Changed to square brackets []
-      "Developed a fundamental understanding in robotics, kinematics, inverse kinematics, and industrial robots to strengthen problem-solving skills in robot motion control",
-      "Analyzed end-effector configurations using Robo-Analyzer on a SCARA robot by modifying joint variables to enhance precision in positioning",
-      "Simulated the SCARA robot’s payload capacity using ANSYS Workbench, performing structural analysis to determine maximum load limits, ensuring mechanical stability",
-      "Investigated the relationship between joint movements and end-effector placement through kinematic modelling"
+      "Developed kinematic and inverse kinematic models for a SCARA Robot to compute precise end-effector coordinates using MATLAB",
+      "Simulated structural integrity and payload capacity within ANSYS Workbench to evaluate maximum stress and deformation for mechanical stability",
+      "Analyzed 3R manipulator workspace by calculating DH parameters and transformation matrices to optimize robotic arm reach and movement efficiency",
+      "Navigated motion control configurations in Robo-Analyzer to visualize joint end-effector relationships for enhanced industrial precision"
     ]
   } 
 ];
@@ -67,48 +67,32 @@ export const experience: Experience[] = [
 
 export const skills: Skill[] = [
   {
-    category: "CAD & Design",
-    items: ["SolidWorks", "CATIA", "AutoCAD", "Fusion 360", "NX11", "MATLAB", "Robo-analyzer","XFLR"]
+    category: "Hardware & Engineering",
+    items: ["Autodesk AutoCAD","CATIA","ANSYS Workbench","SolidWorks","Autodesk Fusion 360","MATLAB/ Simulink","XFLR5","NX 11","Arduino","Microcontrollers"]
   },
   {
-    category: "Simulation & Analysis",
-    items: ["ANSYS", "Gazebo", "Simulink", "Rviz"]
+    category: "Software and Programming",
+    items: ["Python","C","MATLAB","Git/Version Control","Linux (Ubuntu)"]
   },
   {
-    category: "Programming",
-    items: ["Python","C", "MATLAB","ROS/ROS2"]
+    category: "Robotics and Controls",
+    items: ["ROS/ROS2","Nav2","SLAM Toolbox","MATLAB","Robo-Analyzer"]
   },
   {
     category: "Manufacturing",
     items: ["3D Printing", "CNC Machining", "Foam Fabrication", "Injection Molding"]
-  },
-  {
-    category: "Tools & Software",
-    items: ["Git", "LaTeX", "SLAM Toolbox"]
   }
 ];
 
 export const projects: Project[] = [
   {
     id: "proj1",
-    title: "Electric Vehicle Battery Thermal Management",
-    category: "Thermal Analysis",
-    description: "Optimized cooling system for high-performance EV battery packs using advanced CFD simulations",
-    fullDescription: "Designed and analyzed an innovative liquid cooling system for electric vehicle battery packs to maintain optimal operating temperatures under extreme conditions. The project combined computational fluid dynamics with heat transfer analysis to achieve superior thermal performance.",
-    objectives: [
-      "Reduce maximum battery temperature by 15°C under high-load conditions",
-      "Minimize temperature variation across cell modules",
-      "Optimize coolant flow distribution for energy efficiency"
-    ],
-    results: [
-      "Achieved 18°C temperature reduction compared to baseline design",
-      "Improved temperature uniformity by 23%",
-      "Reduced pumping power requirements by 12%"
-    ],
-    keyTakeaways: [
-      "Strategic placement of cooling channels significantly impacts thermal performance",
-      "Multi-objective optimization enables balanced design trade-offs",
-      "CFD validation with experimental data is critical for accurate predictions"
+    title: "Sound Triangulation and Doppler - Motion Detection",
+    category: "Wearable Devices",
+    description: [
+      "Designed and simulated a wearable assistive robotic system in MATLAB that identifies and tracks approaching vehicles to provide haptic feedback for hearing impaired users",
+      "Systemized an FFT- based signal processing pipeline that achieved 95% accuracy in classifying safety-critical sounds (horns and sirens) against ambient urban noises",
+      "Programmed a GCC-PHAT TDOA localization algorithm in Python that successfully detected vehicle direction"
     ],
     thumbnail: "https://images.pexels.com/photos/110844/pexels-photo-110844.jpeg?auto=compress&cs=tinysrgb&w=600",
     media: [
@@ -123,8 +107,8 @@ export const projects: Project[] = [
         caption: "Cooling channel geometry optimization"
       }
     ],
-    tools: ["ANSYS Fluent", "SolidWorks", "MATLAB", "Python"],
-    year: "2023"
+    tools: ["MATLAB", "Python"],
+    year: "2025"
   },
   {
     id: "proj2",
@@ -317,7 +301,7 @@ export const publications: Publication[] = [
   {
     id: "pub1",
     title: "Enhanced Heat Transfer in Microfluidic Devices Using Surface Roughness Optimization",
-    authors: ["A. Chen", "J. Smith", "M. Johnson"],
+    authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shine","Sameeksha Naik","Dr. Bhushan Patil"],
     venue: "International Journal of Heat and Mass Transfer",
     year: "2022",
     abstract: "This study investigates the effects of controlled surface roughness on heat transfer performance in microfluidic heat exchangers. Through a combination of numerical simulations and experimental validation, we demonstrate that optimized roughness patterns can enhance heat transfer coefficients by up to 250% compared to smooth channels, while maintaining acceptable pressure drop penalties.",
