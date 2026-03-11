@@ -1,3 +1,4 @@
+import Publications from '../components/Publications';
 import { Project, Publication, Experience, Education, Skill } from '../types';
 import personalPhoto from './sidd.jpg';
 export const personalInfo = {
@@ -157,7 +158,7 @@ export const projects: Project[] = [
   ],
   
    
-export const publications: Publication[] = [
+export const publications : Publications[] = [
    {
       id: "pub1",
       title: "Experimentation in Injection Molding: Simulation and Parameter Optimization Using Design of Experiment",
