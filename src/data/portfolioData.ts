@@ -9,7 +9,7 @@ export const personalInfo = {
   email: "siddhimorework@gmail.com",
   linkedin: "https://www.linkedin.com/in/more-siddhi/",
   github: "https://github.com/more-sidd",
-  resumeUrl: "/Siddhi Sanjay More Resume.pdf",
+  resumeUrl: './Siddhi Sanjay More Resume.pdf',
   about: "I'm a mechanical engineer passionate about pushing the boundaries of design and simulation. With expertise in CAD modeling, finite element analysis, and computational fluid dynamics, I bridge theoretical concepts with practical engineering solutions. My work spans from optimizing thermal management systems to developing novel manufacturing processes.",
   interests: [
     {
