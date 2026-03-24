@@ -1,3 +1,4 @@
+import ProjectModal from '../components/ProjectModal';
 import Publications from '../components/Publications';
 import { Project, Publication, Experience, Education, Skill } from '../types';
 import personalPhoto from './sidd.jpg';
@@ -9,7 +10,7 @@ export const personalInfo = {
   email: "siddhimorework@gmail.com",
   linkedin: "https://www.linkedin.com/in/more-siddhi/",
   github: "https://github.com/more-sidd",
-  resumeUrl: './Siddhi Sanjay More Resume.pdf',
+  resumeUrl: "./Siddhi Sanjay More Resume.pdf",
   about: "I'm a mechanical engineer passionate about pushing the boundaries of design and simulation. With expertise in CAD modeling, finite element analysis, and computational fluid dynamics, I bridge theoretical concepts with practical engineering solutions. My work spans from optimizing thermal management systems to developing novel manufacturing processes.",
   interests: [
     {
@@ -89,9 +90,10 @@ export const projects: Project[] = [
    const portfolioData = {
   projects: [
     {
-      id: '/.doppler.png',
+      id: "proj4",
       title: "Sound Triangulation and Doppler Motion Detection",
       category: "Robotics & Signal Processing",
+      Thumbnail: "/.doppler.png"
       description: "Wearable assistive robotic system for vehicle tracking and haptic feedback",
       fullDescription: "Designed and simulated a wearable system in MATLAB and Python that identifies and tracks approaching vehicles to assist hearing-impaired users. The project involved creating a signal processing pipeline for real-time acoustic classification and spatial localization.",
       objectives: [
