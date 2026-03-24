@@ -2,6 +2,7 @@ import ProjectModal from '../components/ProjectModal';
 import Publications from '../components/Publications';
 import { Project, Publication, Experience, Education, Skill } from '../types';
 import personalPhoto from './sidd.jpg';
+import Resume from '/.SiddhiResume.pdf';
 export const personalInfo = {
   name: "Siddhi More",
   title: "Mechanical Engineer & Researcher",
@@ -10,7 +11,7 @@ export const personalInfo = {
   email: "siddhimorework@gmail.com",
   linkedin: "https://www.linkedin.com/in/more-siddhi/",
   github: "https://github.com/more-sidd",
-  resumeUrl: "./Siddhi Sanjay More Resume.pdf",
+  resumeUrl: Resume,
   about: "I'm a mechanical engineer passionate about pushing the boundaries of design and simulation. With expertise in CAD modeling, finite element analysis, and computational fluid dynamics, I bridge theoretical concepts with practical engineering solutions. My work spans from optimizing thermal management systems to developing novel manufacturing processes.",
   interests: [
     {
