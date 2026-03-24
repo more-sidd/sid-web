@@ -9,7 +9,7 @@ export const personalInfo = {
   email: "siddhimorework@gmail.com",
   linkedin: "https://www.linkedin.com/in/more-siddhi/",
   github: "https://github.com/more-sidd",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/Siddhi Sanjay More Resume.pdf",
   about: "I'm a mechanical engineer passionate about pushing the boundaries of design and simulation. With expertise in CAD modeling, finite element analysis, and computational fluid dynamics, I bridge theoretical concepts with practical engineering solutions. My work spans from optimizing thermal management systems to developing novel manufacturing processes.",
   interests: [
     {
@@ -177,18 +177,7 @@ export const publications : Publications[] = [
       year: "2024",
       abstract: "This comprehensive review examines the structural and thermal performance of industrial and solar chimneys. It analyzes the impact of wind loads and geometric configurations on stability, while exploring the potential of solar chimney power plants (SCPP) as a sustainable energy solution.",
       pdfUrl: "/publications/more2024_chimney_review.pdf",
-      externalUrl: "https://doi.org/10.1063/5.xxxxxxx"
-    },
-    
-    {
-      id: "pub4",
-      title: "Enhanced Heat Transfer in Microfluidic Devices Using Surface Roughness Optimization",
-      authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shinde", "Sameeksha Naik", "Bhushan Patil"],
-      venue: "International Journal of Heat and Mass Transfer",
-      year: "2022",
-      abstract: "Investigates the effects of controlled surface roughness on heat transfer performance in microfluidic heat exchangers, demonstrating enhancement of heat transfer coefficients by up to 250% compared to smooth channels.",
-      pdfUrl: "/publications/more2022_microfluidic.pdf",
-      externalUrl: "https://doi.org/10.1016/j.ijheatmasstransfer.2022.xxxxx"
-    }
+      externalUrl: 
+    }  
   ]
 };
