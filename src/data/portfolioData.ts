@@ -2,6 +2,7 @@ import ProjectModal from '../components/ProjectModal';
 import Publications from '../components/Publications';
 import { Project, Publication, Experience, Education, Skill } from '../types';
 import personalPhoto from './sidd.jpg';
+import dopplerThumbnail from './doppler.png';
 import Resume from '/.SiddhiResume.pdf';
 export const personalInfo = {
   name: "Siddhi More",
@@ -87,7 +88,7 @@ export const skills: Skill[] = [
   }
 ];
 
-import dopplerImg from './doppler.png';
+
 
 export const projects: Project[] = [
    const portfolioData = {
@@ -96,7 +97,7 @@ export const projects: Project[] = [
       id: "proj4",
       title: "Sound Triangulation and Doppler Motion Detection",
       category: "Robotics & Signal Processing",
-      Thumbnail: dopplerImg
+      Thumbnail: dopplerThumbnail,
       description: "Wearable assistive robotic system for vehicle tracking and haptic feedback",
       fullDescription: "Designed and simulated a wearable system in MATLAB and Python that identifies and tracks approaching vehicles to assist hearing-impaired users. The project involved creating a signal processing pipeline for real-time acoustic classification and spatial localization.",
       objectives: [
