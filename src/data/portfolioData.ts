@@ -89,7 +89,7 @@ export const projects: Project[] = [
    const portfolioData = {
   projects: [
     {
-      id: "proj4",
+      id: '/.doppler.png',
       title: "Sound Triangulation and Doppler Motion Detection",
       category: "Robotics & Signal Processing",
       description: "Wearable assistive robotic system for vehicle tracking and haptic feedback",
