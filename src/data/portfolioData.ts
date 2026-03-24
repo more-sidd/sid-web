@@ -86,6 +86,8 @@ export const skills: Skill[] = [
   }
 ];
 
+import dopplerImg from './doppler.png';
+
 export const projects: Project[] = [
    const portfolioData = {
   projects: [
@@ -93,7 +95,7 @@ export const projects: Project[] = [
       id: "proj4",
       title: "Sound Triangulation and Doppler Motion Detection",
       category: "Robotics & Signal Processing",
-      Thumbnail: "/.doppler.png"
+      Thumbnail: dopplerImg
       description: "Wearable assistive robotic system for vehicle tracking and haptic feedback",
       fullDescription: "Designed and simulated a wearable system in MATLAB and Python that identifies and tracks approaching vehicles to assist hearing-impaired users. The project involved creating a signal processing pipeline for real-time acoustic classification and spatial localization.",
       objectives: [
