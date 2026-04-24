@@ -1,73 +1,62 @@
-import { BookOpen, ExternalLink, FileText } from 'lucide-react';
 import { publications } from '../data/portfolioData';
+import { Reveal } from './Reveal';
 
-const Publications = () => {
+export default function Publications() {
   return (
-  <section id="publications" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Publications
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto" />
-        </div>
+    <section id="publications" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
+      <div className="max-w-6xl mx-auto px-6">
+        <Reveal>
+          <p className="label">05 — Publications</p>
+          <h2 className="heading">Research</h2>
+        </Reveal>
 
-        <div className="space-y-6">
-          {publications.map((publication) => (
-            <div
-              key={publication.id}
-              className="bg-white rounded-xl p-6 md:p-8 shadow-md hover:shadow-xl transition-shadow"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                    <BookOpen className="text-blue-600" size={24} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
+          {publications.map((pub, i) => (
+            <Reveal key={pub.id} delay={i * 80}>
+              <div className="card" style={{ padding: '1.8rem 2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginBottom: '0.6rem' }}>
+                  <div>
+                    <span className="font-mono" style={{
+                      fontSize: '0.62rem', letterSpacing: '0.14em', textTransform: 'uppercase',
+                      background: 'var(--accent)', color: '#fff',
+                      padding: '0.2rem 0.65rem', borderRadius: 2, display: 'inline-block', marginBottom: '0.7rem',
+                    }}>
+                      {pub.year} · Conference Paper
+                    </span>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 600, lineHeight: 1.35, maxWidth: 600 }}>{pub.title}</h3>
                   </div>
+                  {pub.externalUrl && (
+                    <a href={pub.externalUrl} target="_blank" rel="noreferrer" className="btn-ghost" style={{ flexShrink: 0, padding: '0.4rem 0.9rem', fontSize: '0.65rem' }}>
+                      DOI ↗
+                    </a>
+                  )}
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-                    {publication.title}
-                  </h3>
-                  <p className="text-gray-700 mb-2">
-                    {publication.authors.join(', ')}
-                  </p>
-                  <p className="text-blue-600 font-medium mb-4">
-                    {publication.venue} ({publication.year})
-                  </p>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {publication.abstract}
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {publication.pdfUrl && (
-                      <a
-                        href={publication.pdfUrl}
-                        download
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                      >
-                        <FileText size={18} />
-                        Download PDF
-                      </a>
-                    )}
-                    {publication.externalUrl && (
-                      <a
-                        href={publication.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors"
-                      >
-                        <ExternalLink size={18} />
-                        View Online
-                      </a>
-                    )}
-                  </div>
-                </div>
+
+                {/* Authors */}
+                <p className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--accent)', letterSpacing: '0.04em', marginBottom: '0.5rem' }}>
+                  {pub.authors.map((a, ai) => (
+                    <span key={ai}>
+                      {a === 'Siddhi More'
+                        ? <strong style={{ color: 'var(--accent)', textDecoration: 'underline', textDecorationColor: '#e8b09a' }}>{a}</strong>
+                        : a
+                      }
+                      {ai < pub.authors.length - 1 ? ', ' : ''}
+                    </span>
+                  ))}
+                </p>
+
+                {/* Venue */}
+                <p style={{ fontSize: '0.82rem', color: 'var(--muted)', fontStyle: 'italic', marginBottom: '0.8rem' }}>
+                  {pub.venue}
+                </p>
+
+                {/* Abstract */}
+                <p style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.75 }}>{pub.abstract}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Publications;
+}

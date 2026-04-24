@@ -2,21 +2,13 @@ export interface Project {
   id: string;
   title: string;
   category: string;
+  thumbnail?: string;
   description: string;
   fullDescription: string;
   objectives: string[];
   results: string[];
   keyTakeaways: string[];
-  thumbnail: string;
-  media: ProjectMedia[];
-  tools: string[];
-  year: string;
-}
-
-export interface ProjectMedia {
-  type: 'image' | 'video' | 'cad';
-  url: string;
-  caption?: string;
+  github?: string;
 }
 
 export interface Publication {
@@ -48,6 +40,7 @@ export interface Education {
   graduationDate: string;
   gpa?: string;
   honors?: string[];
+  courses?: string[];
 }
 
 export interface Skill {

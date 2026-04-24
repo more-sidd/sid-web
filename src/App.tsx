@@ -1,65 +1,39 @@
-import { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
+import Nav          from './components/Nav';
+import Hero         from './components/Hero';
+import About        from './components/About';
+import Projects     from './components/Projects';
+import Experience   from './components/Experience';
+import Education    from './components/Education';
 import Publications from './components/Publications';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Contact      from './components/Contact';
+import './index.css';
 
-function App() {
-  const [activeSection, setActiveSection] = useState('home');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'projects', 'publications', 'contact'];
-      const scrollPosition = window.scrollY + 150;
-
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetBottom = offsetTop + element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
-
+export default function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header activeSection={activeSection} />
-      <Hero onScrollToNext={() => scrollToSection('about')} />
-      <About />
-      <Experience />
-      <Projects />
-      <Publications />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Projects />
+        <Experience />
+        <Education />
+        <Publications />
+        <Contact />
+      </main>
+      <footer style={{
+        borderTop: '1px solid var(--border)',
+        padding: '1.2rem 1.5rem',
+        display: 'flex', justifyContent: 'space-between',
+        alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem',
+      }}>
+        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--muted)', letterSpacing: '0.06em' }}>
+          © 2026 Siddhi More · Boston, MA
+        </span>
+        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--border-2)', letterSpacing: '0.06em' }}>
+          React + Vite + Tailwind
+        </span>
+      </footer>
+    </>
   );
 }
-
-export default App;

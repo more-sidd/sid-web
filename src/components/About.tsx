@@ -1,60 +1,66 @@
-import { personalInfo } from '../data/portfolioData';
-import { Sparkles, Target, Leaf } from 'lucide-react';
+import { personalInfo, skills } from '../data/portfolioData';
+import { Reveal } from './Reveal';
 
-const About = () => {
-  const iconMap = {
-    'Computational Modeling': Sparkles,
-    'Advanced Manufacturing': Target,
-    'Sustainable Design': Leaf
-  };
-
+export default function About() {
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto" />
-        </div>
+    <section id="about" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
+      <div className="max-w-6xl mx-auto px-6">
+        <Reveal>
+          <p className="label">01 — About</p>
+          <h2 className="heading">Engineer. Researcher. Builder.</h2>
+        </Reveal>
 
-        <div className="max-w-4xl mx-auto mb-16">
-          <p className="text-lg text-gray-700 leading-relaxed text-center">
-            {personalInfo.about}
-          </p>
-        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'clamp(200px,22%,260px) 1fr', gap: '3.5rem', alignItems: 'start' }}>
+          {/* Photo */}
+          <Reveal delay={80}>
+            <img
+              src={personalInfo.photo}
+              alt="Siddhi More"
+              style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: 4, border: '1.5px solid var(--border)' }}
+            />
+          </Reveal>
 
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-gray-900 text-center mb-12">
-            My Interests
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {personalInfo.interests.map((interest, index) => {
-              const Icon = iconMap[interest.title as keyof typeof iconMap];
-              return (
-                <div
-                  key={index}
-                  className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                      <Icon className="text-blue-600" size={32} />
+          {/* Text + Skills */}
+          <div>
+            <Reveal delay={120}>
+              <p style={{ color: 'var(--muted)', marginBottom: '0.9rem', lineHeight: 1.8, fontSize: '0.97rem' }}>
+                I'm a <strong style={{ color: 'var(--text)' }}>robotics graduate student at Northeastern University</strong> (MS, May 2027),
+                with a background in mechanical engineering from Mumbai University. My work bridges
+                physical design, embedded systems, and intelligent autonomy.
+              </p>
+              <p style={{ color: 'var(--muted)', marginBottom: '0.9rem', lineHeight: 1.8, fontSize: '0.97rem' }}>
+                I'm motivated by systems that directly help people — wearable assistive devices,
+                prosthetics that restore natural movement, and autonomous robots that take on tasks
+                humans shouldn't have to. I hold the <strong style={{ color: 'var(--text)' }}>Global Student Award</strong> at Northeastern
+                and have published in <strong style={{ color: 'var(--text)' }}>AIP Conference Proceedings</strong>.
+              </p>
+            </Reveal>
+
+            {/* Skills */}
+            <Reveal delay={180}>
+              <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                {skills.map(s => (
+                  <div key={s.category}>
+                    <p className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.45rem' }}>
+                      {s.category}
+                    </p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+                      {s.items.map(item => <span key={item} className="tag">{item}</span>)}
                     </div>
                   </div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-3 text-center">
-                    {interest.title}
-                  </h4>
-                  <p className="text-gray-600 text-center">
-                    {interest.description}
-                  </p>
-                </div>
-              );
-            })}
+                ))}
+              </div>
+            </Reveal>
           </div>
         </div>
       </div>
+
+      {/* Responsive */}
+      <style>{`
+        @media (max-width: 680px) {
+          #about .max-w-6xl > div:last-child { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
-};
-
-export default About;
+}
