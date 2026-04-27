@@ -139,7 +139,6 @@ export const projects: Project[] = [
     id: "proj2",
     title: "Wearable Hearing System — GCC-PHAT Sound Triangulation",
     category: "Assistive Robotics",
-    thumbnail: "/doppler.png",
     description: "Wearable assistive device for hearing-impaired users that classifies safety-critical sounds and delivers real-time directional haptic feedback using GCC-PHAT TDOA localization — ±10° accuracy, <100ms latency.",
     fullDescription: "430 million people worldwide live with disabling hearing loss, creating a critical safety gap in urban environments where auditory cues from approaching vehicles are inaccessible. This project developed a wearable system combining microphone array triangulation with Doppler effect analysis to identify specific safety sounds, pinpoint their source, and determine if they are approaching.",
     objectives: [
@@ -264,7 +263,7 @@ export const publications: Publication[] = [
   {
     id: "pub2",
     title: "Experimentation and Analysis of Industrial Chimneys and Solar Chimney Power Plant: A Comprehensive Literature Review",
-    authors: ["Siddhi More", "Sonia Pol", "Dnyaneshwari Shinde", "Sameeksha Naik", "Bhushan T. Patil"],
+    authors: ["Siddhi More", "Sonia Pol", "Bhushan T. Patil"],
     venue: "AIP Conference Proceedings, International Conference on Advances in Physical Sciences and Materials (ICAPSM 2024)",
     year: "2024",
     abstract: "This comprehensive review examines the structural and thermal performance of industrial and solar chimneys, analyzing the impact of wind loads and geometric configurations on stability. The review explores the potential of solar chimney power plants (SCPP) as a sustainable energy solution, synthesizing findings across structural analysis, thermal modeling, and renewable energy generation research.",
