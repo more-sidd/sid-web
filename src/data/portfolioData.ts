@@ -54,7 +54,7 @@ export const experience: Experience[] = [
     id: "exp1",
     title: "Robotics Intern",
     company: "IIT Bombay & 1Stop.ai",
-    location: "Pune, India",
+    location: "Mumbai, India",
     startDate: "Feb 2022",
     endDate: "Apr 2022",
     responsibilities: [
@@ -63,9 +63,20 @@ export const experience: Experience[] = [
       "Validated structural integrity and payload capacity under static load cases in ANSYS Workbench, evaluating max stress and deformation margins.",
     ],
   },
-  {
+ {
     id: "exp2",
-    title: "Materials Incharge (Junior)",
+    title: "CAD intern",
+    company: "CRCE Student Chapter",
+    location: "Mumbai, India",
+    startDate: "Mar 2022",
+    endDate: "Aug 2022",
+    responsibilities: [
+      "Organized and mentored at Mech-a-thon; led technical workshops, developed structured guides for complex topics, and maintained active engagement between teaching faculty and students.",
+    ],
+  },
+  {
+    id: "exp3",
+    title: "Junior Design and Materials Member",
     company: "Team Vaayushastra — SAE Aero Design West",
     location: "Mumbai, India",
     startDate: "Aug 2021",
@@ -73,17 +84,6 @@ export const experience: Experience[] = [
     responsibilities: [
       "Served as Materials Incharge for SAE Aero Design West competition — selected and sourced materials for wing construction, operated laser cutters and woodworking equipment for structural components, and performed foam cutting for wing profiles.",
       "Designed landing gear and wings in SolidWorks and ran FEA simulations to validate structural integrity under competition deadlines; iterated rapidly between CAD, simulation, and physical prototype.",
-    ],
-  },
-  {
-    id: "exp3",
-    title: "ASME Student Representative",
-    company: "CRCE Student Chapter",
-    location: "Mumbai, India",
-    startDate: "Mar 2022",
-    endDate: "Aug 2022",
-    responsibilities: [
-      "Organized and mentored at Mech-a-thon; led technical workshops, developed structured guides for complex topics, and maintained active engagement between teaching faculty and students.",
     ],
   },
 ];
