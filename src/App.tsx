@@ -7,7 +7,7 @@ import Education    from './components/Education';
 import Publications from './components/Publications';
 import Contact      from './components/Contact';
 import './index.css';
-
+ 
 export default function App() {
   return (
     <>
@@ -20,7 +20,7 @@ export default function App() {
         <Education />
         <Publications />
         <Contact />
-      </main>
+        </main>
       <footer style={{
         borderTop: '1px solid var(--border)',
         padding: '1.2rem 1.5rem',
@@ -37,3 +37,4 @@ export default function App() {
     </>
   );
 }
+ 
