@@ -1,6 +1,6 @@
 import { Project, Publication, Experience, Education, Skill } from '../types';
-import siddPhoto from '/sidd.jpg.jpg';
-import dopplerThumbnail from '/doppler.png.jpg';
+import siddPhoto from '/sidd.jpg';
+import dopplerThumbnail from '/doppler.png';
 
 export const personalInfo = {
   name: "Siddhi More",
