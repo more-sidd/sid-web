@@ -1,18 +1,17 @@
 import { Project, Publication, Experience, Education, Skill } from '../types';
-
 import siddPhoto from '/sidd.jpg';
+import dopplerThumbnail from '/doppler.png';
 
 export const personalInfo = {
   name: "Siddhi More",
   title: "Wearable & Assistive Robotics Engineer",
   tagline: "Building hardware that restores human mobility — from planetary gearbox design and embedded firmware to ROS2 navigation and ML-validated musculoskeletal simulation.",
-  photo: siddPhoto,
+  photo: "/sidd.jpg",
   email: "more.sidd@northeastern.edu",
   linkedin: "https://www.linkedin.com/in/siddhi-more-728b92230/",
   github: "https://github.com/more-sidd",
   resumeUrl: "/SiddhiResume.pdf",
 };
-
 export const education: Education[] = [
   {
     id: "edu1",
@@ -140,7 +139,7 @@ export const projects: Project[] = [
     id: "proj2",
     title: "Wearable Hearing System — GCC-PHAT Sound Triangulation",
     category: "Assistive Robotics",
-    thumbnail: dopplerThumbnail,
+    thumbnail: "/doppler.png",
     description: "Wearable assistive device for hearing-impaired users that classifies safety-critical sounds and delivers real-time directional haptic feedback using GCC-PHAT TDOA localization — ±10° accuracy, <100ms latency.",
     fullDescription: "430 million people worldwide live with disabling hearing loss, creating a critical safety gap in urban environments where auditory cues from approaching vehicles are inaccessible. This project developed a wearable system combining microphone array triangulation with Doppler effect analysis to identify specific safety sounds, pinpoint their source, and determine if they are approaching.",
     objectives: [
