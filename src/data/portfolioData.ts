@@ -15,7 +15,7 @@ export const personalInfo = {
 export const education: Education[] = [
   {
     id: "edu1",
-    degree: "MS Robotics",
+    degree: "MS Robotics(Mechanical Concentration)",
     institution: "Northeastern University",
     location: "Boston, MA",
     graduationDate: "May 2027",
