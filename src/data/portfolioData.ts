@@ -265,7 +265,7 @@ export const publications: Publication[] = [
     id: "pub2",
     title: "Experimentation and Analysis of Industrial Chimneys and Solar Chimney Power Plant: A Comprehensive Literature Review",
     authors: ["Siddhi More", "Sonia Pol", "Bhushan T. Patil"],
-    venue: "AIP Conference Proceedings, International Conference on Advances in Physical Sciences and Materials (ICAPSM 2024)",
+    venue: "International Conference on Materials Science and Manufacturing Technology (ICMSMT 2024)",
     year: "2024",
     abstract: "This comprehensive review examines the structural and thermal performance of industrial and solar chimneys, analyzing the impact of wind loads and geometric configurations on stability. The review explores the potential of solar chimney power plants (SCPP) as a sustainable energy solution, synthesizing findings across structural analysis, thermal modeling, and renewable energy generation research.",
   },
