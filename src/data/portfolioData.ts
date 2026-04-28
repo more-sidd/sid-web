@@ -66,12 +66,13 @@ export const experience: Experience[] = [
  {
     id: "exp2",
     title: "CAD intern",
-    company: "CRCE Student Chapter",
+    company: "IIT Bombay & 1Stop.ai",
     location: "Mumbai, India",
-    startDate: "Mar 2022",
+    startDate: "May 2022",
     endDate: "Aug 2022",
     responsibilities: [
-      "Organized and mentored at Mech-a-thon; led technical workshops, developed structured guides for complex topics, and maintained active engagement between teaching faculty and students.",
+       "Created and refined 3D mechanical component models in AutoCAD and CAD/CAM software; developed precision engineering drawings and part documentation aligned with manufacturing standards.",
+      "Modeled and assembled components following technical specifications; gained industry-standard drafting and documentation practices applicable to real manufacturing workflows.",
     ],
   },
   {
