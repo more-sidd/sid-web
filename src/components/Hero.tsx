@@ -19,7 +19,7 @@ export default function Hero() {
       }} />
       {/* Warm glow */}
       <div style={{
-        position: 'absolute', top: '-180px', right: '-180px',
+        position: 'absolute', top: '-180px', right: '-180px', overflow: 'hidden',
         width: '600px', height: '600px', borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(193,68,14,0.09) 0%, transparent 65%)',
         pointerEvents: 'none',
