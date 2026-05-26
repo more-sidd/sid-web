@@ -7,6 +7,7 @@ export interface Project {
   skills?: string[];      // skill tags shown at bottom of modal
   description: string;
   fullDescription: string;
+  status?: 'complete' | 'in-progress';
   objectives: string[];
   results: string[];
   keyTakeaways: string[];
