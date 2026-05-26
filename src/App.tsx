@@ -2,6 +2,7 @@ import Nav          from './components/Nav';
 import Hero         from './components/Hero';
 import About        from './components/About';
 import Projects     from './components/Projects';
+import Gallery      from './components/Gallery';
 import Experience   from './components/Experience';
 import Education    from './components/Education';
 import Publications from './components/Publications';
@@ -16,11 +17,12 @@ export default function App() {
         <Hero />
         <About />
         <Projects />
+        <Gallery />
         <Experience />
         <Education />
         <Publications />
         <Contact />
-        </main>
+      </main>
       <footer style={{
         borderTop: '1px solid var(--border)',
         padding: '1.2rem 1.5rem',
@@ -37,4 +39,3 @@ export default function App() {
     </>
   );
 }
- 

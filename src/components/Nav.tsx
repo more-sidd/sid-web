@@ -4,6 +4,7 @@ import { personalInfo } from '../data/portfolioData';
 const LINKS = [
   { id: 'about',        label: 'About' },
   { id: 'projects',     label: 'Projects' },
+  { id: 'gallery',      label: 'Gallery' },   // ← NEW
   { id: 'experience',   label: 'Experience' },
   { id: 'education',    label: 'Education' },
   { id: 'publications', label: 'Publications' },

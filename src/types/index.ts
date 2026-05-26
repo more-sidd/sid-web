@@ -3,6 +3,7 @@ export interface Project {
   title: string;
   category: string;
   thumbnail?: string;
+  images?: string[];      // ← NEW: array of photo URLs for gallery strip + Gallery section
   description: string;
   fullDescription: string;
   objectives: string[];

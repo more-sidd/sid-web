@@ -19,7 +19,7 @@ export const education: Education[] = [
     institution: "Northeastern University",
     location: "Boston, MA",
     graduationDate: "May 2027",
-    gpa: "3.67 / 4.0",
+    gpa: "3.25 / 4.0",
     honors: ["Global Student Award"],
     courses: [
       "Robot Sensing & Navigation",
@@ -134,8 +134,14 @@ export const projects: Project[] = [
       "A 75ms predictive model is necessary to compensate end-to-end CAN-FD pipeline latency and correctly time torque delivery at push-off.",
       "PLA gearbox teeth fracture under repeated impact loading at heel strike — PETG or Nylon required for physical deployment.",
     ],
+    images: [
+    "/gallery/FSR data.jpg",
+    "/gallery/Pros CAD.jpg",
+    "/gallery/Pros Assembly.jpg",
+  ],
     github: "https://github.com/more-sidd/Predictive-Bilateral-Control-for-a-Powered-Ankle-Prosthesis",
   },
+
   {
     id: "proj2",
     title: "Wearable Hearing System — GCC-PHAT Sound Triangulation",
@@ -157,8 +163,13 @@ export const projects: Project[] = [
       "GCC-PHAT outperforms standard cross-correlation in noisy outdoor environments by relying solely on phase information.",
       "Doppler frequency shift analysis reliably distinguishes stationary from approaching sources even in real urban noise conditions.",
     ],
+
+  images: [
+    "/gallery/Car Horn Detection.png",
+  ],
     github: "https://github.com/more-sidd/A-Doppler-Based-Wearable-device-for-Directional-Awareness",
   },
+
   {
     id: "proj3",
     title: "Autonomous SLAM Navigation — ROS2 & TurtleBot3",
@@ -180,6 +191,11 @@ export const projects: Project[] = [
       "Velocity clamping at hardware spec (0.22 m/s) is critical — removing it causes exponential response instability and collision.",
       "Rosbag frequency histograms are a practical tool for diagnosing odometry drift and sensor update rate issues.",
     ],
+
+    images: [
+    "/gallery/Custom Env Turtlebot.gif",
+  ],
+
     github: "https://github.com/more-sidd/Turtlebot3-Navigation-using-SLAM",
   },
   {
@@ -203,6 +219,12 @@ export const projects: Project[] = [
       "Map reshuffling every 500 episodes balances stable Q-table convergence with generalizability to novel obstacle layouts.",
       "Coverage-scaled exploration bonus, inspired by SLAM, actively prevents the agent from revisiting already-cleared regions.",
     ],
+
+    images: [
+    "/gallery/ankle-cad.jpg",
+    "/gallery/ankle-pcb.jpg",
+  ],
+
     github: "https://github.com/more-sidd/hyacinth-cleaner-bot",
   },
   {
@@ -226,7 +248,12 @@ export const projects: Project[] = [
       "Buck converters (24V→12V/5V) are essential for powering mixed-voltage embedded systems from a single battery source.",
       "Von Mises stress FEA on the crusher drum identified stress concentrations that informed structural reinforcement before fabrication.",
     ],
+    images: [
+    "/gallery/ankle-cad.jpg",
+    "/gallery/ankle-pcb.jpg",
+  ],
   },
+
   {
     id: "proj6",
     title: "Injection Molding FEA & DOE Optimization",
@@ -248,6 +275,10 @@ export const projects: Project[] = [
       "Full-factorial DOE reveals critical two-factor interactions that single-variable analysis completely misses.",
       "Cooling time accounts for ~70% of total cycle time, making it the highest-leverage target for production efficiency improvements.",
     ],
+    images: [
+    "/gallery/ankle-cad.jpg",
+    "/gallery/ankle-pcb.jpg",
+  ],
   },
 ];
 
@@ -269,4 +300,9 @@ export const publications: Publication[] = [
     year: "2024",
     abstract: "This comprehensive review examines the structural and thermal performance of industrial and solar chimneys, analyzing the impact of wind loads and geometric configurations on stability. The review explores the potential of solar chimney power plants (SCPP) as a sustainable energy solution, synthesizing findings across structural analysis, thermal modeling, and renewable energy generation research.",
   },
+];
+// ← paste here, at the end of the file
+export const galleryImages = [
+  { src: "/gallery/hackathon-team.jpg", caption: "Smart India Hackathon" },
+  { src: "/gallery/lab-day.jpg",        caption: "Lab at Northeastern" },
 ];

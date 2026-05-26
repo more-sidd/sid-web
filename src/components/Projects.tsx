@@ -22,6 +22,8 @@ export default function Projects() {
           {projects.map((p, i) => {
             const ac = ACCENT_COLORS[i % ACCENT_COLORS.length];
             const bg = ACCENT_BGS[i % ACCENT_BGS.length];
+            const hasImages = p.images && p.images.length > 0;
+
             return (
               <Reveal key={p.id} delay={i * 55}>
                 <div
@@ -30,18 +32,72 @@ export default function Projects() {
                   onClick={() => setActive(p)}
                 >
                   {/* Top accent bar */}
-                  <div style={{ height: 3, background: ac, transition: 'opacity 0.2s' }} />
+                  <div style={{ height: 3, background: ac }} />
 
-                  {/* Thumbnail (if exists) */}
-                  {p.thumbnail && (
+                  {/* ── Image section ── */}
+                  {hasImages ? (
+                    // Multiple images → horizontal strip
+                    <div
+                      style={{
+                        display: 'flex',
+                        gap: 2,
+                        overflow: 'hidden',
+                        maxHeight: 160,
+                        background: 'var(--bg)',
+                      }}
+                      onClick={e => e.stopPropagation()} // allow scroll without opening modal
+                    >
+                      {p.images!.slice(0, 3).map((src, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            flex: idx === 0 ? '2 1 0' : '1 1 0',
+                            overflow: 'hidden',
+                            minWidth: 0,
+                          }}
+                          onClick={() => setActive(p)} // clicking image opens modal
+                        >
+                          <img
+                            src={src}
+                            alt={`${p.title} photo ${idx + 1}`}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              display: 'block',
+                              transition: 'transform 0.35s ease',
+                            }}
+                          />
+                        </div>
+                      ))}
+                      {/* Overlay count badge if more than 3 */}
+                      {p.images!.length > 3 && (
+                        <div style={{
+                          position: 'absolute',
+                          bottom: 6, right: 6,
+                          background: 'rgba(26,24,20,0.75)',
+                          color: '#fff',
+                          fontSize: '0.6rem',
+                          fontFamily: "'JetBrains Mono', monospace",
+                          padding: '0.15rem 0.4rem',
+                          borderRadius: 2,
+                          letterSpacing: '0.06em',
+                          pointerEvents: 'none',
+                        }}>
+                          +{p.images!.length - 3} more
+                        </div>
+                      )}
+                    </div>
+                  ) : p.thumbnail ? (
+                    // Fallback to single thumbnail
                     <div style={{ overflow: 'hidden', maxHeight: 160 }}>
                       <img src={p.thumbnail} alt={p.title} style={{ width: '100%', objectFit: 'cover', display: 'block' }} />
                     </div>
-                  )}
+                  ) : null}
 
                   <div style={{ padding: '1.2rem 1.3rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    {/* Period + category */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                    {/* Category tag */}
+                    <div style={{ marginBottom: '0.5rem' }}>
                       <span className="tag" style={{ background: bg, borderColor: ac + '55', color: ac, fontWeight: 500 }}>{p.category}</span>
                     </div>
 
