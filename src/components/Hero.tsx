@@ -83,10 +83,9 @@ export default function Hero() {
           animation: 'fadeUp 0.7s ease 0.7s both',
         }}>
           {[
-            { n: '3.67', l: 'GPA' },
-            { n: '6',    l: 'Projects' },
-            { n: '2',    l: 'Publications' },
-            { n: '2027', l: 'Graduating' },
+            { n: '3.25', l: 'GPA' },
+            { n: '3',    l: 'Publications' },
+            { n: 'May 2027', l: 'Graduating' },
           ].map((s, i) => (
             <div key={s.l} style={{ display: 'flex', alignItems: 'center' }}>
               {i > 0 && <div style={{ width: 1, height: 36, background: 'var(--border)' }} />}
