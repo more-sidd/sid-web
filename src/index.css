@@ -733,3 +733,69 @@ nav {
   opacity: 1 !important;
 }
  
+
+/* ── GALLERY hover effects ──────────────────────────────────────────────────── */
+.gallery-tile:hover img          { transform: scale(1.04); }
+.gallery-tile:hover .gallery-caption { opacity: 1 !important; }
+
+/* ── DARK MODE ──────────────────────────────────────────────────────────────────
+   Paste this entire block at the very bottom of index.css.
+   It overrides every CSS variable when <html class="dark"> is active.
+   Palette: near-black background, white text, purple accent.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+html.dark {
+  --bg:          #0d0d0f;
+  --bg-alt:      #111114;
+  --surface:     #18181c;
+  --border:      #2a2a32;
+  --border-2:    #3a3a46;
+  --border-strong: #3a3a46;
+  --text:        #f0eef8;
+  --muted:       #8b8a9e;
+  --accent:      #27A3F5;
+  --accent-bg:   #0d1f2e;
+  --accent-light:#0d1f2e;
+}
+
+/* Nav background in dark + scrolled */
+html.dark .nav-scrolled {
+  background: rgba(13, 13, 15, 0.94) !important;
+}
+
+/* Cards */
+html.dark .card:hover {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* Hero grid lines — slightly more visible on dark */
+html.dark .hero-bg-grid {
+  opacity: 0.25;
+}
+
+/* Hero glow — purple tint in dark */
+html.dark .hero-bg-glow,
+html.dark [style*="radial-gradient(circle, rgba(193,68,14"] {
+  background: radial-gradient(circle, rgba(155, 109, 255, 0.1) 0%, transparent 65%) !important;
+}
+
+/* Scrollbar */
+html.dark ::-webkit-scrollbar-track { background: var(--bg); }
+html.dark ::-webkit-scrollbar-thumb { background: var(--border-2); }
+
+/* Smooth color transitions on everything */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* Don't animate transforms (breaks hover effects) */
+.card, .btn-primary, .btn-ghost, .gallery-tile img, .gallery-tile {
+  transition: background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease,
+              box-shadow 0.25s ease,
+              transform 0.22s ease,
+              opacity 0.2s ease;
+}

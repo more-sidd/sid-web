@@ -4,17 +4,78 @@ import { personalInfo } from '../data/portfolioData';
 const LINKS = [
   { id: 'about',        label: 'About' },
   { id: 'projects',     label: 'Projects' },
-  { id: 'gallery',      label: 'Gallery' },   // ← NEW
+  { id: 'skills',       label: 'Skills' },
+  { id: 'gallery',      label: 'Gallery' },
   { id: 'experience',   label: 'Experience' },
   { id: 'education',    label: 'Education' },
   { id: 'publications', label: 'Publications' },
   { id: 'contact',      label: 'Contact' },
 ];
 
+function SunIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <circle cx="12" cy="12" r="4" />
+      <line x1="12" y1="2"  x2="12" y2="5" />
+      <line x1="12" y1="19" x2="12" y2="22" />
+      <line x1="2"  y1="12" x2="5"  y2="12" />
+      <line x1="19" y1="12" x2="22" y2="12" />
+      <line x1="4.22"  y1="4.22"  x2="6.34"  y2="6.34" />
+      <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
+      <line x1="4.22"  y1="19.78" x2="6.34"  y2="17.66" />
+      <line x1="17.66" y1="6.34"  x2="19.78" y2="4.22" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+}
+
+function ThemeToggle({ dark, onToggle }: { dark: boolean; onToggle: () => void }) {
+  return (
+    <button
+      onClick={onToggle}
+      title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 36,
+        height: 36,
+        borderRadius: '50%',
+        border: '1.5px solid var(--border)',
+        background: 'var(--surface)',
+        cursor: 'pointer',
+        color: dark ? '#27A3F5' : '#c1440e',
+        transition: 'border-color 0.2s, color 0.2s, background 0.2s',
+        flexShrink: 0,
+      }}
+    >
+      {dark ? <MoonIcon /> : <SunIcon />}
+    </button>
+  );
+}
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive]     = useState('');
   const [open, setOpen]         = useState(false);
+  const [dark, setDark]         = useState(() => localStorage.getItem('theme') === 'dark');
+
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [dark]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -49,7 +110,7 @@ export default function Nav() {
           SM<span style={{ color: 'var(--accent)' }}>_</span>
         </button>
 
-        {/* Desktop links */}
+        {/* Desktop: links + toggle + resume */}
         <div className="hidden md:flex items-center gap-7">
           {LINKS.map(l => (
             <button
@@ -66,24 +127,32 @@ export default function Nav() {
               {l.label}
             </button>
           ))}
+
+          <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
+
           <a href={personalInfo.resumeUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.45rem 1rem', fontSize: '0.68rem' }}>
             Resume ↗
           </a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setOpen(o => !o)}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)' }}
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-            {open
-              ? <><line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" strokeWidth="2"/><line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" strokeWidth="2"/></>
-              : <><line x1="2" y1="5"  x2="20" y2="5"  stroke="currentColor" strokeWidth="2"/><line x1="2" y1="11" x2="20" y2="11" stroke="currentColor" strokeWidth="2"/><line x1="2" y1="17" x2="20" y2="17" stroke="currentColor" strokeWidth="2"/></>
-            }
-          </svg>
-        </button>
+        {/* Mobile: toggle + hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <div className="md:hidden">
+            <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
+          </div>
+          <button
+            className="md:hidden"
+            onClick={() => setOpen(o => !o)}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)' }}
+          >
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              {open
+                ? <><line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" strokeWidth="2"/><line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" strokeWidth="2"/></>
+                : <><line x1="2" y1="5"  x2="20" y2="5"  stroke="currentColor" strokeWidth="2"/><line x1="2" y1="11" x2="20" y2="11" stroke="currentColor" strokeWidth="2"/><line x1="2" y1="17" x2="20" y2="17" stroke="currentColor" strokeWidth="2"/></>
+              }
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
