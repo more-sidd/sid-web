@@ -300,7 +300,6 @@ export const galleryImages = [
   { src: "/gallery/SIH.jpg", caption: "Smart India Hackathon" },
   { src: "/gallery/Gwise1.jpeg",        caption: "GWiSE NEU" },
   { src: "/gallery/Gwise2.JPG",        caption: "GWiSE NEU" },
-  { src: "/gallery/Hiking1.JPG",        caption: "Fun Activites!" },
   { src: "/gallery/Hiking2.jpeg",        caption: "Fun Activites!" },
   { src: "/gallery/NEU.JPG",        caption: "Northeastern University" },
   { src: "/gallery/GLI1.JPG",        caption: "Graduate Leadership Institute @ lead360" },
