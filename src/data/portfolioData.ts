@@ -221,8 +221,7 @@ export const projects: Project[] = [
     ],
 
     images: [
-    "/gallery/ankle-cad.jpg",
-    "/gallery/ankle-pcb.jpg",
+    "/gallery/grid_visualization.png",
   ],
 
     github: "https://github.com/more-sidd/hyacinth-cleaner-bot",
@@ -248,10 +247,6 @@ export const projects: Project[] = [
       "Buck converters (24V→12V/5V) are essential for powering mixed-voltage embedded systems from a single battery source.",
       "Von Mises stress FEA on the crusher drum identified stress concentrations that informed structural reinforcement before fabrication.",
     ],
-    images: [
-    "/gallery/ankle-cad.jpg",
-    "/gallery/ankle-pcb.jpg",
-  ],
   },
 
   {
@@ -276,8 +271,7 @@ export const projects: Project[] = [
       "Cooling time accounts for ~70% of total cycle time, making it the highest-leverage target for production efficiency improvements.",
     ],
     images: [
-    "/gallery/ankle-cad.jpg",
-    "/gallery/ankle-pcb.jpg",
+    "/gallery/sink marks.png",
   ],
   },
 ];
@@ -303,6 +297,13 @@ export const publications: Publication[] = [
 ];
 // ← paste here, at the end of the file
 export const galleryImages = [
-  { src: "/gallery/hackathon-team.jpg", caption: "Smart India Hackathon" },
-  { src: "/gallery/lab-day.jpg",        caption: "Lab at Northeastern" },
+  { src: "/gallery/SIH.jpg", caption: "Smart India Hackathon" },
+  { src: "/gallery/Gwise1.jpeg",        caption: "GWiSE NEU" },
+  { src: "/gallery/Gwise2.JPG",        caption: "GWiSE NEU" },
+  { src: "/gallery/Hiking1.JPG",        caption: "Fun Activites!" },
+  { src: "/gallery/Hiking2.jpeg",        caption: "Fun Activites!" },
+  { src: "/gallery/NEU.JPG",        caption: "Northeastern University" },
+  { src: "/gallery/GLI1.JPG",        caption: "Graduate Leadership Institute @ lead360" },
+  { src: "/gallery/GLI2.jpg",        caption: "Graduate Leadership Institute @ lead360" },
+  { src: "/gallery/GLI3.jpeg",        caption: "Graduate Leadership Institute @ lead360" },
 ];
