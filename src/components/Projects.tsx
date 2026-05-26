@@ -117,7 +117,7 @@ export default function Projects() {
                     {/* Footer */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
                       <span className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>
-                        {{p.github ? '↗ GitHub available' : p.status?: 'complete' | 'in-progress';}
+                        {p.github ? '↗ GitHub available' : p.status === 'complete' ? '✓ Completed' : 'In progress'}
                       </span>
                       <span className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.1em', color: ac, textTransform: 'uppercase' }}>
                         Details →
