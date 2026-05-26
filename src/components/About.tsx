@@ -15,7 +15,7 @@ export default function About() {
           <Reveal delay={80}>
             <img
               src={personalInfo.photo}
-              alt="Siddhi More"
+              alt="Siddhi Sanjay More"
               style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', borderRadius: 4, border: '1.5px solid var(--border)' }}
             />
           </Reveal>
