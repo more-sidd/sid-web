@@ -5,10 +5,10 @@ import dopplerThumbnail from '/doppler.png';
 export const personalInfo = {
   name: "Siddhi More",
   title: "Wearable & Assistive Robotics Engineer",
-  tagline: "Building hardware that restores human mobility — from planetary gearbox design and embedded firmware to ROS2 navigation and ML-validated musculoskeletal simulation.",
+  tagline: "Building hardware that restores human mobility!From planetary gearbox design and embedded firmware to ROS2 navigation and ML-validated musculoskeletal simulation.",
   photo: "/sidd.jpg",
   email: "more.sidd@northeastern.edu",
-  linkedin: "https://www.linkedin.com/in/siddhi-more-728b92230/",
+  linkedin: "https://www.linkedin.com/in/more-siddhi/",
   github: "https://github.com/more-sidd",
   resumeUrl: "/SiddhiResume.pdf",
 };
