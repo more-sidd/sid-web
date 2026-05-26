@@ -117,7 +117,7 @@ export const projects: Project[] = [
     id: "proj1",
     title: "Powered Ankle Prosthesis — Predictive Bilateral Control",
     category: "Wearable Robotics",
-    status: "in-progress"
+    status: "in-progress",
     description: "Closed-loop impedance-controlled prosthetic ankle with a 36:1 planetary gearbox, 200Hz ESP32 gait phase estimator, and OpenSim-validated ML terrain classification at 85.9% accuracy.",
     fullDescription: "Below-knee amputees face significant challenges adapting to varying terrain. Current passive prostheses cannot adjust ankle stiffness across activities, resulting in excessive metabolic cost and increased fall risk. This project addresses that through a powered ankle prosthesis combining phase-portrait gait estimation with predictive control to deliver biomechanically timed assistive torque.",
     objectives: [
@@ -147,7 +147,7 @@ export const projects: Project[] = [
     id: "proj2",
     title: "Wearable Hearing System — GCC-PHAT Sound Triangulation",
     category: "Assistive Robotics",
-    status: "complete"
+    status: "complete",
     description: "Wearable assistive device for hearing-impaired users that classifies safety-critical sounds and delivers real-time directional haptic feedback using GCC-PHAT TDOA localization — ±10° accuracy, <100ms latency.",
     fullDescription: "430 million people worldwide live with disabling hearing loss, creating a critical safety gap in urban environments where auditory cues from approaching vehicles are inaccessible. This project developed a wearable system combining microphone array triangulation with Doppler effect analysis to identify specific safety sounds, pinpoint their source, and determine if they are approaching.",
     objectives: [
@@ -176,7 +176,7 @@ export const projects: Project[] = [
     id: "proj3",
     title: "Autonomous SLAM Navigation — ROS2 & TurtleBot3",
     category: "Autonomous Navigation",
-    status: "complete"
+    status: "complete",
     description: "Custom ROS2 control package replacing manual teleoperation with automated closed-loop trajectory execution for consistent autonomous SLAM map generation. Report: 97/100.",
     fullDescription: "Manual teleoperation for SLAM mapping is unreliable — human error causes collisions, inconsistent coverage, and poor map quality. This project developed turtlebot3_control, a ROS2 package that automates trajectory execution with Cartographer SLAM and Nav2 running in parallel, enabling consistent, reproducible autonomous mapping.",
     objectives: [
@@ -205,7 +205,7 @@ export const projects: Project[] = [
     id: "proj4",
     title: "Aquatic Hyacinth Cleaner — Q-Learning Navigation Agent",
     category: "Reinforcement Learning",
-    status: "complete"
+    status: "complete",
     description: "Q-learning agent with partial observability solving autonomous aquatic navigation for invasive species removal — 100% completion rate from episode 400 of 5000, clearing all 20 targets in 94 steps.",
     fullDescription: "A physical aquatic robot can only sense what its sensors detect within a certain range — it cannot see the entire pond at once. This project designed a Q-learning agent operating under partial observability constraints to navigate a grid-based pond simulation, avoid obstacles, and efficiently remove invasive water hyacinth.",
     objectives: [
@@ -234,7 +234,7 @@ export const projects: Project[] = [
     id: "proj5",
     title: "Semi-Autonomous Aquatic Robot — Smart India Hackathon",
     category: "Autonomous Systems",
-    status: "complete"
+    status: "complete",
     description: "Multi-microcontroller aquatic robot with CNN-based hyacinth classification (87.5% accuracy), full EasyEDA circuit schematic, and end-to-end hyacinth-to-textile processing pipeline.",
     fullDescription: "Invasive water hyacinth causes severe ecological damage to freshwater bodies across India. This Smart India Hackathon project designed a semi-autonomous robot to remove and process the plant — combining multi-microcontroller embedded electronics, computer vision, SolidWorks FEA, and textile fabrication into a single end-to-end system.",
     objectives: [
@@ -258,7 +258,7 @@ export const projects: Project[] = [
     id: "proj6",
     title: "Injection Molding FEA & DOE Optimization",
     category: "Manufacturing Simulation",
-    status: "complete"
+    status: "complete",
     description: "Systematic DOE and ANOVA optimization of automotive airbag housing injection molding in SolidWorks Plastics — reduced sink marks by 20% and warpage by 11%. Published in AIP Conference Proceedings, ICAPSM 2024.",
     fullDescription: "Automotive airbag housings are safety-critical components that must withstand high pressures during deployment. Defects like sink marks and warpage compromise both structural integrity and dimensional accuracy. This research applied Design of Experiments and ANOVA to identify the critical process parameter interactions driving these defects.",
     objectives: [
