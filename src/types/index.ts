@@ -3,7 +3,8 @@ export interface Project {
   title: string;
   category: string;
   thumbnail?: string;
-  images?: string[];      // ← NEW: array of photo URLs for gallery strip + Gallery section
+  images?: string[];      // photo strip in card + gallery in modal
+  skills?: string[];      // skill tags shown at bottom of modal
   description: string;
   fullDescription: string;
   objectives: string[];

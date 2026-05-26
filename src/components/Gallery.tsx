@@ -3,7 +3,6 @@ import { projects, galleryImages } from '../data/portfolioData';
 
 type Tab = 'general' | 'projects';
 
-// Lightbox state
 interface LightboxState {
   src: string;
   caption?: string;
@@ -15,17 +14,15 @@ export default function Gallery() {
   const [tab, setTab] = useState<Tab>('general');
   const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
-  // Collect all project images with their metadata
-  const projectImages = projects
-    .flatMap(p =>
-      (p.images ?? []).map(img => ({
-        src: img,
-        projectId: p.id,
-        projectTitle: p.title,
-        category: p.category,
-        github: p.github,
-      }))
-    );
+  const projectImages = projects.flatMap(p =>
+    (p.images ?? []).map(img => ({
+      src: img,
+      projectId: p.id,
+      projectTitle: p.title,
+      category: p.category,
+      github: p.github,
+    }))
+  );
 
   const scrollToProject = (id: string) => {
     setLightbox(null);
@@ -42,7 +39,7 @@ export default function Gallery() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
           <h2 className="heading" style={{ marginBottom: 0 }}>Visual Archive</h2>
 
-          {/* Tab switcher */}
+          {/* ── Tab switcher — bigger & more visible ── */}
           <div style={{ display: 'flex', gap: 0, border: '1.5px solid var(--border)', borderRadius: 3, overflow: 'hidden' }}>
             {(['general', 'projects'] as Tab[]).map(t => (
               <button
@@ -50,15 +47,16 @@ export default function Gallery() {
                 onClick={() => setTab(t)}
                 className="font-mono"
                 style={{
-                  padding: '0.45rem 1.1rem',
-                  fontSize: '0.68rem',
-                  letterSpacing: '0.12em',
+                  padding: '0.7rem 2rem',           // ← taller + wider
+                  fontSize: '0.78rem',              // ← bigger text
+                  letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  background: tab === t ? 'var(--accent)' : 'transparent',
+                  background: tab === t ? 'var(--accent)' : 'var(--surface)',
                   color: tab === t ? '#fff' : 'var(--muted)',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
+                  fontWeight: tab === t ? 600 : 400,
                 }}
               >
                 {t}
@@ -95,7 +93,11 @@ export default function Gallery() {
             ) : (
               <MasonryGrid>
                 {projectImages.map((img, i) => (
-                  <div key={i} style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setLightbox({ src: img.src, tag: img.projectTitle, projectId: img.projectId })}>
+                  <div
+                    key={i}
+                    style={{ position: 'relative', cursor: 'pointer', breakInside: 'avoid', marginBottom: '0.8rem' }}
+                    onClick={() => setLightbox({ src: img.src, tag: img.projectTitle, projectId: img.projectId })}
+                  >
                     <GalleryTile
                       src={img.src}
                       onClick={() => setLightbox({ src: img.src, tag: img.projectTitle, projectId: img.projectId })}
@@ -108,6 +110,7 @@ export default function Gallery() {
                       borderRadius: 2,
                       padding: '0.2rem 0.55rem',
                       display: 'flex', alignItems: 'center', gap: '0.4rem',
+                      pointerEvents: 'none',
                     }}>
                       <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', flexShrink: 0 }} />
                       <span className="font-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.1em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap', maxWidth: 160, overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -134,36 +137,19 @@ export default function Gallery() {
             padding: '1.5rem',
           }}
         >
-          <div
-            onClick={e => e.stopPropagation()}
-            style={{ maxWidth: 860, width: '100%', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}
-          >
-            {/* Close */}
+          <div onClick={e => e.stopPropagation()} style={{ maxWidth: 860, width: '100%', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <button
-                onClick={() => setLightbox(null)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', padding: '0.3rem' }}
-              >
+              <button onClick={() => setLightbox(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', padding: '0.3rem' }}>
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                   <line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" strokeWidth="1.8"/>
                   <line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" strokeWidth="1.8"/>
                 </svg>
               </button>
             </div>
-
-            {/* Image */}
-            <img
-              src={lightbox.src}
-              alt={lightbox.caption ?? lightbox.tag ?? ''}
-              style={{ width: '100%', maxHeight: '75vh', objectFit: 'contain', borderRadius: 4, display: 'block' }}
-            />
-
-            {/* Caption / project link */}
+            <img src={lightbox.src} alt={lightbox.caption ?? lightbox.tag ?? ''} style={{ width: '100%', maxHeight: '75vh', objectFit: 'contain', borderRadius: 4, display: 'block' }} />
             {(lightbox.caption || lightbox.tag) && (
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>
-                  {lightbox.caption ?? lightbox.tag}
-                </span>
+                <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>{lightbox.caption ?? lightbox.tag}</span>
                 {lightbox.projectId && (
                   <button
                     onClick={() => scrollToProject(lightbox.projectId!)}
@@ -188,14 +174,9 @@ export default function Gallery() {
   );
 }
 
-/* ── Sub-components ─────────────────────────────────────── */
-
 function MasonryGrid({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{
-      columns: '3 260px',
-      gap: '0.8rem',
-    }}>
+    <div style={{ columns: '3 260px', gap: '0.8rem' }}>
       {children}
     </div>
   );
@@ -217,12 +198,7 @@ function GalleryTile({ src, caption, onClick }: { src: string; caption?: string;
       }}
       className="gallery-tile"
     >
-      <img
-        src={src}
-        alt={caption ?? ''}
-        loading="lazy"
-        style={{ width: '100%', display: 'block', transition: 'transform 0.35s ease' }}
-      />
+      <img src={src} alt={caption ?? ''} loading="lazy" style={{ width: '100%', display: 'block', transition: 'transform 0.35s ease' }} />
       {caption && (
         <div style={{
           position: 'absolute', bottom: 0, left: 0, right: 0,
@@ -242,12 +218,7 @@ function GalleryTile({ src, caption, onClick }: { src: string; caption?: string;
 
 function EmptyState({ message }: { message: string }) {
   return (
-    <div style={{
-      border: '1.5px dashed var(--border)',
-      borderRadius: 4,
-      padding: '3.5rem 2rem',
-      textAlign: 'center',
-    }}>
+    <div style={{ border: '1.5px dashed var(--border)', borderRadius: 4, padding: '3.5rem 2rem', textAlign: 'center' }}>
       <div style={{ fontSize: '2rem', marginBottom: '0.8rem', opacity: 0.3 }}>📷</div>
       <p className="font-mono" style={{ fontSize: '0.72rem', letterSpacing: '0.1em', color: 'var(--muted)', maxWidth: 420, margin: '0 auto', lineHeight: 1.7 }}>
         {message}

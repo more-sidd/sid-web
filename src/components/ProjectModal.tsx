@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Project } from '../types';
 
 interface Props {
@@ -6,61 +7,147 @@ interface Props {
 }
 
 export default function ProjectModal({ project, onClose }: Props) {
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const hasImages = project.images && project.images.length > 0;
+
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-box" onClick={e => e.stopPropagation()}>
-        {/* Header */}
-        <div style={{ padding: '1.6rem 1.8rem 1.2rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
-          <div>
-            <span className="tag tag-accent" style={{ marginBottom: '0.6rem', display: 'inline-block' }}>{project.category}</span>
-            <h3 className="font-display" style={{ fontSize: '1.6rem', lineHeight: 1.1 }}>{project.title}</h3>
-          </div>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', flexShrink: 0, padding: '0.2rem' }}>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" strokeWidth="1.8"/>
-              <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" strokeWidth="1.8"/>
-            </svg>
-          </button>
-        </div>
+    <>
+      <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-box" onClick={e => e.stopPropagation()}>
 
-        {/* Thumbnail */}
-        {project.thumbnail && (
-          <div style={{ padding: '1.2rem 1.8rem 0' }}>
-            <img src={project.thumbnail} alt={project.title} style={{ width: '100%', borderRadius: 3, border: '1px solid var(--border)' }} />
-          </div>
-        )}
-
-        {/* Body */}
-        <div style={{ padding: '1.4rem 1.8rem 1.8rem', display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.75, fontSize: '0.93rem' }}>{project.fullDescription}</p>
-
-          {[
-            { label: 'Objectives', items: project.objectives },
-            { label: 'Results',    items: project.results },
-            { label: 'Key Takeaways', items: project.keyTakeaways },
-          ].map(block => (
-            <div key={block.label}>
-              <p className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.5rem' }}>
-                {block.label}
-              </p>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                {block.items.map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.6 }}>
-                    <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0, marginTop: '0.42rem' }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+          {/* ── Header ── */}
+          <div style={{ padding: '1.6rem 1.8rem 1.2rem', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+            <div>
+              <span className="tag tag-accent" style={{ marginBottom: '0.6rem', display: 'inline-block' }}>{project.category}</span>
+              <h3 className="font-display" style={{ fontSize: '1.6rem', lineHeight: 1.1 }}>{project.title}</h3>
             </div>
-          ))}
+            <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', flexShrink: 0, padding: '0.2rem' }}>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" strokeWidth="1.8"/>
+                <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" strokeWidth="1.8"/>
+              </svg>
+            </button>
+          </div>
 
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noreferrer" className="btn-ghost" style={{ alignSelf: 'flex-start' }}>
-              View on GitHub ↗
-            </a>
+          {/* ── Image gallery strip ── */}
+          {hasImages && (
+            <div style={{ padding: '1.2rem 1.8rem 0' }}>
+              <p className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.6rem' }}>
+                Photos
+              </p>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: project.images!.length === 1
+                  ? '1fr'
+                  : project.images!.length === 2
+                  ? '1fr 1fr'
+                  : 'repeat(3, 1fr)',
+                gap: '0.5rem',
+              }}>
+                {project.images!.map((src, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => setLightboxSrc(src)}
+                    style={{
+                      borderRadius: 3,
+                      overflow: 'hidden',
+                      border: '1px solid var(--border)',
+                      cursor: 'zoom-in',
+                      aspectRatio: '4/3',
+                    }}
+                    className="gallery-tile"
+                  >
+                    <img
+                      src={src}
+                      alt={`${project.title} photo ${idx + 1}`}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.3s ease' }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           )}
+
+          {/* Fallback: single thumbnail */}
+          {!hasImages && project.thumbnail && (
+            <div style={{ padding: '1.2rem 1.8rem 0' }}>
+              <img src={project.thumbnail} alt={project.title} style={{ width: '100%', borderRadius: 3, border: '1px solid var(--border)' }} />
+            </div>
+          )}
+
+          {/* ── Body ── */}
+          <div style={{ padding: '1.4rem 1.8rem 1.8rem', display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
+            <p style={{ color: 'var(--muted)', lineHeight: 1.75, fontSize: '0.93rem' }}>{project.fullDescription}</p>
+
+            {[
+              { label: 'Objectives',    items: project.objectives },
+              { label: 'Results',       items: project.results },
+              { label: 'Key Takeaways', items: project.keyTakeaways },
+            ].map(block => (
+              <div key={block.label}>
+                <p className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.5rem' }}>
+                  {block.label}
+                </p>
+                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                  {block.items.map((item, i) => (
+                    <li key={i} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.6 }}>
+                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0, marginTop: '0.42rem' }} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+
+            {/* ── Skill tags ── */}
+            {project.skills && project.skills.length > 0 && (
+              <div>
+                <p className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.5rem' }}>
+                  Skills & Tools
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+                  {project.skills.map(skill => (
+                    <span key={skill} className="tag">{skill}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* GitHub link */}
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noreferrer" className="btn-ghost" style={{ alignSelf: 'flex-start' }}>
+                View on GitHub ↗
+              </a>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* ── Image lightbox ── */}
+      {lightboxSrc && (
+        <div
+          onClick={() => setLightboxSrc(null)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 300,
+            background: 'rgba(15,13,10,0.92)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '1.5rem',
+          }}
+        >
+          <div onClick={e => e.stopPropagation()} style={{ maxWidth: 900, width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button onClick={() => setLightboxSrc(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', padding: '0.3rem' }}>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" strokeWidth="1.8"/>
+                  <line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" strokeWidth="1.8"/>
+                </svg>
+              </button>
+            </div>
+            <img src={lightboxSrc} alt="" style={{ width: '100%', maxHeight: '80vh', objectFit: 'contain', borderRadius: 4, display: 'block' }} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
