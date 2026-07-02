@@ -311,4 +311,6 @@ export const galleryImages = [
   { src: "/gallery/GLI1.JPG",        caption: "Graduate Leadership Institute @ lead360" },
   { src: "/gallery/GLI2.jpg",        caption: "Graduate Leadership Institute @ lead360" },
   { src: "/gallery/GLI3.jpeg",        caption: "Graduate Leadership Institute @ lead360" },
+  { src: "/gallery/kayaking.jpg"        caption: "Fun Activities!"},
+  { src: "/gallery/Pupper.jpg"        caption: "Pupperv3 Stanford X BRH"},
 ];
