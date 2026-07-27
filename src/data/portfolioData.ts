@@ -290,7 +290,7 @@ export const publications: Publication[] = [
     venue: "AIP Conference Proceedings, International Conference on Advances in Physical Sciences and Materials (ICAPSM 2024)",
     year: "2024",
     abstract: "This research optimizes the injection molding process for automotive airbag housings using SolidWorks Plastics simulation and a 2³ full-factorial Design of Experiments. ANOVA analysis identified melt temperature (F=159.0) and mold temperature (F=440.0) as statistically significant drivers of cooling time and sink mark formation, while injection pressure was non-significant. Optimal parameter settings reduced sink marks by 20% and warpage by 11%, contributing validated optimization strategies for safety-critical automotive manufacturing.",
-    externalUrl: "https://doi.org/10.1063/5.xxxxxxx",
+    externalUrl: "https://doi.org/10.1063/5.0348166",
   },
   {
     id: "pub2",
