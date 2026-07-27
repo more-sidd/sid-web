@@ -12,7 +12,7 @@
   --border-2:  #c8c2b8;
   --text:      #1a1814;
   --muted:     #706a60;
-  --accent:    #a3bf15;
+  --accent:    #0172ce;
   --accent-bg: #fdf0eb;
 }
 
@@ -74,7 +74,7 @@ body {
   --border-strong: #c8c2b8;
   --text: #1a1814;
   --muted: #7a7568;
-  --accent: #c1440e;
+  --accent: #0172ce;
   --accent-light: #f7e8e2;
   --mono: 'JetBrains Mono', monospace;
   --display: 'Bebas Neue', sans-serif;
