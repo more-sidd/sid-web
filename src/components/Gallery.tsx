@@ -51,8 +51,8 @@ export default function Gallery() {
                   fontSize: '0.78rem',              // ← bigger text
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  background: tab === t ? 'var(--accent)' : 'var(--surface)',
-                  color: tab === t ? '#fff' : 'var(--muted)',
+                  background: tab === t ? 'var(--accent-fill)' : 'var(--surface)',
+                  color: tab === t ? 'var(--accent-on)' : 'var(--muted)',
                   border: 'none',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
@@ -105,14 +105,15 @@ export default function Gallery() {
                     {/* Project tag badge */}
                     <div style={{
                       position: 'absolute', bottom: 8, left: 8,
-                      background: 'rgba(26,24,20,0.82)',
+                      background: 'rgba(36,30,40,0.82)',
                       backdropFilter: 'blur(6px)',
                       borderRadius: 2,
                       padding: '0.2rem 0.55rem',
                       display: 'flex', alignItems: 'center', gap: '0.4rem',
                       pointerEvents: 'none',
                     }}>
-                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block', flexShrink: 0 }} />
+                      {/* sits on a dark badge, so the bright pastel reads better than the ink */}
+                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent-fill)', display: 'inline-block', flexShrink: 0 }} />
                       <span className="font-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.1em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap', maxWidth: 160, overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {img.projectTitle}
                       </span>
@@ -131,7 +132,7 @@ export default function Gallery() {
           onClick={() => setLightbox(null)}
           style={{
             position: 'fixed', inset: 0, zIndex: 200,
-            background: 'rgba(15,13,10,0.88)',
+            background: 'rgba(22,18,26,0.88)',
             backdropFilter: 'blur(8px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: '1.5rem',
@@ -203,7 +204,7 @@ function GalleryTile({ src, caption, onClick }: { src: string; caption?: string;
         <div style={{
           position: 'absolute', bottom: 0, left: 0, right: 0,
           padding: '0.5rem 0.7rem',
-          background: 'linear-gradient(transparent, rgba(15,13,10,0.7))',
+          background: 'linear-gradient(transparent, rgba(22,18,26,0.7))',
           color: 'rgba(255,255,255,0.85)',
           fontSize: '0.75rem',
           opacity: 0,

@@ -4,26 +4,58 @@ import About        from './components/About';
 import Projects     from './components/Projects';
 import Skills       from './components/Skills';
 import Gallery      from './components/Gallery';
+import Blog         from './components/Blog';
 import Experience   from './components/Experience';
 import Education    from './components/Education';
 import Publications from './components/Publications';
 import Contact      from './components/Contact';
+import { lazy, Suspense } from 'react';
+import { useHashRoute } from './lib/useHashRoute';
 import './index.css';
+import './blog.css';
+
+// The markdown renderer and Supabase client are only needed once someone opens
+// a post, so they load on demand instead of weighing down the landing page.
+const BlogPost      = lazy(() => import('./components/BlogPost'));
+const CommentsAdmin = lazy(() => import('./components/CommentsAdmin'));
+
+function RouteFallback() {
+  return (
+    <div className="post-page">
+      <div className="post-container">
+        <p className="comments-status font-mono">Loading…</p>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
+  const route = useHashRoute();
+
   return (
     <>
       <Nav />
       <main>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Gallery />
-        <Experience />
-        <Education />
-        <Publications />
-        <Contact />
+        {route.name === 'post' && (
+          <Suspense fallback={<RouteFallback />}><BlogPost slug={route.slug} /></Suspense>
+        )}
+        {route.name === 'admin' && (
+          <Suspense fallback={<RouteFallback />}><CommentsAdmin /></Suspense>
+        )}
+        {route.name === 'home'  && (
+          <>
+            <Hero />
+            <About />
+            <Projects />
+            <Skills />
+            <Gallery />
+            <Blog />
+            <Experience />
+            <Education />
+            <Publications />
+            <Contact />
+          </>
+        )}
       </main>
       <footer style={{
         borderTop: '1px solid var(--border)',
@@ -34,7 +66,7 @@ export default function App() {
         <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--muted)', letterSpacing: '0.06em' }}>
           © 2026 Siddhi More · Boston, MA
         </span>
-        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--border-2)', letterSpacing: '0.06em' }}>
+        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--muted)', letterSpacing: '0.06em' }}>
           React + Vite + Tailwind
         </span>
       </footer>

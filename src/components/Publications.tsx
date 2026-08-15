@@ -18,7 +18,7 @@ export default function Publications() {
                   <div>
                     <span className="font-mono" style={{
                       fontSize: '0.62rem', letterSpacing: '0.14em', textTransform: 'uppercase',
-                      background: 'var(--accent)', color: '#fff',
+                      background: 'var(--accent-fill)', color: 'var(--accent-on)',
                       padding: '0.2rem 0.65rem', borderRadius: 2, display: 'inline-block', marginBottom: '0.7rem',
                     }}>
                       {pub.year} · Conference Paper
@@ -37,7 +37,7 @@ export default function Publications() {
                   {pub.authors.map((a, ai) => (
                     <span key={ai}>
                       {a === 'Siddhi More'
-                        ? <strong style={{ color: 'var(--accent)', textDecoration: 'underline', textDecorationColor: '#e8b09a' }}>{a}</strong>
+                        ? <strong style={{ color: 'var(--accent)', textDecoration: 'underline', textDecorationColor: 'var(--accent-fill)' }}>{a}</strong>
                         : a
                       }
                       {ai < pub.authors.length - 1 ? ', ' : ''}

@@ -22,7 +22,7 @@ export default function Experience() {
                   <p className="font-mono" style={{ fontSize: '0.72rem', letterSpacing: '0.06em', color: 'var(--muted)', lineHeight: 1.6 }}>
                     {e.startDate} – {e.endDate}
                   </p>
-                  <p className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--border-2)', marginTop: 2, letterSpacing: '0.04em' }}>
+                  <p className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--muted)', marginTop: 2, letterSpacing: '0.04em' }}>
                     {e.location}
                   </p>
                 </div>
@@ -34,7 +34,7 @@ export default function Experience() {
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     {e.responsibilities.map((r, ri) => (
                       <li key={ri} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.65 }}>
-                        <span style={{ flexShrink: 0, color: 'var(--border-2)', fontFamily: 'monospace', fontSize: '0.8rem', marginTop: '0.12rem' }}>—</span>
+                        <span style={{ flexShrink: 0, color: 'var(--muted)', fontFamily: 'monospace', fontSize: '0.8rem', marginTop: '0.12rem' }}>—</span>
                         {r}
                       </li>
                     ))}

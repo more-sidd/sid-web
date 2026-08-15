@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
+import { useHashRoute, goHome } from '../lib/useHashRoute';
 
 const LINKS = [
   { id: 'about',        label: 'About' },
   { id: 'projects',     label: 'Projects' },
   { id: 'skills',       label: 'Skills' },
   { id: 'gallery',      label: 'Gallery' },
+  { id: 'blog',         label: 'Blog' },
   { id: 'experience',   label: 'Experience' },
   { id: 'education',    label: 'Education' },
   { id: 'publications', label: 'Publications' },
@@ -51,7 +53,7 @@ function ThemeToggle({ dark, onToggle }: { dark: boolean; onToggle: () => void }
         border: '1.5px solid var(--border)',
         background: 'var(--surface)',
         cursor: 'pointer',
-        color: dark ? '#27A3F5' : '#c1440e',
+        color: dark ? 'var(--lemon)' : 'var(--accent)',
         transition: 'border-color 0.2s, color 0.2s, background 0.2s',
         flexShrink: 0,
       }}
@@ -66,6 +68,8 @@ export default function Nav() {
   const [active, setActive]     = useState('');
   const [open, setOpen]         = useState(false);
   const [dark, setDark]         = useState(() => localStorage.getItem('theme') === 'dark');
+  const route = useHashRoute();
+  const onHome = route.name === 'home';
 
   useEffect(() => {
     if (dark) {
@@ -83,7 +87,10 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Re-observe whenever the route changes — the home sections unmount while a
+  // blog post is open, so the observer from the previous render is stale.
   useEffect(() => {
+    if (!onHome) { setActive(''); return; }
     const sections = document.querySelectorAll('section[id]');
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
@@ -91,11 +98,12 @@ export default function Nav() {
     );
     sections.forEach(s => obs.observe(s));
     return () => obs.disconnect();
-  }, []);
+  }, [onHome]);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setOpen(false);
+    if (onHome) document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    else goHome(id);   // leave the post first, then scroll to the section
   };
 
   return (
@@ -103,7 +111,7 @@ export default function Nav() {
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => (onHome ? window.scrollTo({ top: 0, behavior: 'smooth' }) : goHome())}
           className="font-display text-2xl"
           style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text)' }}
         >

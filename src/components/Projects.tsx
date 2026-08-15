@@ -4,8 +4,11 @@ import { Project } from '../types';
 import ProjectModal from './ProjectModal';
 import { Reveal } from './Reveal';
 
-const ACCENT_COLORS = ['#2a9d8f','#4361ee','#f4a261','#52b788','#e63946','#7b61ff'];
-const ACCENT_BGS    = ['#e8f4f0','#eef2ff','#fff8ee','#f0f7ee','#fdf0f0','#f3f0ff'];
+/* Cards cycle the four palette hues. These read as CSS variables so the set
+   flips automatically in dark mode: the -ink tokens collapse back to the raw
+   pastels there, where they clear 6:1 unaided. */
+const ACCENT_COLORS = ['var(--rose-ink)','var(--blueberry-ink)','var(--lilac-ink)','var(--lemon-ink)'];
+const ACCENT_BGS    = ['var(--rose-soft)','var(--blueberry-soft)','var(--lilac-soft)','var(--lemon-soft)'];
 
 export default function Projects() {
   const [active, setActive] = useState<Project | null>(null);
@@ -75,7 +78,7 @@ export default function Projects() {
                         <div style={{
                           position: 'absolute',
                           bottom: 6, right: 6,
-                          background: 'rgba(26,24,20,0.75)',
+                          background: 'rgba(36,30,40,0.75)',
                           color: '#fff',
                           fontSize: '0.6rem',
                           fontFamily: "'JetBrains Mono', monospace",
@@ -98,7 +101,9 @@ export default function Projects() {
                   <div style={{ padding: '1.2rem 1.3rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                     {/* Category tag */}
                     <div style={{ marginBottom: '0.5rem' }}>
-                      <span className="tag" style={{ background: bg, borderColor: ac + '55', color: ac, fontWeight: 500 }}>{p.category}</span>
+                      {/* ac is a var() now, so the old `ac + '55'` alpha trick
+                          would emit invalid CSS — color-mix does it properly. */}
+                      <span className="tag" style={{ background: bg, borderColor: `color-mix(in srgb, ${ac} 35%, transparent)`, color: ac, fontWeight: 500 }}>{p.category}</span>
                     </div>
 
                     <h3 className="font-display" style={{ fontSize: '1.15rem', lineHeight: 1.15, marginBottom: '0.55rem' }}>{p.title}</h3>

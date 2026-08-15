@@ -21,7 +21,7 @@ export default function Hero() {
       <div style={{
         position: 'absolute', top: '-180px', right: '-180px', overflow: 'hidden',
         width: '600px', height: '600px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(193,68,14,0.09) 0%, transparent 65%)',
+        background: 'radial-gradient(circle, rgba(242,97,156,0.18) 0%, transparent 65%)',
         pointerEvents: 'none',
       }} />
 
@@ -39,8 +39,13 @@ export default function Hero() {
 
         {/* Name */}
         <h1 className="font-display" style={{
-          fontSize: 'clamp(4.5rem, 13vw, 10rem)',
-          lineHeight: 0.88, color: 'var(--text)',
+          // Delight's lowercase runs wider than Bebas Neue's condensed caps,
+          // so the ceiling comes down a little and the leading opens up to
+          // clear ascenders. Measured: "Siddhi" ≈ 375px inside a 1104px
+          // container at this cap, so there's room to push it larger if you
+          // want more impact.
+          fontSize: 'clamp(3.6rem, 11vw, 8.5rem)',
+          lineHeight: 0.98, letterSpacing: '-0.035em', color: 'var(--text)',
           animation: 'fadeUp 0.7s ease 0.22s both',
         }}>
           Siddhi<br />
@@ -51,8 +56,8 @@ export default function Hero() {
 
         {/* Tagline */}
         <p className="font-display" style={{
-          fontSize: 'clamp(1rem, 2.5vw, 1.7rem)', color: 'var(--muted)',
-          marginTop: '1.2rem', letterSpacing: '0.06em',
+          fontSize: 'clamp(1rem, 2.2vw, 1.5rem)', color: 'var(--muted)',
+          marginTop: '1.2rem', letterSpacing: '-0.01em', fontWeight: 500,
           animation: 'fadeUp 0.7s ease 0.36s both',
         }}>
           Building robots that sense, decide, and help people.

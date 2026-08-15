@@ -129,7 +129,7 @@ export default function ProjectModal({ project, onClose }: Props) {
           onClick={() => setLightboxSrc(null)}
           style={{
             position: 'fixed', inset: 0, zIndex: 300,
-            background: 'rgba(15,13,10,0.92)',
+            background: 'rgba(22,18,26,0.92)',
             backdropFilter: 'blur(8px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             padding: '1.5rem',
