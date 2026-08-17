@@ -1,6 +1,4 @@
 import { Project, Publication, Experience, Education, Skill } from '../types';
-import siddPhoto from '/sidd.jpg';
-import dopplerThumbnail from '/doppler.png';
 
 export const personalInfo = {
   name: "Siddhi More",
@@ -136,9 +134,9 @@ export const projects: Project[] = [
       "PLA gearbox teeth fracture under repeated impact loading at heel strike — PETG or Nylon required for physical deployment.",
     ],
     images: [
-    "/gallery/FSR data.jpg",
-    "/gallery/Pros CAD.jpg",
-    "/gallery/Pros Assembly.jpg",
+    "/gallery/fsr-data.jpg",
+    "/gallery/pros-cad.jpg",
+    "/gallery/pros-assembly.jpg",
   ],
     github: "https://github.com/more-sidd/Predictive-Bilateral-Control-for-a-Powered-Ankle-Prosthesis",
   },
@@ -167,7 +165,7 @@ export const projects: Project[] = [
     ],
 
   images: [
-    "/gallery/Car Horn Detection.png",
+    "/gallery/car-horn-detection.png",
   ],
     github: "https://github.com/more-sidd/A-Doppler-Based-Wearable-device-for-Directional-Awareness",
   },
@@ -196,7 +194,7 @@ export const projects: Project[] = [
     ],
 
     images: [
-    "/gallery/Custom Env Turtlebot.gif",
+    "/gallery/custom-env-turtlebot.gif",
   ],
 
     github: "https://github.com/more-sidd/Turtlebot3-Navigation-using-SLAM",
@@ -225,7 +223,7 @@ export const projects: Project[] = [
     ],
 
     images: [
-    "/gallery/grid_visualization.png",
+    "/gallery/grid-visualization.png",
   ],
 
     github: "https://github.com/more-sidd/hyacinth-cleaner-bot",
@@ -277,7 +275,7 @@ export const projects: Project[] = [
       "Cooling time accounts for ~70% of total cycle time, making it the highest-leverage target for production efficiency improvements.",
     ],
     images: [
-    "/gallery/sink marks.png",
+    "/gallery/sink-marks.png",
   ],
   },
 ];
@@ -303,14 +301,14 @@ export const publications: Publication[] = [
 ];
 // ← paste here, at the end of the file
 export const galleryImages = [
-  { src: "/gallery/SIH.jpg", caption: "Smart India Hackathon" },
-  { src: "/gallery/Gwise1.jpeg",        caption: "GWiSE NEU" },
-  { src: "/gallery/Gwise2.JPG",        caption: "GWiSE NEU" },
-  { src: "/gallery/Hiking2.jpeg",        caption: "Fun Activites!" },
-  { src: "/gallery/NEU.JPG",        caption: "Northeastern University" },
-  { src: "/gallery/GLI1.JPG",        caption: "Graduate Leadership Institute @ lead360" },
-  { src: "/gallery/GLI2.jpg",        caption: "Graduate Leadership Institute @ lead360" },
-  { src: "/gallery/GLI3.jpeg",        caption: "Graduate Leadership Institute @ lead360" },
+  { src: "/gallery/sih.jpg", caption: "Smart India Hackathon" },
+  { src: "/gallery/gwise1.jpeg",        caption: "GWiSE NEU" },
+  { src: "/gallery/gwise2.jpg",        caption: "GWiSE NEU" },
+  { src: "/gallery/hiking2.jpeg",        caption: "Fun Activites!" },
+  { src: "/gallery/neu.jpg",        caption: "Northeastern University" },
+  { src: "/gallery/gli1.jpg",        caption: "Graduate Leadership Institute @ lead360" },
+  { src: "/gallery/gli2.jpg",        caption: "Graduate Leadership Institute @ lead360" },
+  { src: "/gallery/gli3.jpeg",        caption: "Graduate Leadership Institute @ lead360" },
   { src: "/gallery/kayaking.jpg",        caption: "Fun Activities!"},
-  { src: "/gallery/Pupper.jpg" ,       caption: "Pupperv3 Stanford X BRH"},
+  { src: "/gallery/pupper.jpg" ,       caption: "Pupperv3 Stanford X BRH"},
 ];
