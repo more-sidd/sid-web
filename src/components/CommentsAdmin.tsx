@@ -25,7 +25,7 @@ export default function CommentsAdmin() {
   }, []);
 
   if (!isSupabaseConfigured) {
-    return <Shell><p className="comments-status font-mono">Supabase isn’t configured. See BLOG.md.</p></Shell>;
+    return <Shell><p className="comments-status font-mono">Supabase isn’t configured. See BLOG-SETUP.md.</p></Shell>;
   }
   if (checking) {
     return <Shell><p className="comments-status font-mono">Checking session…</p></Shell>;

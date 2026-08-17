@@ -110,7 +110,7 @@ export default function Comments({ slug }: { slug: string }) {
         <div className="comments-empty">
           <p className="font-mono">
             Comments aren’t connected yet — add your Supabase keys to <code>.env</code>
-            {' '}and run <code>supabase/schema.sql</code>. See <code>BLOG.md</code>.
+            {' '}and run <code>supabase/schema.sql</code>. See <code>BLOG-SETUP.md</code>.
           </p>
         </div>
       </div>
