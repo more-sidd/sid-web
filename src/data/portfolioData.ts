@@ -194,7 +194,7 @@ export const projects: Project[] = [
     ],
 
     images: [
-    "/gallery/custom-env-turtlebot.gif",
+    "/gallery/custom-env-turtlebot.png",
   ],
 
     github: "https://github.com/more-sidd/Turtlebot3-Navigation-using-SLAM",
@@ -249,6 +249,9 @@ export const projects: Project[] = [
       "I2C master-slave architecture with ESP32 as master enables clean separation of subsystem control across multiple Arduino Nano nodes.",
       "Buck converters (24V→12V/5V) are essential for powering mixed-voltage embedded systems from a single battery source.",
       "Von Mises stress FEA on the crusher drum identified stress concentrations that informed structural reinforcement before fabrication.",
+      ],
+      images: [
+    "/gallery/SIH-2.png",
     ],
   },
 
