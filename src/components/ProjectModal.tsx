@@ -83,6 +83,7 @@ export default function ProjectModal({ project, onClose }: Props) {
               { label: 'Objectives',    items: project.objectives },
               { label: 'Results',       items: project.results },
               { label: 'Key Takeaways', items: project.keyTakeaways },
+              { label: 'Goals', items: project.goals },
             ].map(block => (
               <div key={block.label}>
                 <p className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.5rem' }}>

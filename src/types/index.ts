@@ -11,6 +11,7 @@ export interface Project {
   objectives: string[];
   results: string[];
   keyTakeaways: string[];
+  goals: string[];
   github?: string;
 }
 
