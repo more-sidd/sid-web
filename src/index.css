@@ -1,90 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ── DELIGHT ────────────────────────────────────────────────────────────────
-   Delight by Rajesh Rajput — free / pay-what-you-want.
-   Download: https://rajputrajesh-448.gumroad.com/l/Delight9
 
-   Put the variable .woff2 at  public/fonts/Delight-Variable.woff2
-   (rename whatever the download calls it). See public/fonts/README.md.
-
-   One variable file covers all 9 weights, so this is a single request
-   instead of nine. Until the file exists the site falls back to system
-   fonts — it stays readable, it just isn't Delight yet.
-   ─────────────────────────────────────────────────────────────────────── */
-@font-face {
-  font-family: 'Delight';
-  src: url('/fonts/Delight-Variable.woff2') format('woff2-variations'),
-       url('/fonts/Delight-Variable.woff2') format('woff2');
-  font-weight: 100 900;   /* variable axis range */
-  font-style: normal;
-  font-display: swap;
-}
 
 
 /* ══════════════════════════════════════════════════════════════════════════
-   COLOUR SYSTEM
-   Palette: Raspberry Rose / Soft Lilac / Blueberry Milk / Lemon Cream
-   on a #EEEEEE ground.
+   COLOUR SYSTEM  —  b8b8d1 / 5b5f97 / ffc145 / fffffb / ff6b6c
+   Retro-terminal palette on warm paper.
 
-   The four palette colours are PASTELS. Measured against #EEEEEE they land
-   between 1.09:1 and 2.60:1 — every one fails the 4.5:1 WCAG minimum for
-   text. So the system splits each hue into three roles:
+   Measured on the cream ground, three of the five source colours cannot
+   carry text at all:
 
-     --x        the pastel itself. FILLS ONLY: backgrounds, chips, bars.
-     --x-ink    a darkened version, hue preserved. Safe for TEXT on light.
-     --x-soft   a pale wash for badge//tag backgrounds.
+     amber  #FFC145 -> 1.53:1     coral #FF6B6C -> 2.61:1
+     periwinkle #B8B8D1 -> 1.83:1  indigo #5B5F97 -> 5.61:1  (the only one)
 
-   Rule of thumb: on a light background, never set `color:` to a bare pastel.
-   Use the -ink. In dark mode the pastels clear 6:1 on their own, so there
-   the raw palette is used directly for text.
+   So warm colours are FILLS. Text uses --ink, --muted (indigo) or --accent
+   (a rust derived from the coral). Darkening amber far enough for text gives
+   #936200, a mud brown that throws away everything amber is for — hence rust
+   carries the links instead.
+
+   Indigo (hue 236) and amber (hue 40) sit ~194 degrees apart: near
+   complements, and the strongest pairing available here. Amber on deep
+   indigo is also a straight nod to amber-CRT terminals.
    ══════════════════════════════════════════════════════════════════════════ */
 :root {
-  /* ── Palette: fills ── */
-  --rose:            #F2619C;
-  --lilac:           #E7BEF8;
-  --blueberry:       #93ABD9;
-  --lemon:           #EDE986;
-
-  /* ── Palette: text-safe inks (≥4.5:1 on #EEEEEE and on white) ── */
-  --rose-ink:        #C6105A;
-  --lilac-ink:       #8B14BE;
-  --blueberry-ink:   #416AB8;
-  --lemon-ink:       #726F11;
-
-  /* ── Palette: pale washes for chip / badge backgrounds ── */
-  --rose-soft:       #FCE7F0;
-  --lilac-soft:      #F7ECFC;
-  --blueberry-soft:  #E9EEF7;
-  --lemon-soft:      #FAF8DF;
+  /* ── Source palette. FILLS ONLY on light backgrounds. ── */
+  --periwinkle: #B8B8D1;
+  --indigo:     #5B5F97;
+  --amber:      #FFC145;
+  --coral:      #FF6B6C;
+  --rust:       #A8443C;   /* text-safe coral: 5.05:1 on cream */
 
   /* ── Surfaces ── */
-  --bg:        #EEEEEE;
-  --bg-alt:    #E7E2EC;   /* lilac-tinted, for alternating sections */
-  --surface:   #FFFFFF;
+  --paper:     #FBF8F0;    /* the desk */
+  --paper-2:   #F2EDE0;    /* alternating sections */
+  --surface:   #FFFFFB;    /* windows sitting on the desk */
 
   /* ── Ink ── */
-  --text:      #241E28;   /* 14.0:1 on bg — near-black with a plum cast */
-  --muted:     #5C5266;   /*  6.3:1 on bg */
+  --ink:       #18192D;    /* 16.3:1 on paper. Text, outlines, hard shadows */
+  --ink-2:     #5B5F97;    /* secondary text, 5.6:1 */
 
-  /* ── Lines. Decorative dividers may sit below 3:1; --border-input is the
-        one that must stay perceivable because it bounds form fields. ── */
-  --border:        #DCD6E0;
-  --border-2:      #BCB2C4;
-  --border-strong: #BCB2C4;
-  --border-input:  #6789CA;   /* 3.5:1 on white, 3.0:1 on bg */
+  /* ── Retro chrome. The whole look is three devices: a thick ink outline,
+        a hard offset shadow with no blur, and square corners. ── */
+  --rule-w:         2px;
+  --shadow-hard-sm: 3px 3px 0 var(--ink);
+  --shadow-hard:    5px 5px 0 var(--ink);
+  --shadow-hard-lg: 8px 8px 0 var(--ink);
 
-  /* ── Accent (raspberry). --accent is the ink and is what `color:` should
-        use; --accent-fill is the pastel and only ever backs something. ── */
-  --accent:       #C6105A;
-  --accent-fill:  #F2619C;
-  --accent-on:    #241E28;   /* text placed on top of --accent-fill */
-  --accent-bg:    #FCE7F0;
-  --accent-light: #FCE7F0;
+  /* ── Back-compat aliases. Existing components reference these names; they
+        now point at the retro palette so nothing had to be renamed. ── */
+  --bg:            var(--paper);
+  --bg-alt:        var(--paper-2);
+  --text:          var(--ink);
+  --muted:         var(--ink-2);
+  --border:        var(--ink);
+  --border-2:      var(--ink);
+  --border-strong: var(--ink);
+  --border-input:  var(--ink);
 
-  --danger: #B3261E;
+  --accent:       var(--rust);     /* labels, links, active nav */
+  --accent-fill:  var(--amber);    /* buttons and badges */
+  --accent-on:    var(--ink);      /* text on --accent-fill: 10.7:1 */
+  --accent-bg:    #FFF3D6;         /* pale amber wash */
+  --accent-light: #FFF3D6;
+
+  --danger: #A8443C;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -96,8 +78,8 @@ html, body {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Delight', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  font-size: 16px;
+  font-family: var(--body);
+  font-size: 15px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -106,40 +88,45 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
 
-/* Bebas Neue was a single condensed weight that read as bold on its own.
-   Delight needs an explicit weight and negative tracking to carry headings. */
-.font-display { font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; }
+/* Headings are the body face at 700 - one typeface for the whole site. Being
+   monospaced, it needs no negative tracking; weight alone carries hierarchy. */
+.font-display { font-family: var(--display); font-weight: 700; letter-spacing: 0; }
 .font-mono    { font-family: 'JetBrains Mono', monospace; }
 
 .nav-base { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background 0.3s, border-color 0.3s; }
-.nav-scrolled { background: rgba(238,238,238,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+.nav-scrolled { background: rgba(251,248,240,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
 
 .section-pad { padding: 5.5rem 0; }
 .section-alt  { background: var(--bg-alt); }
 
 .label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
-.heading { font-family: var(--display); font-weight: 700; font-size: clamp(2.1rem, 3.9vw, 3.3rem); letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 2.5rem; }
+.heading { font-family: var(--display); font-weight: 700; font-size: clamp(2.1rem, 3.9vw, 3.3rem); letter-spacing: 0; line-height: 1.08; margin-bottom: 2.5rem; }
 
-.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 2px; color: var(--muted); white-space: nowrap; }
-.tag-accent { background: var(--accent-bg); border-color: var(--accent-fill); color: var(--accent); }
+.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; padding: 0.16rem 0.55rem; background: var(--surface); border: 1.5px solid var(--ink); border-radius: 0; color: var(--ink); white-space: nowrap; }
+.tag-accent { background: var(--accent-bg); border-color: var(--ink); color: var(--ink); }
 
-.card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 4px; transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s; }
-.card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.07); }
+/* Hard offset shadow, no blur, square corners — the core of the look. The
+   stepped transition snaps instead of easing, which reads mechanical rather
+   than modern-smooth. */
+.card { background: var(--surface); border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-sm); transition: transform 0.1s steps(2), box-shadow 0.1s steps(2); }
+.card:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hard); }
 
-/* Raspberry at full strength with dark ink on top (5.4:1). White on the
-   pastel would only reach 3.0:1, so the dark text is what makes the real
-   palette colour usable here instead of a muddied darker pink. */
-.btn-primary { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--accent-fill); color: var(--accent-on); font-weight: 500; padding: 0.7rem 1.8rem; border: none; border-radius: 2px; cursor: pointer; transition: opacity 0.2s, transform 0.15s; text-decoration: none; display: inline-block; }
-.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+/* Amber fill with ink text: 10.7:1. White on amber would be 1.5:1, so the
+   dark ink is what lets the real palette colour be used at full strength. */
+.btn-primary { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--accent-fill); color: var(--accent-on); font-weight: 500; padding: 0.6rem 1.5rem; border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-sm); cursor: pointer; transition: transform 0.08s steps(2), box-shadow 0.08s steps(2); text-decoration: none; display: inline-block; }
+.btn-primary:hover { transform: translate(-1px, -1px); box-shadow: var(--shadow-hard); }
+/* Pressing sinks the button into its own shadow. */
+.btn-primary:active { transform: translate(3px, 3px); box-shadow: none; }
 
-.btn-ghost { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; color: var(--text); padding: 0.7rem 1.6rem; border: 1.5px solid var(--border-2); border-radius: 2px; cursor: pointer; transition: border-color 0.2s, color 0.2s, transform 0.15s; text-decoration: none; display: inline-block; }
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.btn-ghost { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--surface); color: var(--ink); padding: 0.6rem 1.4rem; border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-sm); cursor: pointer; transition: transform 0.08s steps(2), box-shadow 0.08s steps(2); text-decoration: none; display: inline-block; }
+.btn-ghost:hover { transform: translate(-1px, -1px); box-shadow: var(--shadow-hard); }
+.btn-ghost:active { transform: translate(3px, 3px); box-shadow: none; }
 
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
-.modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(36,30,40,0.55); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
-.modal-box { background: var(--surface); border: 1.5px solid var(--border); border-radius: 6px; width: 100%; max-width: 680px; max-height: 88vh; overflow-y: auto; }
+.modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(24,25,45,0.62); display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+.modal-box { background: var(--surface); border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-lg); width: 100%; max-width: 700px; max-height: 88vh; overflow-y: auto; }
 
 /* ── FONTS ─────────────────────────────────────────────────────────────────
    Colours live in the single :root block at the top of this file. There used
@@ -148,10 +135,10 @@ body {
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
   --mono: 'JetBrains Mono', monospace;
-  /* Delight carries both display and body; the fallbacks are close enough in
-     width that layout doesn't jump while the font file loads. */
-  --display: 'Delight', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --body: 'Delight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* One family throughout: JetBrains Mono. Headings differ from body by weight
+     (700 vs 400) and size only, which keeps the terminal feel consistent. */
+  --display: 'JetBrains Mono', ui-monospace, monospace;
+  --body:    'JetBrains Mono', ui-monospace, monospace;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -161,8 +148,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--body);
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.72;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -185,7 +172,7 @@ nav {
   font-family: var(--display);
   font-weight: 700;
   font-size: 1.5rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   color: var(--text);
   background: none;
   border: none;
@@ -253,16 +240,16 @@ nav {
 .hero-bg-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 80px 80px;
-  opacity: 0.4;
+    linear-gradient(var(--periwinkle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--periwinkle) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.55;
 }
 .hero-bg-glow {
   position: absolute;
   top: -200px; right: -200px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(242,97,156,0.18) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(255,193,69,0.30) 0%, transparent 68%);
   pointer-events: none;
 }
 .hero-eyebrow {
@@ -291,17 +278,21 @@ nav {
 .hero-name {
   font-family: var(--display);
   font-weight: 700;
-  /* Delight's lowercase is wider than Bebas's condensed caps, so the ceiling
-     drops from 11rem and the leading opens up to clear ascenders. */
-  font-size: clamp(3.6rem, 11vw, 8.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  /* Deliberately restrained. JetBrains Mono draws "Siddhi" 360px wide at
+     100px type, so 6rem lands around 346px inside the 644px window - it
+     reads as a heading rather than a billboard. */
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: 0;
   color: var(--text);
   animation: fadeUp 0.7s ease 0.2s both;
 }
 .hero-name-accent { color: var(--accent); }
 .hero-cursor {
   display: inline-block;
+  font-size: 0.55em;
+  vertical-align: baseline;
+  margin-left: 0.08em;
   animation: blink 1s step-end infinite;
 }
 @keyframes blink {
@@ -309,9 +300,9 @@ nav {
 }
 .hero-tagline {
   font-family: var(--display);
-  font-weight: 500;
+  font-weight: 700;
   font-size: clamp(1.05rem, 2.4vw, 1.6rem);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   color: var(--muted);
   margin-top: 1.5rem;
   animation: fadeUp 0.7s ease 0.35s both;
@@ -385,7 +376,7 @@ nav {
   font-family: var(--display);
   font-weight: 700;
   font-size: 2rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--accent);
   line-height: 1;
 }
@@ -425,48 +416,77 @@ nav {
   font-weight: 700;
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   line-height: 1.08;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   color: var(--text);
   margin-bottom: 3rem;
 }
 
 /* ── ABOUT ─────────────────────────────────────────────────────────────────── */
+/* ── About: photo | bio | photo ────────────────────────────────────────────
+   The bio comes first in the DOM so reading and tab order follow the content;
+   grid-column places it between the two photos visually. */
 .about-grid {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 4rem;
+  grid-template-columns: clamp(140px, 17%, 205px) 1fr clamp(140px, 17%, 205px);
+  gap: 2.5rem;
   align-items: start;
 }
-@media (max-width: 768px) {
-  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+.about-bio         { grid-column: 2; grid-row: 1; }
+.about-photo-left  { grid-column: 1; grid-row: 1; }
+.about-photo-right { grid-column: 3; grid-row: 1; }
+
+/* Tablet: bio full width, the two photos side by side beneath it. */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  .about-bio         { grid-column: 1 / -1; grid-row: auto; }
+  .about-photo-left,
+  .about-photo-right { grid-column: auto; grid-row: auto; }
 }
-.photo-slot { width: 100%; }
-.photo-placeholder {
+
+/* Phone: single column. */
+@media (max-width: 520px) {
+  .about-grid { grid-template-columns: 1fr; }
+}
+/* ── About photos ──────────────────────────────────────────────────────────
+   Two stacked frames. Same chrome as everything else: square corners, thick
+   ink rule, hard offset shadow. The second is optional and falls back to a
+   dashed slot rather than a broken image. */
+.photo-frame {
+  border: var(--rule-w) solid var(--ink);
+  box-shadow: var(--shadow-hard-sm);
+  background: var(--surface);
+  line-height: 0;
+}
+.photo-frame img {
   width: 100%;
-  aspect-ratio: 3/4;
-  background: var(--bg-alt);
-  border: 2px dashed var(--border-strong);
-  border-radius: 4px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+.photo-frame-empty {
+  aspect-ratio: 3 / 4;
+  border-style: dashed;
+  box-shadow: none;
+  background: var(--paper-2);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  text-align: center;
+  line-height: 1.8;
 }
-.photo-initials {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 3rem;
-  letter-spacing: 0.02em;   /* caps-only, so a little positive tracking still reads well */
-  color: var(--muted);
-}
-.photo-hint {
-  font-family: var(--mono);
-  font-size: 0.65rem;
+.photo-frame-empty span {
+  font-size: 0.6rem;
   letter-spacing: 0.1em;
-  color: var(--muted);
   text-transform: uppercase;
+  color: var(--muted);
 }
+.photo-frame-empty code {
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  padding: 0 0.25rem;
+  text-transform: none;
+}
+
 .about-text-col {}
 .about-p {
   color: var(--muted);
@@ -555,7 +575,7 @@ nav {
   font-family: var(--display);
   font-weight: 700;
   font-size: 1.3rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   color: var(--text);
   padding: 0.6rem 1.4rem 0;
   line-height: 1.2;
@@ -642,7 +662,7 @@ nav {
   font-family: var(--display);
   font-weight: 700;
   font-size: 1.35rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   color: var(--text);
   margin-bottom: 0.2rem;
 }
@@ -687,7 +707,7 @@ nav {
   font-family: var(--display);
   font-weight: 700;
   font-size: 1.3rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   color: var(--text);
   margin-bottom: 0.2rem;
 }
@@ -739,7 +759,7 @@ nav {
   font-family: var(--display);
   font-weight: 700;
   font-size: 1.5rem;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   color: var(--text);
   margin-bottom: 0.6rem;
   line-height: 1.25;
@@ -772,7 +792,7 @@ nav {
   font-family: var(--display);
   font-weight: 700;
   font-size: clamp(1.3rem, 3vw, 2.1rem);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--accent);
   text-decoration: none;
   margin-bottom: 2.5rem;
@@ -842,57 +862,51 @@ nav {
 /* On near-black the pastels measure 6.4:1 (rose) to 15.4:1 (lemon), so here
    the raw palette IS the text colour — no darkened inks needed. This is the
    one place the palette gets to appear exactly as designed. */
+/* Amber clears 11.9:1 on the deep indigo ground, so here the palette's own
+   warm colours carry text directly — no darkened rust needed. */
 html.dark {
-  --bg:          #0D0D0F;
-  --bg-alt:      #131316;
-  --surface:     #1A1A1F;
-  --border:      #2C2A33;
-  --border-2:    #3E3A48;
-  --border-strong: #3E3A48;
-  --border-input:  #93ABD9;   /* 8.4:1 on dark bg */
-  --text:        #F2EFF4;
-  --muted:       #9A93A6;
+  --paper:     #0C0D1A;
+  --paper-2:   #131427;
+  --surface:   #1C1E38;
+  --ink:       #F0F0F5;
+  --ink-2:     #B8B8D1;
 
-  /* Inks collapse back to the pastels themselves. */
-  --rose-ink:      #F2619C;
-  --lilac-ink:     #E7BEF8;
-  --blueberry-ink: #93ABD9;
-  --lemon-ink:     #EDE986;
+  --bg:            var(--paper);
+  --bg-alt:        var(--paper-2);
+  --text:          var(--ink);
+  --muted:         var(--ink-2);
+  --border:        var(--ink);
+  --border-2:      var(--ink);
+  --border-strong: var(--ink);
+  --border-input:  var(--ink);
 
-  /* Softs become deep tints of each hue. */
-  --rose-soft:      #2E1220;
-  --lilac-soft:     #241733;
-  --blueberry-soft: #151C2B;
-  --lemon-soft:     #24230F;
+  --rust:         #FFC145;
+  --accent:       #FFC145;
+  --accent-fill:  #FFC145;
+  --accent-on:    #18192D;
+  --accent-bg:    #2A2410;
+  --accent-light: #2A2410;
 
-  --accent:       #F2619C;   /* 6.4:1 on bg */
-  --accent-fill:  #F2619C;
-  --accent-on:    #241E28;   /* dark ink on the pink fill — 5.4:1 */
-  --accent-bg:    #2E1220;
-  --accent-light: #2E1220;
-
-  --danger: #FF8B8B;
+  --danger: #FF6B6C;
 }
 
 /* Nav background in dark + scrolled */
 html.dark .nav-scrolled {
-  background: rgba(13, 13, 15, 0.94) !important;
+  background: rgba(12, 13, 26, 0.94) !important;
 }
 
-/* Cards */
-html.dark .card:hover {
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
-}
+/* --ink flips to near-white in dark mode, so the hard offset shadow becomes a
+   light edge against the indigo ground. Nothing to override. */
 
 /* Hero grid lines — slightly more visible on dark */
 html.dark .hero-bg-grid {
-  opacity: 0.25;
+  opacity: 0.16;
 }
 
-/* Hero glow — purple tint in dark */
+/* Hero glow — amber CRT bloom on the dark ground */
 html.dark .hero-bg-glow,
-html.dark [style*="radial-gradient(circle, rgba(242,97,156"] {
-  background: radial-gradient(circle, rgba(231, 190, 248, 0.13) 0%, transparent 65%) !important;
+html.dark [style*="radial-gradient(circle, rgba(255,193,69"] {
+  background: radial-gradient(circle, rgba(255, 193, 69, 0.16) 0%, transparent 68%) !important;
 }
 
 /* Scrollbar */
@@ -906,12 +920,167 @@ html.dark ::-webkit-scrollbar-thumb { background: var(--border-2); }
   transition-timing-function: ease;
 }
 
-/* Don't animate transforms (breaks hover effects) */
-.card, .btn-primary, .btn-ghost, .gallery-tile img, .gallery-tile {
+/* Colour still fades, but transform and box-shadow stay stepped so the
+   press/lift reads mechanical rather than eased. */
+.card, .btn-primary, .btn-ghost {
   transition: background-color 0.25s ease,
               border-color 0.25s ease,
               color 0.25s ease,
-              box-shadow 0.25s ease,
-              transform 0.22s ease,
-              opacity 0.2s ease;
+              box-shadow 0.1s steps(2),
+              transform 0.1s steps(2);
 }
+.gallery-tile img, .gallery-tile {
+  transition: transform 0.12s steps(3), border-color 0.25s ease;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RETRO WINDOW CHROME
+   Reusable "application window" wrapper: title bar with control dots, a
+   centred monospace title, and a hard offset shadow.
+   ══════════════════════════════════════════════════════════════════════════ */
+.win {
+  background: var(--surface);
+  border: var(--rule-w) solid var(--ink);
+  box-shadow: var(--shadow-hard);
+  border-radius: 0;
+}
+.win-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.55rem;
+  background: var(--paper-2);
+  border-bottom: var(--rule-w) solid var(--ink);
+}
+.win-dots { display: flex; gap: 0.32rem; flex-shrink: 0; }
+.win-dot {
+  width: 9px; height: 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+}
+.win-dot-live { background: var(--coral); }
+.win-title {
+  flex: 1;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.win-body { padding: 1.1rem; }
+
+/* An inset "well", the inverse of the raised window — used for readouts. */
+.well {
+  background: var(--paper-2);
+  border: 1.5px solid var(--ink);
+  box-shadow: inset 2px 2px 0 rgba(24,25,45,0.14);
+  padding: 0.7rem 0.85rem;
+}
+
+/* A labelled meter, like the vol/cpu/ram readouts on a desktop widget. */
+.meter { display: flex; align-items: center; gap: 0.6rem; }
+.meter-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  width: 2.6rem;
+  flex-shrink: 0;
+}
+.meter-track {
+  flex: 1;
+  height: 12px;
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+}
+.meter-fill { height: 100%; background: var(--amber); }
+.meter-fill-coral { background: var(--coral); }
+.meter-fill-indigo { background: var(--indigo); }
+
+/* Square, high-contrast focus ring in keeping with the rest. */
+:focus-visible {
+  outline: var(--rule-w) solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   HERO DESKTOP  —  asymmetrical
+   A wide primary window beside a narrower stack of two readout panels. The
+   side column is pushed down so the two halves do not read as aligned
+   columns; that offset is what makes the composition asymmetrical rather
+   than just "two columns".
+   ══════════════════════════════════════════════════════════════════════════ */
+.hero-desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(270px, 0.9fr);
+  gap: 1.6rem;
+  align-items: start;
+}
+.hero-win-main { animation: fadeUp 0.6s ease 0.1s both; }
+.hero-win-main-body { padding: 1.6rem 1.8rem 1.9rem; }
+.hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 3.5rem;            /* the offset */
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+@media (max-width: 900px) {
+  .hero-desk { grid-template-columns: 1fr; gap: 1.2rem; }
+  .hero-side { margin-top: 0; }
+  .hero-win-main-body { padding: 1.2rem 1.2rem 1.5rem; }
+}
+
+/* Readout rows in the system panel */
+.readout-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-top: 0.35rem;
+  margin-top: 0.35rem;
+  border-top: 1px solid var(--periwinkle);
+}
+.readout-val {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* "On the bench" panel */
+.bench-title {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.bench-desc {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.bench-link {
+  margin-top: 0.8rem;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  color: var(--ink);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+}
+.bench-link:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+.bench-link:active { transform: translate(2px, 2px); box-shadow: none; }

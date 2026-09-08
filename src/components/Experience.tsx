@@ -6,7 +6,7 @@ export default function Experience() {
     <section id="experience" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
-          <p className="label">03 — Experience</p>
+          <p className="label">02 — Experience</p>
           <h2 className="heading">Professional History</h2>
         </Reveal>
 

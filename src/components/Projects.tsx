@@ -4,11 +4,11 @@ import { Project } from '../types';
 import ProjectModal from './ProjectModal';
 import { Reveal } from './Reveal';
 
-/* Cards cycle the four palette hues. These read as CSS variables so the set
-   flips automatically in dark mode: the -ink tokens collapse back to the raw
-   pastels there, where they clear 6:1 unaided. */
-const ACCENT_COLORS = ['var(--rose-ink)','var(--blueberry-ink)','var(--lilac-ink)','var(--lemon-ink)'];
-const ACCENT_BGS    = ['var(--rose-soft)','var(--blueberry-soft)','var(--lilac-soft)','var(--lemon-soft)'];
+/* Cards cycle the four palette hues on their DECORATIVE parts only — the top
+   bar and the bullet dots. Amber, coral and periwinkle measure 1.5-2.6:1 on
+   the cream ground, so none of them can be used for text; anything readable
+   uses --ink or --accent instead. */
+const CARD_HUES = ['var(--amber)', 'var(--coral)', 'var(--indigo)', 'var(--periwinkle)'];
 
 export default function Projects() {
   const [active, setActive] = useState<Project | null>(null);
@@ -17,14 +17,13 @@ export default function Projects() {
     <section id="projects" className="section-pad section-alt" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
-          <p className="label">02 — Projects</p>
+          <p className="label">03 — Projects</p>
           <h2 className="heading">Selected Work</h2>
         </Reveal>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.4rem' }}>
           {projects.map((p, i) => {
-            const ac = ACCENT_COLORS[i % ACCENT_COLORS.length];
-            const bg = ACCENT_BGS[i % ACCENT_BGS.length];
+            const hue = CARD_HUES[i % CARD_HUES.length];
             const hasImages = p.images && p.images.length > 0;
 
             return (
@@ -34,8 +33,8 @@ export default function Projects() {
                   style={{ overflow: 'hidden', cursor: 'pointer', display: 'flex', flexDirection: 'column', height: '100%' }}
                   onClick={() => setActive(p)}
                 >
-                  {/* Top accent bar */}
-                  <div style={{ height: 3, background: ac }} />
+                  {/* Top accent bar — decorative, so a raw fill is fine */}
+                  <div style={{ height: 6, background: hue, borderBottom: '2px solid var(--ink)' }} />
 
                   {/* ── Image section ── */}
                   {hasImages ? (
@@ -101,9 +100,10 @@ export default function Projects() {
                   <div style={{ padding: '1.2rem 1.3rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                     {/* Category tag */}
                     <div style={{ marginBottom: '0.5rem' }}>
-                      {/* ac is a var() now, so the old `ac + '55'` alpha trick
-                          would emit invalid CSS — color-mix does it properly. */}
-                      <span className="tag" style={{ background: bg, borderColor: `color-mix(in srgb, ${ac} 35%, transparent)`, color: ac, fontWeight: 500 }}>{p.category}</span>
+                      {/* Uniform retro chip: ink on surface with a hard outline.
+                          Colour-coding lives in the top bar, where contrast
+                          rules don't apply. */}
+                      <span className="tag">{p.category}</span>
                     </div>
 
                     <h3 className="font-display" style={{ fontSize: '1.15rem', lineHeight: 1.15, marginBottom: '0.55rem' }}>{p.title}</h3>
@@ -113,7 +113,7 @@ export default function Projects() {
                     <ul style={{ listStyle: 'none', marginBottom: '1rem' }}>
                       {p.results.slice(0, 2).map((r, ri) => (
                         <li key={ri} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.5, marginBottom: '0.25rem' }}>
-                          <span style={{ width: 5, height: 5, borderRadius: '50%', background: ac, flexShrink: 0, marginTop: '0.38rem' }} />
+                          <span style={{ width: 6, height: 6, background: hue, border: '1.5px solid var(--ink)', flexShrink: 0, marginTop: '0.36rem' }} />
                           {r}
                         </li>
                       ))}
@@ -124,7 +124,7 @@ export default function Projects() {
                       <span className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>
                         {p.github ? '↗ GitHub available' : p.status === 'complete' ? '✓ Completed' : 'In progress'}
                       </span>
-                      <span className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.1em', color: ac, textTransform: 'uppercase' }}>
+                      <span className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.1em', color: 'var(--accent)', textTransform: 'uppercase' }}>
                         Details →
                       </span>
                     </div>

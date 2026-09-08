@@ -6,7 +6,7 @@ export default function Publications() {
     <section id="publications" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
-          <p className="label">05 — Publications</p>
+          <p className="label">08 — Publications</p>
           <h2 className="heading">Research</h2>
         </Reveal>
 

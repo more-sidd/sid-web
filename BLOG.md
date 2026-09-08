@@ -232,7 +232,7 @@ If you want page views, say so and I'll wire one up — it's a small change.
 - [x] Blog section is live with 1 post
 - [x] Comment box appears on posts (shows "not connected" for now)
 - [ ] **Comments connected** — needs [BLOG-SETUP.md](BLOG-SETUP.md)
-- [ ] **Delight font** — needs the file, see [public/fonts/README.md](public/fonts/README.md)
+- [x] Fonts — Pixelify Sans + JetBrains Mono, loaded from Google Fonts (nothing to install)
 - [ ] Visitor stats — not built, see above
 
 ---
@@ -248,7 +248,6 @@ If you want page views, say so and I'll wire one up — it's a small change.
 | Everything after a certain point looks like one big paragraph | You need a blank line between paragraphs |
 | Post shows raw `---` and settings as text | The settings block must be the very first thing in the file, no blank line above it |
 | Comment box says "not connected" | Expected until you do [BLOG-SETUP.md](BLOG-SETUP.md) |
-| Site fonts look plain/generic | The Delight file isn't installed yet |
 
 ---
 

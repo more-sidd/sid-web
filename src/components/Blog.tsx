@@ -10,7 +10,7 @@ export default function Blog() {
   return (
     <section id="blog" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto px-6">
-        <p className="label">03.6 — Writing</p>
+        <p className="label">06 — Writing</p>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
           <h2 className="heading" style={{ marginBottom: 0 }}>Blog &amp; Notes</h2>
 

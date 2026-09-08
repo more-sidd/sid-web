@@ -4,11 +4,11 @@ import { useHashRoute, goHome } from '../lib/useHashRoute';
 
 const LINKS = [
   { id: 'about',        label: 'About' },
+  { id: 'experience',   label: 'Experience' },
   { id: 'projects',     label: 'Projects' },
   { id: 'skills',       label: 'Skills' },
   { id: 'gallery',      label: 'Gallery' },
   { id: 'blog',         label: 'Blog' },
-  { id: 'experience',   label: 'Experience' },
   { id: 'education',    label: 'Education' },
   { id: 'publications', label: 'Publications' },
   { id: 'contact',      label: 'Contact' },

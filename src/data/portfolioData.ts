@@ -5,7 +5,8 @@ export const personalInfo = {
   title: "Wearable & Assistive Robotics Engineer",
   tagline: "Building hardware that restores human mobility!From planetary gearbox design and embedded firmware to ROS2 navigation and ML-validated musculoskeletal simulation.",
   photo: "/sidd.jpg",
-  email: "more.sidd@northeastern.edu",
+  photo2: "/sidd2.jpg",
+  email: "siddhimorework@gmail.com",
   linkedin: "https://www.linkedin.com/in/more-siddhi/",
   github: "https://github.com/more-sidd",
   resumeUrl: "/SiddhiResume.pdf",
@@ -113,22 +114,34 @@ export const skills: Skill[] = [
 export const projects: Project[] = [
  {
     id: "proj1",
-    title: "Pupper v3 - A quaraped robot developed by Stamford University, currently learning to take it's baby steps in Boston",
+    title: "Pupper v3 - A quadruped robot developed by Stamford University, currently learning to take it's baby steps in Boston",
     category: "Legged Robots/ Quadrupeds",
     status: "in-progress",
-    description: "upper v3 is a cute companion robot designed to spark joy and teach robotics and AI.",
+    description: "Pupper v3 is a cute companion robot designed to spark joy and teach robotics and AI.",
     fullDescription: "Pupper is an agile quadruped robot developed by Standford University for learning legged robotics (CS 123). It focuses on developing efficient and adaptive locomotion strategies for quadrupedal robots.",
     objectives: [
-    ],
-    goals: [
       "Develop a comprehensive understanding of legged robotics principles and applications.",
       "Implement and test advanced control algorithms for dynamic locomotion.",
       "Establish an outreach program for promoting legged robotics education and research in Boston Highschools."
     ],
-    results: [
+    goals: [
+  "Run baseline push tests and characterize disturbance response using the BNO086 IMU.",
+  "Deploy a ROS2 reflex safety layer that reacts to falls in real time.",
+  "Retrain the MuJoCo MJX RL policy in simulation with push and IMU-noise domain randomization.",
+  "Validate the retrained policy sim-to-real on hardware.",
+  "Apply DOE/ANOVA statistical analysis to quantify push-recovery improvement.",
+   ],
+results: [
+  "Brought up the full ROS2 control stack (imu_sensor_broadcaster, joint_state_broadcaster, neural_controller, neural_controller_three_legged) with all controllers activating cleanly on hardware.",
+  "Confirmed the deployed policy architecture: a 720-dim observation space with 20-step history feeding a 1024→512→512→512→12 MLP with ELU activations, PD gains kp=5.0 / kd=0.25.",
+  "Traced the IMU signal path from the BNO086 to the observation vector, isolating projected gravity vector and angular velocity as the primary disturbance-sensing signals.",
+  "Paired a PS5 DualSense controller over Bluetooth for teleoperation and confirmed a camera pipeline dropout is non-blocking to walking.",
     ],
-    keyTakeaways: [
-    ],
+keyTakeaways: [
+  "Push-recovery failure can be framed as an empirical delay-margin problem on a nonlinear legged system.",
+  "A fast-iterating platform like Pupper enables testing disturbance rejection ideas in hours rather than weeks.",
+  "ps aux and ros2 topic list together quickly isolate silent controller crashes in the ROS2 stack.",
+  ],
     images: [
     "/gallery/Pupper1.jpg",
     "/gallery/Pupper2.jpg",
