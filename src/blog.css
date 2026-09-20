@@ -6,19 +6,19 @@
 /* ── Cards on the home page ────────────────────────────────────────────────── */
 .blog-filters { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .blog-filter {
-  font-size: 0.66rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.35rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  padding: 0.45rem 1rem;
   background: var(--surface);
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
-  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
   cursor: pointer;
-  box-shadow: 2px 2px 0 var(--ink);
-  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2), background 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s, background 0.2s;
 }
-.blog-filter:active { transform: translate(2px, 2px); box-shadow: none; }
 .blog-filter:hover { border-color: var(--accent); color: var(--accent); }
 .blog-filter-active { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--accent-on); }
 
@@ -27,9 +27,9 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
-.blog-card { overflow: hidden; cursor: pointer; display: flex; flex-direction: column; height: 100%; }
+.blog-card { overflow: hidden; cursor: pointer; display: flex; flex-direction: column; height: 100%; border-radius: var(--radius); }
 .blog-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.blog-card-cover { aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1.5px solid var(--border); }
+.blog-card-cover { aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--border); }
 .blog-card-cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
 .blog-card:hover .blog-card-cover img { transform: scale(1.04); }
 .blog-card-body { padding: 1.4rem; display: flex; flex-direction: column; flex: 1; }
@@ -46,8 +46,8 @@
 .blog-card-title {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
   line-height: 1.25;
   color: var(--text);
   margin: 0.6rem 0 0.5rem;
@@ -71,8 +71,8 @@
   white-space: nowrap;
 }
 .blog-empty {
-  border: 1.5px dashed var(--border);
-  border-radius: 0;
+  border: 1px dashed var(--border-2);
+  border-radius: var(--radius-sm);
   padding: 3.5rem 2rem;
   text-align: center;
 }
@@ -87,7 +87,7 @@
 .comments-empty code {
   background: var(--bg-alt);
   border: 1px solid var(--border);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   padding: 0.1rem 0.35rem;
   font-size: 0.95em;
 }
@@ -100,9 +100,10 @@
   border: none;
   cursor: pointer;
   color: var(--muted);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   padding: 0;
   margin-bottom: 2.5rem;
   transition: color 0.2s;
@@ -121,9 +122,9 @@
 }
 .post-title {
   font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(2rem, 5.5vw, 3.3rem);
-  letter-spacing: 0;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+  letter-spacing: -0.035em;
   line-height: 1.12;
   color: var(--text);
 }
@@ -131,8 +132,8 @@
 .post-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
 .post-cover {
   width: 100%;
-  border-radius: 0;
-  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
   margin-bottom: 2.5rem;
   display: block;
 }
@@ -143,16 +144,16 @@
 .post-body h2 {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.75rem;
-  letter-spacing: 0;
+  font-size: 1.6rem;
+  letter-spacing: -0.03em;
   margin-top: 3rem;
   line-height: 1.25;
 }
 .post-body h3 {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: 0;
+  font-size: 1.22rem;
+  letter-spacing: -0.02em;
   margin-top: 2.2rem;
 }
 .post-body p { color: var(--muted); }
@@ -162,27 +163,27 @@
 .post-body ol { padding-left: 1.4rem; color: var(--muted); }
 .post-body li + li { margin-top: 0.4rem; }
 .post-body blockquote {
-  border-left: 4px solid var(--indigo);
+  border-left: 3px solid var(--accent);
   padding: 0.4rem 0 0.4rem 1.3rem;
   color: var(--muted);
   font-style: italic;
 }
 .post-body code {
-  font-family: var(--mono);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.86em;
   background: var(--paper-2);
   border: 1px solid var(--border);
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   padding: 0.1rem 0.35rem;
 }
 .post-body pre {
   background: var(--paper-2);
-  border: var(--rule-w) solid var(--ink);
-  border-radius: 0;
-  box-shadow: inset 2px 2px 0 rgba(24,25,45,0.13);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 1.1rem 1.3rem;
   overflow-x: auto;
 }
+.post-body pre { background: var(--accent-bg); }
 .post-body pre code { background: none; border: none; padding: 0; font-size: 0.82rem; line-height: 1.7; }
 .post-body hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
 .post-body table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
@@ -198,7 +199,7 @@
 .post-body td { color: var(--muted); }
 
 .post-figure { margin: 2rem 0; }
-.post-figure img { width: 100%; border-radius: 0; border: 1.5px solid var(--border); display: block; }
+.post-figure img { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border); display: block; }
 .post-figure figcaption {
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -214,13 +215,13 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   margin: 2rem 0;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
 }
 .post-video iframe,
 .post-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-.post-body video { width: 100%; border-radius: 0; border: 1.5px solid var(--border); display: block; }
+.post-body video { width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border); display: block; }
 
 .post-nav {
   display: grid;
@@ -233,9 +234,9 @@
 @media (max-width: 560px) { .post-nav { grid-template-columns: 1fr; } }
 .post-nav-link {
   background: var(--surface);
-  border: var(--rule-w) solid var(--ink);
-  border-radius: 0;
-  box-shadow: var(--shadow-hard-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
   padding: 1rem 1.2rem;
   cursor: pointer;
   text-align: left;
@@ -273,13 +274,13 @@
   letter-spacing: 0.06em;
   background: var(--accent-fill);
   color: var(--accent-on);
-  border: 1.5px solid var(--ink);
-  border-radius: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 0.1rem 0.55rem;
 }
 .comments-empty {
-  border: 1.5px dashed var(--border);
-  border-radius: 0;
+  border: 1px dashed var(--border-2);
+  border-radius: var(--radius-sm);
   padding: 2rem;
   text-align: center;
 }
@@ -293,8 +294,8 @@
   background: var(--surface);
   /* Field boundaries need 3:1 to satisfy WCAG 1.4.11, which the decorative
      --border does not reach. Blueberry, darkened, does. */
-  border: var(--rule-w) solid var(--ink);
-  border-radius: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 0.7rem 0.9rem;
   color: var(--text);
   font-family: var(--body);
@@ -328,14 +329,15 @@
 .comment-item:last-child { border-bottom: none; padding-bottom: 0; }
 .comment-avatar {
   flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 0;
-  background: var(--accent-fill);
-  border: 1.5px solid var(--ink);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
   color: var(--accent);
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
   display: flex;
   align-items: center;
   justify-content: center;

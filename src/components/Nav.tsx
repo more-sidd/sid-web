@@ -53,7 +53,7 @@ function ThemeToggle({ dark, onToggle }: { dark: boolean; onToggle: () => void }
         border: '1.5px solid var(--border)',
         background: 'var(--surface)',
         cursor: 'pointer',
-        color: dark ? 'var(--lemon)' : 'var(--accent)',
+        color: 'var(--accent)',
         transition: 'border-color 0.2s, color 0.2s, background 0.2s',
         flexShrink: 0,
       }}
@@ -127,7 +127,7 @@ export default function Nav() {
               className="font-mono"
               style={{
                 background: 'none', border: 'none', cursor: 'pointer',
-                fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase',
+                fontSize: '0.86rem', fontWeight: 500,
                 color: active === l.id ? 'var(--accent)' : 'var(--muted)',
                 transition: 'color 0.2s',
               }}
@@ -138,7 +138,7 @@ export default function Nav() {
 
           <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
 
-          <a href={personalInfo.resumeUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.45rem 1rem', fontSize: '0.68rem' }}>
+          <a href={personalInfo.resumeUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.5rem 1.15rem', fontSize: '0.8rem' }}>
             Resume ↗
           </a>
         </div>
@@ -174,8 +174,8 @@ export default function Nav() {
                 display: 'block', width: '100%', textAlign: 'left',
                 padding: '0.85rem 1.5rem', background: 'none', border: 'none',
                 borderBottom: '1px solid var(--border)', cursor: 'pointer',
-                fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem',
-                letterSpacing: '0.12em', textTransform: 'uppercase',
+                fontSize: '0.92rem',
+                fontWeight: 500,
                 color: active === l.id ? 'var(--accent)' : 'var(--muted)',
               }}
             >

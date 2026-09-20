@@ -4,11 +4,8 @@ import { Project } from '../types';
 import ProjectModal from './ProjectModal';
 import { Reveal } from './Reveal';
 
-/* Cards cycle the four palette hues on their DECORATIVE parts only — the top
-   bar and the bullet dots. Amber, coral and periwinkle measure 1.5-2.6:1 on
-   the cream ground, so none of them can be used for text; anything readable
-   uses --ink or --accent instead. */
-const CARD_HUES = ['var(--amber)', 'var(--coral)', 'var(--indigo)', 'var(--periwinkle)'];
+/* The soft direction leans on one accent plus generous whitespace, so the
+   category pill carries identity and the cards stay uniform. */
 
 export default function Projects() {
   const [active, setActive] = useState<Project | null>(null);
@@ -23,7 +20,6 @@ export default function Projects() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.4rem' }}>
           {projects.map((p, i) => {
-            const hue = CARD_HUES[i % CARD_HUES.length];
             const hasImages = p.images && p.images.length > 0;
 
             return (
@@ -33,8 +29,6 @@ export default function Projects() {
                   style={{ overflow: 'hidden', cursor: 'pointer', display: 'flex', flexDirection: 'column', height: '100%' }}
                   onClick={() => setActive(p)}
                 >
-                  {/* Top accent bar — decorative, so a raw fill is fine */}
-                  <div style={{ height: 6, background: hue, borderBottom: '2px solid var(--ink)' }} />
 
                   {/* ── Image section ── */}
                   {hasImages ? (
@@ -77,13 +71,13 @@ export default function Projects() {
                         <div style={{
                           position: 'absolute',
                           bottom: 6, right: 6,
-                          background: 'rgba(36,30,40,0.75)',
+                          background: 'rgba(94,68,46,0.82)',
                           color: '#fff',
                           fontSize: '0.6rem',
-                          fontFamily: "'JetBrains Mono', monospace",
+                          
                           padding: '0.15rem 0.4rem',
-                          borderRadius: 2,
-                          letterSpacing: '0.06em',
+                          borderRadius: 999,
+                          letterSpacing: '0.02em',
                           pointerEvents: 'none',
                         }}>
                           +{p.images!.length - 3} more
@@ -100,9 +94,6 @@ export default function Projects() {
                   <div style={{ padding: '1.2rem 1.3rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
                     {/* Category tag */}
                     <div style={{ marginBottom: '0.5rem' }}>
-                      {/* Uniform retro chip: ink on surface with a hard outline.
-                          Colour-coding lives in the top bar, where contrast
-                          rules don't apply. */}
                       <span className="tag">{p.category}</span>
                     </div>
 
@@ -113,7 +104,7 @@ export default function Projects() {
                     <ul style={{ listStyle: 'none', marginBottom: '1rem' }}>
                       {p.results.slice(0, 2).map((r, ri) => (
                         <li key={ri} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.5, marginBottom: '0.25rem' }}>
-                          <span style={{ width: 6, height: 6, background: hue, border: '1.5px solid var(--ink)', flexShrink: 0, marginTop: '0.36rem' }} />
+                          <span style={{ width: 5, height: 5, background: 'var(--accent)', flexShrink: 0, marginTop: '0.42rem', borderRadius: '50%' }} />
                           {r}
                         </li>
                       ))}
@@ -124,7 +115,7 @@ export default function Projects() {
                       <span className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.08em', color: 'var(--muted)' }}>
                         {p.github ? '↗ GitHub available' : p.status === 'complete' ? '✓ Completed' : 'In progress'}
                       </span>
-                      <span className="font-mono" style={{ fontSize: '0.65rem', letterSpacing: '0.1em', color: 'var(--accent)', textTransform: 'uppercase' }}>
+                      <span className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--accent)', fontWeight: 600 }}>
                         Details →
                       </span>
                     </div>

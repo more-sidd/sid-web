@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,65 +6,64 @@
 
 
 
-/* ══════════════════════════════════════════════════════════════════════════
-   COLOUR SYSTEM  —  b8b8d1 / 5b5f97 / ffc145 / fffffb / ff6b6c
-   Retro-terminal palette on warm paper.
-
-   Measured on the cream ground, three of the five source colours cannot
-   carry text at all:
-
-     amber  #FFC145 -> 1.53:1     coral #FF6B6C -> 2.61:1
-     periwinkle #B8B8D1 -> 1.83:1  indigo #5B5F97 -> 5.61:1  (the only one)
-
-   So warm colours are FILLS. Text uses --ink, --muted (indigo) or --accent
-   (a rust derived from the coral). Darkening amber far enough for text gives
-   #936200, a mud brown that throws away everything amber is for — hence rust
-   carries the links instead.
-
-   Indigo (hue 236) and amber (hue 40) sit ~194 degrees apart: near
-   complements, and the strongest pairing available here. Amber on deep
-   indigo is also a straight nod to amber-CRT terminals.
-   ══════════════════════════════════════════════════════════════════════════ */
 :root {
-  /* ── Source palette. FILLS ONLY on light backgrounds. ── */
-  --periwinkle: #B8B8D1;
-  --indigo:     #5B5F97;
-  --amber:      #FFC145;
-  --coral:      #FF6B6C;
-  --rust:       #A8443C;   /* text-safe coral: 5.05:1 on cream */
+  /* ══════════════════════════════════════════════════════════════════════
+     Vanilla Cream / Buttercream / Powder Blue / Walnut Brown
+
+     Measured on the cream ground, three of the four cannot carry text:
+       buttercream 1.08:1   powder blue 1.49:1   walnut 8.44:1  <- only one
+
+     So walnut is the ink, and the warm/cool pastels are FILLS ONLY. That
+     left nothing for links, so --accent is powder blue darkened to 4.88:1;
+     it keeps a cool counterpoint instead of making every accent brown.
+     ══════════════════════════════════════════════════════════════════════ */
+
+  /* ── Source palette. Fills only, except walnut. ── */
+  --vanilla:     #FFF8E2;
+  --buttercream: #FFEFB9;
+  --powder:      #BCD1DE;
+  --walnut:      #5E442E;
 
   /* ── Surfaces ── */
-  --paper:     #FBF8F0;    /* the desk */
-  --paper-2:   #F2EDE0;    /* alternating sections */
-  --surface:   #FFFFFB;    /* windows sitting on the desk */
+  --paper:     #FFF8E2;
+  --paper-2:   #FFFDF7;   /* lifted band, lighter than the paper */
+  --surface:   #FFFDF7;   /* cards */
 
   /* ── Ink ── */
-  --ink:       #18192D;    /* 16.3:1 on paper. Text, outlines, hard shadows */
-  --ink-2:     #5B5F97;    /* secondary text, 5.6:1 */
+  --ink:       #5E442E;   /* 8.44:1 on paper */
+  --ink-2:     #926A48;   /* 4.52:1 — the lightest walnut still readable */
 
-  /* ── Retro chrome. The whole look is three devices: a thick ink outline,
-        a hard offset shadow with no blur, and square corners. ── */
-  --rule-w:         2px;
-  --shadow-hard-sm: 3px 3px 0 var(--ink);
-  --shadow-hard:    5px 5px 0 var(--ink);
-  --shadow-hard-lg: 8px 8px 0 var(--ink);
+  /* ── Soft chrome: hairline rule, gentle radius, diffuse warm shadow. ── */
+  --rule-w:     1px;
+  --radius:     16px;
+  --radius-sm:  12px;
+  --radius-pill: 999px;
+  --shadow-sm:  0 1px 2px rgba(94,68,46,0.05);
+  --shadow:     0 2px 10px rgba(94,68,46,0.055);
+  --shadow-md:  0 6px 22px rgba(94,68,46,0.09);
+  --shadow-lg:  0 18px 46px rgba(94,68,46,0.14);
 
-  /* ── Back-compat aliases. Existing components reference these names; they
-        now point at the retro palette so nothing had to be renamed. ── */
+  /* Legacy names kept so components did not all need renaming. */
+  --shadow-hard-sm: var(--shadow-sm);
+  --shadow-hard:    var(--shadow);
+  --shadow-hard-lg: var(--shadow-lg);
+
   --bg:            var(--paper);
   --bg-alt:        var(--paper-2);
   --text:          var(--ink);
   --muted:         var(--ink-2);
-  --border:        var(--ink);
-  --border-2:      var(--ink);
-  --border-strong: var(--ink);
-  --border-input:  var(--ink);
+  --border:        #E6D6C2;
+  --border-2:      #D4BCA8;
+  --border-strong: #D4BCA8;
+  --border-input:  #C9AE97;
 
-  --accent:       var(--rust);     /* labels, links, active nav */
-  --accent-fill:  var(--amber);    /* buttons and badges */
-  --accent-on:    var(--ink);      /* text on --accent-fill: 10.7:1 */
-  --accent-bg:    #FFF3D6;         /* pale amber wash */
-  --accent-light: #FFF3D6;
+  --accent:       #46728D;   /* powder blue, darkened for text: 4.88:1 */
+  --accent-lg:    #6696B4;   /* 3:1 — large text and icons only */
+  --accent-fill:  var(--walnut);
+  --accent-on:    var(--paper-2);
+  --accent-bg:    #EAF1F5;
+  --accent-light: #EAF1F5;
+  --wash-warm:    #FFF3D0;
 
   --danger: #A8443C;
 }
@@ -88,45 +87,44 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
 
-/* Headings are the body face at 700 - one typeface for the whole site. Being
-   monospaced, it needs no negative tracking; weight alone carries hierarchy. */
-.font-display { font-family: var(--display); font-weight: 700; letter-spacing: 0; }
-.font-mono    { font-family: 'JetBrains Mono', monospace; }
+/* One family throughout. Hierarchy comes from weight, size and tracking. */
+.font-display { font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; }
+/* Kept as a class name so existing call sites work; it is no longer a
+   monospace face — small caps-y labels in the same family instead. */
+.font-mono { font-family: var(--body); letter-spacing: 0.06em; }
 
 .nav-base { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background 0.3s, border-color 0.3s; }
-.nav-scrolled { background: rgba(251,248,240,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+.nav-scrolled { background: rgba(255,253,247,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
 
 .section-pad { padding: 5.5rem 0; }
 .section-alt  { background: var(--bg-alt); }
 
-.label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
-.heading { font-family: var(--display); font-weight: 700; font-size: clamp(2.1rem, 3.9vw, 3.3rem); letter-spacing: 0; line-height: 1.08; margin-bottom: 2.5rem; }
+.label { font-family: var(--body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+.heading { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 3.6vw, 2.6rem); letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 2.2rem; }
 
-.tag { font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; padding: 0.16rem 0.55rem; background: var(--surface); border: 1.5px solid var(--ink); border-radius: 0; color: var(--ink); white-space: nowrap; }
-.tag-accent { background: var(--accent-bg); border-color: var(--ink); color: var(--ink); }
+.tag { font-family: var(--body); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.3rem 0.7rem; background: var(--accent-bg); border: none; border-radius: var(--radius-pill); color: var(--ink); white-space: nowrap; }
+.tag-accent { background: var(--wash-warm); color: var(--ink); }
 
-/* Hard offset shadow, no blur, square corners — the core of the look. The
-   stepped transition snaps instead of easing, which reads mechanical rather
-   than modern-smooth. */
-.card { background: var(--surface); border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-sm); transition: transform 0.1s steps(2), box-shadow 0.1s steps(2); }
-.card:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hard); }
+/* Soft cards: hairline border, generous radius, diffuse warm shadow. The
+   lift on hover is small and eased — nothing snaps. */
+.card { background: var(--surface); border: var(--rule-w) solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--border-2); }
 
-/* Amber fill with ink text: 10.7:1. White on amber would be 1.5:1, so the
-   dark ink is what lets the real palette colour be used at full strength. */
-.btn-primary { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--accent-fill); color: var(--accent-on); font-weight: 500; padding: 0.6rem 1.5rem; border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-sm); cursor: pointer; transition: transform 0.08s steps(2), box-shadow 0.08s steps(2); text-decoration: none; display: inline-block; }
-.btn-primary:hover { transform: translate(-1px, -1px); box-shadow: var(--shadow-hard); }
-/* Pressing sinks the button into its own shadow. */
-.btn-primary:active { transform: translate(3px, 3px); box-shadow: none; }
+/* Walnut fill with cream text — 8.4:1. The pastels are all far too light
+   to sit under text, so the ink itself carries the primary button. */
+.btn-primary { font-family: var(--body); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.01em; text-transform: none; background: var(--accent-fill); color: var(--accent-on); padding: 0.75rem 1.6rem; border: none; border-radius: var(--radius-pill); box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease; text-decoration: none; display: inline-block; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn-primary:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
 
-.btn-ghost { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--surface); color: var(--ink); padding: 0.6rem 1.4rem; border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-sm); cursor: pointer; transition: transform 0.08s steps(2), box-shadow 0.08s steps(2); text-decoration: none; display: inline-block; }
-.btn-ghost:hover { transform: translate(-1px, -1px); box-shadow: var(--shadow-hard); }
-.btn-ghost:active { transform: translate(3px, 3px); box-shadow: none; }
+.btn-ghost { font-family: var(--body); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.01em; text-transform: none; background: var(--surface); color: var(--ink); padding: 0.75rem 1.5rem; border: var(--rule-w) solid var(--border); border-radius: var(--radius-pill); box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; text-decoration: none; display: inline-block; }
+.btn-ghost:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--border-2); }
+.btn-ghost:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
 
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
-.modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(24,25,45,0.62); display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
-.modal-box { background: var(--surface); border: var(--rule-w) solid var(--ink); border-radius: 0; box-shadow: var(--shadow-hard-lg); width: 100%; max-width: 700px; max-height: 88vh; overflow-y: auto; }
+.modal-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(94,68,46,0.42); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+.modal-box { background: var(--surface); border: var(--rule-w) solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 100%; max-width: 700px; max-height: 88vh; overflow-y: auto; }
 
 /* ── FONTS ─────────────────────────────────────────────────────────────────
    Colours live in the single :root block at the top of this file. There used
@@ -134,11 +132,11 @@ body {
    exactly one place to change a colour.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  --mono: 'JetBrains Mono', monospace;
-  /* One family throughout: JetBrains Mono. Headings differ from body by weight
-     (700 vs 400) and size only, which keeps the terminal feel consistent. */
-  --display: 'JetBrains Mono', ui-monospace, monospace;
-  --body:    'JetBrains Mono', ui-monospace, monospace;
+  --mono:    'Plus Jakarta Sans', system-ui, sans-serif;
+  /* One family throughout: Plus Jakarta Sans. Hierarchy comes from weight
+     and size, not from switching typeface. */
+  --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --body:    'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -180,10 +178,11 @@ nav {
 }
 .text-accent { color: var(--accent); }
 .nav-link {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--body);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--muted);
   background: none;
   border: none;
@@ -193,18 +192,20 @@ nav {
 }
 .nav-link:hover, .nav-link-active { color: var(--accent); }
 .btn-nav {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-family: var(--body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--accent-on);
   background: var(--accent-fill);
-  padding: 0.45rem 1.1rem;
-  border-radius: 2px;
+  padding: 0.55rem 1.25rem;
+  border-radius: var(--radius-pill);
   text-decoration: none;
-  transition: opacity 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.btn-nav:hover { opacity: 0.85; }
+.btn-nav:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
 .mobile-menu {
   display: flex;
@@ -214,17 +215,18 @@ nav {
   padding: 0.5rem 0;
 }
 .mobile-link {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-family: var(--body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--muted);
   padding: 0.85rem 1.5rem;
   text-align: left;
   background: none;
   border: none;
-  cursor: pointer;
   border-bottom: 1px solid var(--border);
+  cursor: pointer;
 }
 .mobile-link:hover { color: var(--accent); }
 
@@ -237,31 +239,29 @@ nav {
   display: flex;
   align-items: center;
 }
-.hero-bg-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(var(--periwinkle) 1px, transparent 1px),
-    linear-gradient(90deg, var(--periwinkle) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.55;
-}
+/* One very soft warm bloom instead of the old graph-paper grid — enough to
+   stop the cream reading as flat, not enough to notice as a texture. */
 .hero-bg-glow {
   position: absolute;
-  top: -200px; right: -200px;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(255,193,69,0.30) 0%, transparent 68%);
+  top: -260px; right: -220px;
+  width: 760px; height: 760px;
+  background: radial-gradient(circle, rgba(255,239,185,0.75) 0%, transparent 68%);
   pointer-events: none;
 }
 .hero-eyebrow {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.2rem;
+  gap: 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  /* The pill keeps its buttercream fill in both themes, so its text is
+     pinned to walnut rather than the flipping --ink (7.8:1 either way). */
+  color: var(--walnut);
+  background: var(--buttercream);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1.6rem;
   animation: fadeUp 0.6s ease 0.1s both;
 }
 .hero-dot {
@@ -269,6 +269,7 @@ nav {
   background: var(--accent);
   border-radius: 50%;
   display: inline-block;
+  flex-shrink: 0;
   animation: pulse 2s ease-in-out infinite;
 }
 @keyframes pulse {
@@ -277,85 +278,40 @@ nav {
 }
 .hero-name {
   font-family: var(--display);
-  font-weight: 700;
-  /* Deliberately restrained. JetBrains Mono draws "Siddhi" 360px wide at
-     100px type, so 6rem lands around 346px inside the 644px window - it
-     reads as a heading rather than a billboard. */
-  font-size: clamp(2.4rem, 7vw, 6rem);
-  line-height: 0.92;
-  letter-spacing: 0;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 5.6vw, 4.2rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
   color: var(--text);
   animation: fadeUp 0.7s ease 0.2s both;
 }
-.hero-name-accent { color: var(--accent); }
-.hero-cursor {
-  display: inline-block;
-  font-size: 0.55em;
-  vertical-align: baseline;
-  margin-left: 0.08em;
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; } 50% { opacity: 0; }
-}
+.hero-name-accent { color: var(--text); }
 .hero-tagline {
   font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(1.05rem, 2.4vw, 1.6rem);
-  letter-spacing: 0;
-  color: var(--muted);
-  margin-top: 1.5rem;
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+  margin-top: 1rem;
   animation: fadeUp 0.7s ease 0.35s both;
 }
 .hero-sub {
-  max-width: 580px;
-  font-size: 1rem;
+  max-width: 50ch;
+  font-size: 0.97rem;
   color: var(--muted);
   line-height: 1.75;
-  margin-top: 1.2rem;
+  margin-top: 1.1rem;
   animation: fadeUp 0.7s ease 0.45s both;
 }
 .hero-cta {
   display: flex;
-  gap: 0.8rem;
+  gap: 0.7rem;
   flex-wrap: wrap;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
   animation: fadeUp 0.7s ease 0.55s both;
 }
-/* Duplicate of the .btn-primary near the top of this file; this one wins on
-   source order, so it has to carry the same fill/ink pair. White here would
-   land at 3.0:1 on the raspberry. */
-.btn-primary {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--accent-fill);
-  color: var(--accent-on);
-  font-weight: 500;
-  padding: 0.75rem 2rem;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.15s;
-}
-.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-.btn-ghost {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: transparent;
-  color: var(--text);
-  padding: 0.75rem 1.6rem;
-  border: 1.5px solid var(--border-strong);
-  border-radius: 2px;
-  text-decoration: none;
-  transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  display: inline-flex;
-  align-items: center;
-}
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
 .hero-stats {
   display: flex;
   align-items: center;
@@ -427,34 +383,30 @@ nav {
    grid-column places it between the two photos visually. */
 .about-grid {
   display: grid;
-  grid-template-columns: clamp(140px, 17%, 205px) 1fr clamp(140px, 17%, 205px);
-  gap: 2.5rem;
-  align-items: start;
-}
-.about-bio         { grid-column: 2; grid-row: 1; }
-.about-photo-left  { grid-column: 1; grid-row: 1; }
-.about-photo-right { grid-column: 3; grid-row: 1; }
-
-/* Tablet: bio full width, the two photos side by side beneath it. */
-@media (max-width: 900px) {
-  .about-grid { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
-  .about-bio         { grid-column: 1 / -1; grid-row: auto; }
-  .about-photo-left,
-  .about-photo-right { grid-column: auto; grid-row: auto; }
+  /* photo | bio | photo. The columns are classed on the Reveal wrappers,
+     which are the real grid items — putting them on the inner div did
+     nothing, which is what collapsed this layout before. */
+  grid-template-columns: minmax(140px, 0.7fr) minmax(0, 2fr) minmax(140px, 0.7fr);
+  gap: 2.2rem;
+  align-items: center;
 }
 
-/* Phone: single column. */
-@media (max-width: 520px) {
+/* Hold three columns down to a genuinely narrow window. Above this the
+   photos just get slimmer rather than rewrapping. */
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  .about-bio   { grid-column: 1 / -1; order: -1; }
+  .about-photo { order: 1; }
+}
+@media (max-width: 460px) {
   .about-grid { grid-template-columns: 1fr; }
 }
-/* ── About photos ──────────────────────────────────────────────────────────
-   Two stacked frames. Same chrome as everything else: square corners, thick
-   ink rule, hard offset shadow. The second is optional and falls back to a
-   dashed slot rather than a broken image. */
+
 .photo-frame {
-  border: var(--rule-w) solid var(--ink);
-  box-shadow: var(--shadow-hard-sm);
-  background: var(--surface);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--powder);
+  box-shadow: var(--shadow-md);
   line-height: 0;
 }
 .photo-frame img {
@@ -465,25 +417,26 @@ nav {
 }
 .photo-frame-empty {
   aspect-ratio: 3 / 4;
-  border-style: dashed;
+  background: var(--surface);
+  border: 1px dashed var(--border-2);
   box-shadow: none;
-  background: var(--paper-2);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  line-height: 1.8;
+  line-height: 1.9;
 }
 .photo-frame-empty span {
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .photo-frame-empty code {
-  background: var(--surface);
-  border: 1px solid var(--ink);
-  padding: 0 0.25rem;
+  background: var(--accent-bg);
+  border-radius: 4px;
+  padding: 0 0.3rem;
   text-transform: none;
 }
 
@@ -859,35 +812,41 @@ nav {
    Palette: near-black background, white text, purple accent.
    ─────────────────────────────────────────────────────────────────────────── */
 
-/* On near-black the pastels measure 6.4:1 (rose) to 15.4:1 (lemon), so here
-   the raw palette IS the text colour — no darkened inks needed. This is the
-   one place the palette gets to appear exactly as designed. */
 /* Amber clears 11.9:1 on the deep indigo ground, so here the palette's own
    warm colours carry text directly — no darkened rust needed. */
+/* Dark mode keeps the same family: walnut taken down to espresso, cream as
+   the ink, and the two pastels used directly since both are light enough to
+   read on a dark ground (powder 10.8:1, buttercream 14.9:1 behind ink). */
 html.dark {
-  --paper:     #0C0D1A;
-  --paper-2:   #131427;
-  --surface:   #1C1E38;
-  --ink:       #F0F0F5;
-  --ink-2:     #B8B8D1;
+  --paper:     #241A12;
+  --paper-2:   #2E2218;
+  --surface:   #332619;
+  --ink:       #FFF8E2;
+  --ink-2:     #CDB49A;
 
   --bg:            var(--paper);
   --bg-alt:        var(--paper-2);
   --text:          var(--ink);
   --muted:         var(--ink-2);
-  --border:        var(--ink);
-  --border-2:      var(--ink);
-  --border-strong: var(--ink);
-  --border-input:  var(--ink);
+  --border:        #493829;
+  --border-2:      #5E4835;
+  --border-strong: #5E4835;
+  --border-input:  #6E5540;
 
-  --rust:         #FFC145;
-  --accent:       #FFC145;
-  --accent-fill:  #FFC145;
-  --accent-on:    #18192D;
-  --accent-bg:    #2A2410;
-  --accent-light: #2A2410;
+  --accent:       #BCD1DE;
+  --accent-lg:    #BCD1DE;
+  --accent-fill:  #FFEFB9;
+  --accent-on:    #241A12;
+  --accent-bg:    #2C3A42;
+  --accent-light: #2C3A42;
+  --wash-warm:    #3A2C1C;
 
-  --danger: #FF6B6C;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow:    0 2px 10px rgba(0,0,0,0.34);
+  --shadow-md: 0 6px 22px rgba(0,0,0,0.42);
+  --shadow-lg: 0 18px 46px rgba(0,0,0,0.5);
+
+  --danger: #FF9A8F;
 }
 
 /* Nav background in dark + scrolled */
@@ -899,14 +858,10 @@ html.dark .nav-scrolled {
    light edge against the indigo ground. Nothing to override. */
 
 /* Hero grid lines — slightly more visible on dark */
-html.dark .hero-bg-grid {
-  opacity: 0.16;
-}
 
 /* Hero glow — amber CRT bloom on the dark ground */
-html.dark .hero-bg-glow,
-html.dark [style*="radial-gradient(circle, rgba(255,193,69"] {
-  background: radial-gradient(circle, rgba(255, 193, 69, 0.16) 0%, transparent 68%) !important;
+html.dark .hero-bg-glow {
+  background: radial-gradient(circle, rgba(255, 239, 185, 0.09) 0%, transparent 68%);
 }
 
 /* Scrollbar */
@@ -920,17 +875,16 @@ html.dark ::-webkit-scrollbar-thumb { background: var(--border-2); }
   transition-timing-function: ease;
 }
 
-/* Colour still fades, but transform and box-shadow stay stepped so the
-   press/lift reads mechanical rather than eased. */
+/* Everything eases. Nothing snaps — that was the scrapped retro direction. */
 .card, .btn-primary, .btn-ghost {
   transition: background-color 0.25s ease,
               border-color 0.25s ease,
               color 0.25s ease,
-              box-shadow 0.1s steps(2),
-              transform 0.1s steps(2);
+              box-shadow 0.22s ease,
+              transform 0.22s ease;
 }
 .gallery-tile img, .gallery-tile {
-  transition: transform 0.12s steps(3), border-color 0.25s ease;
+  transition: transform 0.35s ease, border-color 0.25s ease;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -938,149 +892,95 @@ html.dark ::-webkit-scrollbar-thumb { background: var(--border-2); }
    Reusable "application window" wrapper: title bar with control dots, a
    centred monospace title, and a hard offset shadow.
    ══════════════════════════════════════════════════════════════════════════ */
-.win {
-  background: var(--surface);
-  border: var(--rule-w) solid var(--ink);
-  box-shadow: var(--shadow-hard);
-  border-radius: 0;
-}
-.win-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.3rem 0.55rem;
-  background: var(--paper-2);
-  border-bottom: var(--rule-w) solid var(--ink);
-}
-.win-dots { display: flex; gap: 0.32rem; flex-shrink: 0; }
-.win-dot {
-  width: 9px; height: 9px;
-  border: 1.5px solid var(--ink);
-  border-radius: 50%;
-  background: transparent;
-}
-.win-dot-live { background: var(--coral); }
-.win-title {
-  flex: 1;
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.win-body { padding: 1.1rem; }
-
-/* An inset "well", the inverse of the raised window — used for readouts. */
-.well {
-  background: var(--paper-2);
-  border: 1.5px solid var(--ink);
-  box-shadow: inset 2px 2px 0 rgba(24,25,45,0.14);
-  padding: 0.7rem 0.85rem;
-}
-
-/* A labelled meter, like the vol/cpu/ram readouts on a desktop widget. */
-.meter { display: flex; align-items: center; gap: 0.6rem; }
-.meter-label {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  width: 2.6rem;
-  flex-shrink: 0;
-}
-.meter-track {
-  flex: 1;
-  height: 12px;
-  border: 1.5px solid var(--ink);
-  background: var(--surface);
-}
-.meter-fill { height: 100%; background: var(--amber); }
-.meter-fill-coral { background: var(--coral); }
-.meter-fill-indigo { background: var(--indigo); }
-
-/* Square, high-contrast focus ring in keeping with the rest. */
-:focus-visible {
-  outline: var(--rule-w) solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   HERO DESKTOP  —  asymmetrical
-   A wide primary window beside a narrower stack of two readout panels. The
-   side column is pushed down so the two halves do not read as aligned
-   columns; that offset is what makes the composition asymmetrical rather
-   than just "two columns".
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ── Hero ────────────────────────────────────────────────────────────────
+   Bio column on the left, portrait plus two live cards on the right. The
+   cards pull real data (latest post, current project) rather than decoration. */
 .hero-desk {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(270px, 0.9fr);
-  gap: 1.6rem;
-  align-items: start;
-}
-.hero-win-main { animation: fadeUp 0.6s ease 0.1s both; }
-.hero-win-main-body { padding: 1.6rem 1.8rem 1.9rem; }
-.hero-side {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  margin-top: 3.5rem;            /* the offset */
-  animation: fadeUp 0.6s ease 0.3s both;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3.5rem;
+  align-items: center;
 }
 @media (max-width: 900px) {
-  .hero-desk { grid-template-columns: 1fr; gap: 1.2rem; }
-  .hero-side { margin-top: 0; }
-  .hero-win-main-body { padding: 1.2rem 1.2rem 1.5rem; }
+  .hero-desk { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+.hero-side { display: flex; flex-direction: column; gap: 1rem; }
+
+.hero-portrait {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--powder);
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  display: block;
 }
 
-/* Readout rows in the system panel */
-.readout-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding-top: 0.35rem;
-  margin-top: 0.35rem;
-  border-top: 1px solid var(--periwinkle);
+.info-card {
+  background: var(--surface);
+  border: var(--rule-w) solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem 1.1rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
-.readout-val {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
-  color: var(--ink);
-  margin-left: auto;
-  white-space: nowrap;
-}
-
-/* "On the bench" panel */
-.bench-title {
-  font-family: var(--mono);
+.info-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.info-card-label {
   font-size: 0.62rem;
-  letter-spacing: 0.14em;
+  font-weight: 700;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
-.bench-desc {
-  font-size: 0.78rem;
-  line-height: 1.6;
+.info-card-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+.info-card-desc {
+  font-size: 0.82rem;
   color: var(--muted);
+  line-height: 1.6;
 }
-.bench-link {
-  margin-top: 0.8rem;
-  background: var(--surface);
-  border: 1.5px solid var(--ink);
-  box-shadow: 2px 2px 0 var(--ink);
-  color: var(--ink);
-  padding: 0.3rem 0.7rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.info-card-link {
+  margin-top: 0.7rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
 }
-.bench-link:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
-.bench-link:active { transform: translate(2px, 2px); box-shadow: none; }
+.info-card-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Stat tiles */
+.stat-row { display: flex; gap: 0.8rem; margin-top: 2.6rem; flex-wrap: wrap; }
+.stat-tile {
+  flex: 1;
+  min-width: 128px;
+  background: var(--surface);
+  border: var(--rule-w) solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 0.9rem 1.1rem;
+}
+.stat-tile dt {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.stat-tile dd {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
