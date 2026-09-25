@@ -1,6 +1,6 @@
 ---
 title: MassRobotics Women in Robotics Meetups
-date: 2026-09-01
+date: 2026-04-01
 excerpt: A year of showing up to the MassRobotics Women in Robotics meetups in Boston, as an active member and regular attendee.
 tags: [Community, Events]
 cover: /gallery/massrob1.jpg

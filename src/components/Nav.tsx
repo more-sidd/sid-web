@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { personalInfo } from '../data/portfolioData';
 import { useHashRoute, goHome } from '../lib/useHashRoute';
+import { resume } from '../lib/resume';
 
 /* Eleven sections is too many to list individually, so the bar shows six
    groups. `target` is where the link scrolls to; `covers` is every section
@@ -8,10 +8,10 @@ import { useHashRoute, goHome } from '../lib/useHashRoute';
    the rest of the group. */
 const LINKS = [
   { target: 'about',      label: 'About',      covers: ['about'] },
-  { target: 'experience', label: 'Work',       covers: ['experience', 'projects', 'skills'] },
-  { target: 'gallery',    label: 'Gallery',    covers: ['gallery'] },
-  { target: 'blog',       label: 'Writing',    covers: ['blog', 'news'] },
   { target: 'education',  label: 'Background', covers: ['education', 'publications'] },
+  { target: 'experience', label: 'Work',       covers: ['experience', 'projects', 'skills'] },
+  { target: 'blog',       label: 'Writing',    covers: ['blog', 'news'] },
+  { target: 'gallery',    label: 'Gallery',    covers: ['gallery'] },
   { target: 'contact',    label: 'Contact',    covers: ['contact'] },
 ];
 
@@ -92,17 +92,44 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Re-observe whenever the route changes — the home sections unmount while a
-  // blog post is open, so the observer from the previous render is stale.
+  // Which section is 'current' is decided by scroll position, not by an
+  // IntersectionObserver. The observer version set active on every
+  // intersecting entry and let the last one in the batch win, which is
+  // arbitrary when several fire together — so jumping down the page could
+  // leave the wrong link lit. This walks the sections in DOM order and takes
+  // the last one whose top has passed the 40% line: deterministic, and
+  // independent of how tall any section happens to be.
   useEffect(() => {
     if (!onHome) { setActive(''); return; }
-    const sections = document.querySelectorAll('section[id]');
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
-      { rootMargin: '-40% 0px -55% 0px' }
-    );
-    sections.forEach(s => obs.observe(s));
-    return () => obs.disconnect();
+
+    // Whichever section fills the most of the screen is the current one.
+    // A fixed scroll line breaks on short sections: centring a short section
+    // leaves a taller neighbour across the top of the viewport, and the line
+    // picks the neighbour.
+    const pick = () => {
+      const vh = window.innerHeight;
+      let current = '', mostVisible = 0;
+      document.querySelectorAll('section[id]').forEach(sec => {
+        const r = sec.getBoundingClientRect();
+        const visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+        if (visible > mostVisible) { mostVisible = visible; current = sec.id; }
+      });
+      setActive(current);
+    };
+
+    pick();
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(pick);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(raf);
+    };
   }, [onHome]);
 
   const scrollTo = (id: string) => {
@@ -143,8 +170,8 @@ export default function Nav() {
 
           <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
 
-          <a href={personalInfo.resumeUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '0.5rem 1.15rem', fontSize: '0.8rem' }}>
-            Resume ↗
+          <a {...resume.linkProps} className="btn-primary" style={{ padding: '0.5rem 1.15rem', fontSize: '0.8rem' }}>
+            {resume.label}
           </a>
         </div>
 

@@ -14,7 +14,7 @@ export default function Projects() {
     <section id="projects" className="section-pad section-alt" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
-          <p className="label">03 — Projects</p>
+          <p className="label">05 — Projects</p>
           <h2 className="heading">Selected Work</h2>
         </Reveal>
 

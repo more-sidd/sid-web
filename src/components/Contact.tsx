@@ -1,4 +1,5 @@
 import { personalInfo } from '../data/portfolioData';
+import { resume } from '../lib/resume';
 import { Reveal } from './Reveal';
 
 export default function Contact() {
@@ -6,7 +7,7 @@ export default function Contact() {
     { label: 'Email',    href: `mailto:${personalInfo.email}`, icon: '✉' },
     { label: 'GitHub',   href: personalInfo.github,   icon: 'GH' },
     { label: 'LinkedIn', href: personalInfo.linkedin, icon: 'LI' },
-    { label: 'Resume',   href: personalInfo.resumeUrl, icon: '↓' },
+    { label: 'Resume',   href: resume.url, icon: resume.glyph, download: !resume.opensInBrowser },
   ];
 
   return (
@@ -41,8 +42,13 @@ export default function Contact() {
               <a
                 key={l.label}
                 href={l.href}
-                target={l.href.startsWith('mailto') ? undefined : '_blank'}
-                rel="noreferrer"
+                /* A download must not also open a tab, and mailto must not
+                   either — only real external links get _blank. */
+                {...(l.download
+                  ? { download: '' }
+                  : l.href.startsWith('mailto')
+                    ? {}
+                    : { target: '_blank', rel: 'noreferrer' })}
                 className="btn-ghost"
                 style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               >

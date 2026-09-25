@@ -1,6 +1,7 @@
 import { personalInfo, projects } from '../data/portfolioData';
 import { allPosts, formatDate } from '../lib/posts';
 import { navigate } from '../lib/useHashRoute';
+import { resume } from '../lib/resume';
 
 export default function Hero() {
   const scroll = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -37,7 +38,7 @@ export default function Hero() {
 
             <div className="hero-cta">
               <button className="btn-primary" onClick={() => scroll('projects')}>View Projects</button>
-              <a href={personalInfo.resumeUrl} target="_blank" rel="noreferrer" className="btn-ghost">Resume</a>
+              <a {...resume.linkProps} className="btn-ghost">Resume</a>
               <a href={personalInfo.github} target="_blank" rel="noreferrer" className="btn-ghost">GitHub</a>
             </div>
 

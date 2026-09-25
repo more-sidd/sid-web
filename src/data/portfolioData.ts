@@ -9,7 +9,9 @@ export const personalInfo = {
   email: "siddhimorework@gmail.com",
   linkedin: "https://www.linkedin.com/in/more-siddhi/",
   github: "https://github.com/more-sidd",
-  resumeUrl: "/SiddhiResume.pdf",
+  // Point this at whichever file is in public/. A .pdf opens in the browser;
+  // anything else (.docx) downloads instead — see src/lib/resume.ts.
+  resumeUrl: "/SiddhiResume.docx",
 };
 export const education: Education[] = [
   {

@@ -47,14 +47,14 @@ export default function App() {
           <>
             <Hero />
             <About />
+            <Education />
+            <Publications />
             <Experience />
             <Projects />
             <Skills />
-            <Gallery />
             <Blog />
             <News />
-            <Education />
-            <Publications />
+            <Gallery />
             <Contact />
           </>
         )}

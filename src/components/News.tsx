@@ -5,7 +5,7 @@ export default function News() {
   return (
     <PostGrid
       id="news"
-      label="07 — News"
+      label="08 — News"
       heading="News"
       items={news}
       tags={newsTags}

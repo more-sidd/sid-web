@@ -87,7 +87,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="section-pad section-alt" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto px-6">
-        <p className="label">05 — Gallery</p>
+        <p className="label">09 — Gallery</p>
         <div className="gal-head">
           <h2 className="heading" style={{ marginBottom: 0 }}>Visual Archive</h2>
           <div className="gal-tabs">

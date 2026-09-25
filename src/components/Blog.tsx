@@ -5,7 +5,7 @@ export default function Blog() {
   return (
     <PostGrid
       id="blog"
-      label="06 — Writing"
+      label="07 — Writing"
       heading="Blog & Notes"
       items={posts}
       tags={allTags}
