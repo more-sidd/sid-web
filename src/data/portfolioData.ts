@@ -17,7 +17,7 @@ export const education: Education[] = [
     degree: "MS Robotics(Mechanical Concentration)",
     institution: "Northeastern University",
     location: "Boston, MA",
-    graduationDate: "May 2027",
+    graduationDate: "Dec 2026",
     gpa: "3.25 / 4.0",
     honors: ["Global Student Award"],
     courses: [
