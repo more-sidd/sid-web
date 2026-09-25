@@ -2,17 +2,22 @@ import { useState, useEffect } from 'react';
 import { personalInfo } from '../data/portfolioData';
 import { useHashRoute, goHome } from '../lib/useHashRoute';
 
+/* Eleven sections is too many to list individually, so the bar shows six
+   groups. `target` is where the link scrolls to; `covers` is every section
+   the group owns, so the right item stays highlighted as you scroll through
+   the rest of the group. */
 const LINKS = [
-  { id: 'about',        label: 'About' },
-  { id: 'experience',   label: 'Experience' },
-  { id: 'projects',     label: 'Projects' },
-  { id: 'skills',       label: 'Skills' },
-  { id: 'gallery',      label: 'Gallery' },
-  { id: 'blog',         label: 'Blog' },
-  { id: 'education',    label: 'Education' },
-  { id: 'publications', label: 'Publications' },
-  { id: 'contact',      label: 'Contact' },
+  { target: 'about',      label: 'About',      covers: ['about'] },
+  { target: 'experience', label: 'Work',       covers: ['experience', 'projects', 'skills'] },
+  { target: 'gallery',    label: 'Gallery',    covers: ['gallery'] },
+  { target: 'blog',       label: 'Writing',    covers: ['blog', 'news'] },
+  { target: 'education',  label: 'Background', covers: ['education', 'publications'] },
+  { target: 'contact',    label: 'Contact',    covers: ['contact'] },
 ];
+
+/** Which nav group owns the section currently in view. */
+const groupFor = (sectionId: string) =>
+  LINKS.find(l => l.covers.includes(sectionId))?.target ?? '';
 
 function SunIcon() {
   return (
@@ -112,23 +117,23 @@ export default function Nav() {
         {/* Logo */}
         <button
           onClick={() => (onHome ? window.scrollTo({ top: 0, behavior: 'smooth' }) : goHome())}
-          className="font-display text-2xl"
+          className="nav-logo"
           style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text)' }}
         >
           SM<span style={{ color: 'var(--accent)' }}>_</span>
         </button>
 
         {/* Desktop: links + toggle + resume */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-8">
           {LINKS.map(l => (
             <button
-              key={l.id}
-              onClick={() => scrollTo(l.id)}
+              key={l.target}
+              onClick={() => scrollTo(l.target)}
               className="font-mono"
               style={{
                 background: 'none', border: 'none', cursor: 'pointer',
                 fontSize: '0.86rem', fontWeight: 500,
-                color: active === l.id ? 'var(--accent)' : 'var(--muted)',
+                color: groupFor(active) === l.target ? 'var(--accent)' : 'var(--muted)',
                 transition: 'color 0.2s',
               }}
             >
@@ -168,15 +173,15 @@ export default function Nav() {
         <div style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
           {LINKS.map(l => (
             <button
-              key={l.id}
-              onClick={() => scrollTo(l.id)}
+              key={l.target}
+              onClick={() => scrollTo(l.target)}
               style={{
                 display: 'block', width: '100%', textAlign: 'left',
                 padding: '0.85rem 1.5rem', background: 'none', border: 'none',
                 borderBottom: '1px solid var(--border)', cursor: 'pointer',
                 fontSize: '0.92rem',
                 fontWeight: 500,
-                color: active === l.id ? 'var(--accent)' : 'var(--muted)',
+                color: groupFor(active) === l.target ? 'var(--accent)' : 'var(--muted)',
               }}
             >
               {l.label}

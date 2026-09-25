@@ -2,9 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SVG first: one file, crisp at every size. The PNGs are fallbacks for
+         browsers and platforms that still ignore SVG icons. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Matches the page background in each theme, so mobile browser chrome
+         blends in rather than framing the site in white. -->
+    <meta name="theme-color" content="#FFF6C1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#12182A" media="(prefers-color-scheme: dark)" />
+
     <title>Siddhi Sanjay More</title>
+    <meta name="description" content="Robotics graduate student at Northeastern University. Wearable assistive devices, impedance-controlled prosthetics and autonomous navigation." />
   </head>
   <body>
     <div id="root"></div>

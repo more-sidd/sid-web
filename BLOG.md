@@ -9,8 +9,9 @@ For one-time setup (connecting comments), see **[BLOG-SETUP.md](BLOG-SETUP.md)**
 
 | Thing | Where |
 | --- | --- |
-| Your posts | `src/content/blog/` — one `.md` file per post |
-| Photos & videos for posts | `public/blog/` |
+| Your blog posts | `src/content/blog/` — one `.md` file per post |
+| Your news items | `src/content/news/` — same format, shows in the News section |
+| Photos & videos for posts | `public/blog/` (or `public/news/` for news covers) |
 | Read comments / delete spam | `yoursite.com/#/blog-admin` |
 
 To publish: save the file, commit, push. The site rebuilds and it's live.
@@ -47,6 +48,31 @@ More writing. Leave a blank line between paragraphs.
 ```
 
 **3.** Save, commit, push. Done.
+
+---
+
+## Blog vs News
+
+They are the same thing in two folders. The folder decides which section a
+post appears in:
+
+| Put the file in | It shows up under |
+| --- | --- |
+| `src/content/blog/` | Blog & Notes |
+| `src/content/news/` | News |
+
+Everything else is identical — same settings block, same formatting, same
+post page, same comments. A news item still lives at
+`yoursite.com/#/blog/its-slug`, so both share one URL space. That means
+**two files can't have the same filename**, even across the two folders.
+If you do that by accident, the dev server logs a warning telling you which
+slug clashed.
+
+Tags become the filter buttons for whichever section the post is in, so News
+tags (`Events`, `Talks`, `Community`) stay separate from your blog tags.
+
+Cover images for news go in `public/news/` and are referenced as
+`/news/your-file.jpg`.
 
 ---
 
@@ -247,6 +273,7 @@ If you want page views, say so and I'll wire one up — it's a small change.
 | Image missing after deploy | Capital letters in the filename. Your host is case-sensitive even though Windows isn't |
 | Everything after a certain point looks like one big paragraph | You need a blank line between paragraphs |
 | Post shows raw `---` and settings as text | The settings block must be the very first thing in the file, no blank line above it |
+| Title shows as the filename, with no date or picture | You moved the file between the blog and news folders and the dev server cached the old empty version. Stop it, delete the `node_modules/.vite` folder, start it again |
 | Comment box says "not connected" | Expected until you do [BLOG-SETUP.md](BLOG-SETUP.md) |
 
 ---

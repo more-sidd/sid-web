@@ -54,6 +54,7 @@ export interface Skill {
 
 export interface BlogPost {
   slug: string;            // filename without .md — also the URL: #/blog/<slug>
+  kind: 'blog' | 'news';   // which folder it came from; drives which section shows it
   title: string;
   date: string;            // ISO, e.g. 2026-08-15
   excerpt: string;         // falls back to the first paragraph
@@ -72,4 +73,14 @@ export interface Comment {
   body: string;
   created_at: string;
   is_hidden: boolean;
+}
+
+export interface GalleryItem {
+  src: string;
+  caption: string;
+  /** Two buckets only: 'robotics' for project + debugging work, 'fun' for
+      everything social, outdoors and event-related. */
+  category: 'robotics' | 'fun';
+  /** true for .mp4 — the gallery renders a <video> instead of an <img>. */
+  video?: boolean;
 }

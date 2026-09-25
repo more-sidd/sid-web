@@ -1,10 +1,10 @@
-import { Project, Publication, Experience, Education, Skill } from '../types';
+import { Project, Publication, Experience, Education, Skill, GalleryItem } from '../types';
 
 export const personalInfo = {
   name: "Siddhi More",
   title: "Wearable & Assistive Robotics Engineer",
   tagline: "Building hardware that restores human mobility!From planetary gearbox design and embedded firmware to ROS2 navigation and ML-validated musculoskeletal simulation.",
-  photo: "/sidd.jpg",
+  photo: "/sidd.jpeg",
   photo2: "/sidd2.jpg",
   email: "siddhimorework@gmail.com",
   linkedin: "https://www.linkedin.com/in/more-siddhi/",
@@ -374,16 +374,51 @@ export const publications: Publication[] = [
   },
 ];
 // ← paste here, at the end of the file
-export const galleryImages = [
-  { src: "/gallery/sih.jpg", caption: "Smart India Hackathon" },
-  { src: "/gallery/gwise1.jpeg",        caption: "GWiSE NEU" },
-  { src: "/gallery/gwise2.jpg",        caption: "GWiSE NEU" },
-  { src: "/gallery/hiking2.jpeg",        caption: "Fun Activites!" },
-  { src: "/gallery/neu.jpg",        caption: "Northeastern University" },
-  { src: "/gallery/gli1.jpg",        caption: "Graduate Leadership Institute @ lead360" },
-  { src: "/gallery/gli2.jpg",        caption: "Graduate Leadership Institute @ lead360" },
-  { src: "/gallery/gli3.jpeg",        caption: "Graduate Leadership Institute @ lead360" },
-  { src: "/gallery/kayaking.jpg",        caption: "Fun Activities!"},
-  { src: "/gallery/pupper.jpg" ,       caption: "Pupperv3 Stanford X BRH"},
-  { src: "/gallery/Pupper-debug.gif" ,       caption: "Debugging Pupperv3 Lab4 - Stanford CS 123"},
+/* ── Gallery ─────────────────────────────────────────────────────────────────
+   Two buckets and nothing else, because three tabs was confusing:
+     robotics -> projects, builds, debugging
+     fun      -> people, outdoors, and events
+   Set `video: true` for .mp4 files. Move an item between buckets by changing
+   its `category`.
+   ─────────────────────────────────────────────────────────────────────────── */
+export const galleryItems: GalleryItem[] = [
+  { src: "/gallery/Pupper1.jpg",              caption: "Pupper v3 quadruped",                          category: "robotics" },
+  { src: "/gallery/Pupper2.jpg",              caption: "Pupper v3 quadruped",                          category: "robotics" },
+  { src: "/gallery/Pupper3.jpg",              caption: "Pupper v3 quadruped",                          category: "robotics" },
+  { src: "/gallery/Pupper4.jpg",              caption: "Pupper v3 quadruped",                          category: "robotics" },
+  { src: "/gallery/pupper.jpg",               caption: "Pupper v3 — Stanford CS 123 x BRH",            category: "robotics" },
+  { src: "/gallery/Pupper-debug.gif",         caption: "Debugging Pupper v3, Lab 4",                   category: "robotics" },
+  { src: "/gallery/pupper-helloworld.mp4",    caption: "Pupper v3 first steps",                        category: "robotics", video: true },
+  { src: "/gallery/moteus-debug.mp4",         caption: "Debugging a Moteus controller",                category: "robotics", video: true },
+  { src: "/gallery/rebotfailing.mp4",         caption: "reBOT arm not cooperating",                    category: "robotics", video: true },
+  { src: "/gallery/pros-cad.jpg",             caption: "Powered ankle prosthesis — CAD",               category: "robotics" },
+  { src: "/gallery/pros-assembly.jpg",        caption: "Powered ankle prosthesis — assembly",          category: "robotics" },
+  { src: "/gallery/fsr-data.jpg",             caption: "FSR heel-strike data",                         category: "robotics" },
+  { src: "/gallery/car-horn-detection.png",   caption: "Horn detection — wearable hearing system",     category: "robotics" },
+  { src: "/gallery/turtlebot3.jpg",           caption: "TurtleBot3",                                   category: "robotics" },
+  { src: "/gallery/custom-env-turtlebot.png", caption: "Custom Gazebo environment for TurtleBot3",     category: "robotics" },
+  { src: "/gallery/grid-visualization.png",   caption: "Q-learning grid for the hyacinth cleaner",     category: "robotics" },
+  { src: "/gallery/sink-marks.png",           caption: "Injection moulding sink-mark analysis",        category: "robotics" },
+  { src: "/gallery/SIH-2.png",                caption: "Smart India Hackathon build",                  category: "robotics" },
+  { src: "/gallery/STM2.jpg",                 caption: "IKS5A1 sensor shield on a NUCLEO-F401RE",      category: "robotics" },
+  { src: "/gallery/jw1.jpg",                  caption: "JW Fishers ROV in the shop",                   category: "robotics" },
+  { src: "/gallery/jw2.jpg",                  caption: "ROV surface control unit, opened up",          category: "robotics" },
+  { src: "/gallery/jw4.jpg",                  caption: "Looking up from the test pool, 1.4 ft down",   category: "robotics" },
+  { src: "/gallery/jw3.mp4",                  caption: "Flying the ROV around the test pool",          category: "robotics", video: true },
+  { src: "/gallery/hiking1.jpg",              caption: "Hiking",                                       category: "fun" },
+  { src: "/gallery/hiking2.jpeg",             caption: "Hiking",                                       category: "fun" },
+  { src: "/gallery/kayaking.jpg",             caption: "Kayaking",                                     category: "fun" },
+  { src: "/gallery/neu.jpg",                  caption: "Northeastern University",                      category: "fun" },
+  { src: "/gallery/sidd3.jpg",                caption: "Around Boston",                                category: "fun" },
+  { src: "/gallery/revolute.jpg",             caption: "Revolute — Boston physical AI hackathon",      category: "fun" },
+  { src: "/gallery/massrob1.jpg",             caption: "MassRobotics Women in Robotics meetup",        category: "fun" },
+  { src: "/gallery/massrob2.png",             caption: "MassRobotics Women in Robotics meetup",        category: "fun" },
+  { src: "/gallery/massrob3.png",             caption: "MassRobotics Women in Robotics meetup",        category: "fun" },
+  { src: "/gallery/gwise1.jpeg",              caption: "GWiSE at Northeastern",                        category: "fun" },
+  { src: "/gallery/gwise2.jpg",               caption: "GWiSE at Northeastern",                        category: "fun" },
+  { src: "/gallery/gli1.jpg",                 caption: "Graduate Leadership Institute, lead360",       category: "fun" },
+  { src: "/gallery/gli2.jpg",                 caption: "Graduate Leadership Institute, lead360",       category: "fun" },
+  { src: "/gallery/gli3.jpeg",                caption: "Graduate Leadership Institute, lead360",       category: "fun" },
+  { src: "/gallery/sih.jpg",                  caption: "Smart India Hackathon team",                   category: "fun" },
+  { src: "/gallery/STM1.jpg",                 caption: "ST MEMS workshop, Burlington",                 category: "fun" },
 ];

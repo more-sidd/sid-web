@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..900,0..100,0..1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,42 +8,43 @@
 
 :root {
   /* ══════════════════════════════════════════════════════════════════════
-     Vanilla Cream / Buttercream / Powder Blue / Walnut Brown
+     Lemon Cream anchors light, Blueberry Milk anchors dark.
 
-     Measured on the cream ground, three of the four cannot carry text:
-       buttercream 1.08:1   powder blue 1.49:1   walnut 8.44:1  <- only one
+     Both given colours are light pastels (73% and 71% lightness), so
+     neither can be a dark-mode ground and neither can carry text on a
+     light one. Each therefore anchors one theme rather than both:
 
-     So walnut is the ink, and the warm/cool pastels are FILLS ONLY. That
-     left nothing for links, so --accent is powder blue darkened to 4.88:1;
-     it keeps a cool counterpoint instead of making every accent brown.
+       light -> lemon IS the page; a deep berry carries the text (7.05:1)
+       dark  -> deep navy is the page; blueberry is the secondary text and
+                lemon the accent (7.6:1 and 13.9:1)
+
+     Raw blueberry as a fill under text only reaches 3.85:1, so in light
+     mode it is decorative only — buttons use the berry ink instead.
      ══════════════════════════════════════════════════════════════════════ */
 
-  /* ── Source palette. Fills only, except walnut. ── */
-  --vanilla:     #FFF8E2;
-  --buttercream: #FFEFB9;
-  --powder:      #BCD1DE;
-  --walnut:      #5E442E;
+  /* ── The two given colours ── */
+  --lemon:      #FFF6C1;   /* Lemon Cream — the page */
+  --vanilla:    #FFF9E3;   /* Vanilla Tint — cards and highlights */
+  --blueberry:  #93ABD9;
 
   /* ── Surfaces ── */
-  --paper:     #FFF8E2;
-  --paper-2:   #FFFDF7;   /* lifted band, lighter than the paper */
-  --surface:   #FFFDF7;   /* cards */
+  --paper:     #FFF6C1;
+  --paper-2:   #FFF9E3;
+  --surface:   #FFF9E3;
 
   /* ── Ink ── */
-  --ink:       #5E442E;   /* 8.44:1 on paper */
-  --ink-2:     #926A48;   /* 4.52:1 — the lightest walnut still readable */
+  --ink:       #901243;   /* deep berry — 7.05:1 on lemon */
+  --ink-2:     #C5195C;   /* lightest berry still readable — 4.53:1 */
 
-  /* ── Soft chrome: hairline rule, gentle radius, diffuse warm shadow. ── */
+  /* ── Soft chrome ── */
   --rule-w:     1px;
   --radius:     16px;
   --radius-sm:  12px;
   --radius-pill: 999px;
-  --shadow-sm:  0 1px 2px rgba(94,68,46,0.05);
-  --shadow:     0 2px 10px rgba(94,68,46,0.055);
-  --shadow-md:  0 6px 22px rgba(94,68,46,0.09);
-  --shadow-lg:  0 18px 46px rgba(94,68,46,0.14);
-
-  /* Legacy names kept so components did not all need renaming. */
+  --shadow-sm:  0 1px 2px rgba(144,18,67,0.06);
+  --shadow:     0 2px 10px rgba(144,18,67,0.08);
+  --shadow-md:  0 6px 22px rgba(144,18,67,0.13);
+  --shadow-lg:  0 18px 46px rgba(144,18,67,0.2);
   --shadow-hard-sm: var(--shadow-sm);
   --shadow-hard:    var(--shadow);
   --shadow-hard-lg: var(--shadow-lg);
@@ -52,20 +53,22 @@
   --bg-alt:        var(--paper-2);
   --text:          var(--ink);
   --muted:         var(--ink-2);
-  --border:        #E6D6C2;
-  --border-2:      #D4BCA8;
-  --border-strong: #D4BCA8;
-  --border-input:  #C9AE97;
+  /* Vanilla lifts off Lemon by only 1.04:1, so the hairline is what
+     actually separates a card from the page. */
+  --border:        #DFCB8A;
+  --border-2:      #D4BE79;
+  --border-strong: #D4BE79;
+  --border-input:  #C9B069;
 
-  --accent:       #46728D;   /* powder blue, darkened for text: 4.88:1 */
-  --accent-lg:    #6696B4;   /* 3:1 — large text and icons only */
-  --accent-fill:  var(--walnut);
-  --accent-on:    var(--paper-2);
-  --accent-bg:    #EAF1F5;
-  --accent-light: #EAF1F5;
-  --wash-warm:    #FFF3D0;
+  --accent:       #3363C0;        /* blueberry, darkened for text: 4.50:1 */
+  --accent-lg:    #5A85D6;
+  --accent-fill:  var(--ink);     /* berry fill, lemon text on top */
+  --accent-on:    var(--paper);
+  --accent-bg:    #FFFBEE;
+  --accent-light: #FFFBEE;
+  --wash-warm:    #FFF3C8;
 
-  --danger: #A8443C;
+  --danger: #B3261E;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -88,7 +91,10 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
 
 /* One family throughout. Hierarchy comes from weight, size and tracking. */
-.font-display { font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; }
+/* The serif is a display face only — hero name and section headings. Card
+   titles and body copy stay in the sans, which is what keeps this readable
+   rather than decorative. */
+.font-display { font-family: var(--body); font-weight: 700; letter-spacing: -0.025em; }
 /* Kept as a class name so existing call sites work; it is no longer a
    monospace face — small caps-y labels in the same family instead. */
 .font-mono { font-family: var(--body); letter-spacing: 0.06em; }
@@ -100,7 +106,7 @@ body {
 .section-alt  { background: var(--bg-alt); }
 
 .label { font-family: var(--body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
-.heading { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 3.6vw, 2.6rem); letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 2.2rem; }
+.heading { font-family: var(--display); font-weight: 700; font-variation-settings: 'SOFT' 60, 'WONK' 1; font-size: clamp(2.1rem, 3.9vw, 3rem); letter-spacing: -0.02em; line-height: 1.14; margin-bottom: 2.2rem; }
 
 .tag { font-family: var(--body); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.3rem 0.7rem; background: var(--accent-bg); border: none; border-radius: var(--radius-pill); color: var(--ink); white-space: nowrap; }
 .tag-accent { background: var(--wash-warm); color: var(--ink); }
@@ -135,7 +141,7 @@ body {
   --mono:    'Plus Jakarta Sans', system-ui, sans-serif;
   /* One family throughout: Plus Jakarta Sans. Hierarchy comes from weight
      and size, not from switching typeface. */
-  --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --display: 'Fraunces', Georgia, serif;
   --body:    'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
@@ -168,6 +174,7 @@ nav {
 }
 .nav-logo {
   font-family: var(--display);
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 0;
@@ -279,15 +286,20 @@ nav {
 .hero-name {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(2.6rem, 5.6vw, 4.2rem);
-  line-height: 1.04;
-  letter-spacing: -0.045em;
+  /* SOFT rounds the terminals and WONK lets the italic-ish quirks through —
+     together they are what make this warm rather than institutional. */
+  font-variation-settings: 'SOFT' 70, 'WONK' 1;
+  font-size: clamp(2.8rem, 5.6vw, 4.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
   color: var(--text);
   animation: fadeUp 0.7s ease 0.2s both;
 }
 .hero-name-accent { color: var(--text); }
 .hero-tagline {
-  font-family: var(--display);
+  /* Sans, not the script — at this size the script stops being readable and
+     starts being decoration. The script earns its place on the name only. */
+  font-family: var(--body);
   font-weight: 600;
   font-size: clamp(1.15rem, 2.1vw, 1.5rem);
   line-height: 1.4;
@@ -329,7 +341,7 @@ nav {
   text-align: center;
 }
 .stat-num {
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 700;
   font-size: 2rem;
   letter-spacing: 0;
@@ -369,6 +381,7 @@ nav {
 }
 .section-heading {
   font-family: var(--display);
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
   font-weight: 700;
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   line-height: 1.08;
@@ -525,7 +538,7 @@ nav {
   font-weight: 500;
 }
 .project-title {
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 700;
   font-size: 1.3rem;
   letter-spacing: 0;
@@ -612,7 +625,7 @@ nav {
   letter-spacing: 0.05em;
 }
 .exp-role {
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 700;
   font-size: 1.35rem;
   letter-spacing: 0;
@@ -657,7 +670,7 @@ nav {
 }
 .edu-card:hover { border-color: var(--accent); }
 .edu-degree {
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 700;
   font-size: 1.3rem;
   letter-spacing: 0;
@@ -709,7 +722,7 @@ nav {
   margin-bottom: 1rem;
 }
 .pub-title {
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: 0;
@@ -742,7 +755,7 @@ nav {
 }
 .contact-email {
   display: block;
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 700;
   font-size: clamp(1.3rem, 3vw, 2.1rem);
   letter-spacing: 0;
@@ -790,21 +803,7 @@ nav {
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
 .gap-4 { gap: 1rem; }
-/* ── GALLERY ─────────────────────────────────────────────────────────────────
-   Paste these rules at the bottom of your index.css
-   ─────────────────────────────────────────────────────────────────────────── */
- 
-.gallery-tile:hover img {
-  transform: scale(1.04);
-}
-.gallery-tile:hover .gallery-caption {
-  opacity: 1 !important;
-}
- 
-
 /* ── GALLERY hover effects ──────────────────────────────────────────────────── */
-.gallery-tile:hover img          { transform: scale(1.04); }
-.gallery-tile:hover .gallery-caption { opacity: 1 !important; }
 
 /* ── DARK MODE ──────────────────────────────────────────────────────────────────
    Paste this entire block at the very bottom of index.css.
@@ -818,33 +817,36 @@ nav {
    the ink, and the two pastels used directly since both are light enough to
    read on a dark ground (powder 10.8:1, buttercream 14.9:1 behind ink). */
 html.dark {
-  --paper:     #241A12;
-  --paper-2:   #2E2218;
-  --surface:   #332619;
-  --ink:       #FFF8E2;
-  --ink-2:     #CDB49A;
+  /* Blueberry's own hue taken down to a deep navy ground, with blueberry
+     itself promoted to secondary text and lemon carrying the accent. */
+  --paper:     #12182A;
+  --paper-2:   #171F35;
+  --surface:   #1C2540;
+
+  --ink:       #CFDAEE;   /* 12.5:1 on the ground */
+  --ink-2:     #93ABD9;   /* the given blueberry — 7.6:1 */
 
   --bg:            var(--paper);
   --bg-alt:        var(--paper-2);
   --text:          var(--ink);
   --muted:         var(--ink-2);
-  --border:        #493829;
-  --border-2:      #5E4835;
-  --border-strong: #5E4835;
-  --border-input:  #6E5540;
+  --border:        #2A3654;
+  --border-2:      #3A4A70;
+  --border-strong: #3A4A70;
+  --border-input:  #4A5C86;
 
-  --accent:       #BCD1DE;
-  --accent-lg:    #BCD1DE;
-  --accent-fill:  #FFEFB9;
-  --accent-on:    #241A12;
-  --accent-bg:    #2C3A42;
-  --accent-light: #2C3A42;
-  --wash-warm:    #3A2C1C;
+  --accent:       #EDE986;        /* lemon on navy — 13.9:1 */
+  --accent-lg:    #EDE986;
+  --accent-fill:  #EDE986;
+  --accent-on:    #12182A;        /* navy text on the lemon fill */
+  --accent-bg:    #232E4E;
+  --accent-light: #232E4E;
+  --wash-warm:    #2A2A18;
 
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow:    0 2px 10px rgba(0,0,0,0.34);
-  --shadow-md: 0 6px 22px rgba(0,0,0,0.42);
-  --shadow-lg: 0 18px 46px rgba(0,0,0,0.5);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.35);
+  --shadow:    0 2px 10px rgba(0,0,0,0.4);
+  --shadow-md: 0 6px 22px rgba(0,0,0,0.5);
+  --shadow-lg: 0 18px 46px rgba(0,0,0,0.6);
 
   --danger: #FF9A8F;
 }
@@ -882,9 +884,6 @@ html.dark ::-webkit-scrollbar-thumb { background: var(--border-2); }
               color 0.25s ease,
               box-shadow 0.22s ease,
               transform 0.22s ease;
-}
-.gallery-tile img, .gallery-tile {
-  transition: transform 0.35s ease, border-color 0.25s ease;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -984,3 +983,206 @@ html.dark ::-webkit-scrollbar-thumb { background: var(--border-2); }
 }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ── Gallery ───────────────────────────────────────────────────────────────
+   One auto-playing stage plus a thumbnail strip, in two buckets. Clicking
+   anything opens the same set in a manual viewer. */
+.gal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+.gal-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.gal-stage {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+.gal-slide {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: none;
+  background: var(--paper-2);
+  cursor: zoom-in;
+  position: relative;
+}
+.gal-slide img,
+.gal-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+/* Play badge on a video slide, so it reads as playable before you click. */
+.gal-play,
+.gal-thumb-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  color: var(--paper);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+  pointer-events: none;
+}
+.gal-thumb-play { font-size: 0.9rem; }
+
+.gal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+  transition: transform 0.18s ease;
+}
+.gal-arrow:hover { transform: translateY(-50%) scale(1.08); }
+.gal-arrow-l { left: 0.8rem; }
+.gal-arrow-r { right: 0.8rem; }
+
+.gal-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0.9rem 0 1.1rem;
+}
+.gal-caption { font-size: 0.92rem; color: var(--muted); }
+.gal-bar-right { display: flex; align-items: center; gap: 0.9rem; }
+.gal-count {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.gal-pause {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.gal-pause:hover { border-color: var(--border-2); }
+
+.gal-thumbs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 92px;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+.gal-thumb {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--paper-2);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.gal-thumb img,
+.gal-thumb video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gal-thumb:hover { opacity: 1; transform: translateY(-2px); }
+.gal-thumb-on { opacity: 1; border-color: var(--accent); }
+
+/* ── Manual viewer ── */
+.gal-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(24, 20, 10, 0.82);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.gal-modal-inner {
+  width: 100%;
+  max-width: 1040px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.gal-modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.gal-modal-top .gal-count { color: rgba(255,248,226,0.75); }
+.gal-modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,248,226,0.3);
+  background: transparent;
+  color: var(--paper);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.gal-modal-close:hover { background: rgba(255,248,226,0.12); }
+.gal-modal-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+}
+.gal-modal-stage .gal-arrow { position: static; transform: none; }
+.gal-modal-stage .gal-arrow:hover { transform: scale(1.08); }
+.gal-modal-media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  max-height: 76vh;
+  display: grid;
+  place-items: center;
+}
+.gal-modal-media img,
+.gal-modal-media video {
+  max-width: 100%;
+  max-height: 76vh;
+  width: auto;
+  display: block;
+}
+.gal-modal-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255,248,226,0.85);
+}
+
+@media (max-width: 620px) {
+  .gal-thumbs { grid-auto-columns: 72px; }
+  .gal-modal-stage { grid-template-columns: 1fr; }
+  .gal-modal-stage .gal-arrow { position: absolute; top: 50%; transform: translateY(-50%); }
+  .gal-modal-stage .gal-arrow-l { left: 0.4rem; }
+  .gal-modal-stage .gal-arrow-r { right: 0.4rem; }
+}

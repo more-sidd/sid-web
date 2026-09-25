@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SM">
+  <!-- Site palette: berry ink on Lemon Cream, 8.2:1. Fraunces is not available
+       to an SVG favicon, so Georgia stands in for it; at 16px the difference
+       is not visible. No trailing underscore here, unlike the nav logo. -->
+  <rect width="64" height="64" rx="14" fill="#901243"/>
+  <text x="32" y="33"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-weight="700"
+        font-size="30"
+        letter-spacing="-1"
+        fill="#FFF6C1">SM</text>
+</svg>

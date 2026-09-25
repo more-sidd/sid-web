@@ -1,229 +1,202 @@
-import { useState } from 'react';
-import { projects, galleryImages } from '../data/portfolioData';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { galleryItems } from '../data/portfolioData';
+import type { GalleryItem } from '../types';
 
-type Tab = 'general' | 'projects';
+type Bucket = 'robotics' | 'fun';
 
-interface LightboxState {
-  src: string;
-  caption?: string;
-  tag?: string;
-  projectId?: string;
+const TABS: { id: Bucket; label: string }[] = [
+  { id: 'robotics', label: 'Robotics & Mech' },
+  { id: 'fun',      label: 'Fun & Events' },
+];
+
+const SLIDE_MS = 4500;
+
+/** Videos are .mp4; the #t=0.1 fragment makes the browser paint a real frame
+ *  instead of a black rectangle while the slide is idle. */
+function Media({ item, active, controls }: { item: GalleryItem; active: boolean; controls?: boolean }) {
+  if (!item.video) {
+    return <img src={item.src} alt={item.caption} loading={active ? 'eager' : 'lazy'} />;
+  }
+  return (
+    <video
+      src={controls ? item.src : item.src + '#t=0.1'}
+      controls={controls}
+      preload="metadata"
+      playsInline
+      muted={!controls}
+    />
+  );
 }
 
 export default function Gallery() {
-  const [tab, setTab] = useState<Tab>('general');
-  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
+  const [tab, setTab] = useState<Bucket>('robotics');
+  const [index, setIndex] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  /** Index of the item open in manual mode, or null when the lightbox is shut. */
+  const [manual, setManual] = useState<number | null>(null);
 
-  const projectImages = projects.flatMap(p =>
-    (p.images ?? []).map(img => ({
-      src: img,
-      projectId: p.id,
-      projectTitle: p.title,
-      category: p.category,
-      github: p.github,
-    }))
-  );
+  const items = useMemo(() => galleryItems.filter(i => i.category === tab), [tab]);
 
-  const scrollToProject = (id: string) => {
-    setLightbox(null);
-    setTimeout(() => {
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-    }, 80);
-  };
+  // Some readers ask for less movement; for them the slideshow never auto-runs.
+  const [reduceMotion, setReduceMotion] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduceMotion(mq.matches);
+    const on = () => setReduceMotion(mq.matches);
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+
+  useEffect(() => { setIndex(0); }, [tab]);
+
+  const step = useCallback((delta: number) => {
+    setIndex(i => (i + delta + items.length) % items.length);
+  }, [items.length]);
+
+  // Auto-advance. Paused while the lightbox is open, and never runs on a video
+  // slide — rotating away from something someone might be watching is rude.
+  const onVideo = items[index]?.video === true;
+  useEffect(() => {
+    if (!playing || reduceMotion || manual !== null || items.length < 2 || onVideo) return;
+    const t = setInterval(() => step(1), SLIDE_MS);
+    return () => clearInterval(t);
+  }, [playing, reduceMotion, manual, items.length, onVideo, step]);
+
+  // Manual mode keyboard controls.
+  const closeRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (manual === null) return;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setManual(null);
+      if (e.key === 'ArrowRight') setManual(m => (m === null ? m : (m + 1) % items.length));
+      if (e.key === 'ArrowLeft')  setManual(m => (m === null ? m : (m - 1 + items.length) % items.length));
+    };
+    window.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [manual, items.length]);
+
+  const current = items[index];
+  const open = items[manual ?? -1];
 
   return (
-    <section id="gallery" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
+    <section id="gallery" className="section-pad section-alt" style={{ borderBottom: '1px solid var(--border)' }}>
       <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
         <p className="label">05 — Gallery</p>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className="gal-head">
           <h2 className="heading" style={{ marginBottom: 0 }}>Visual Archive</h2>
-
-          {/* ── Tab switcher — bigger & more visible ── */}
-          <div style={{ display: 'flex', gap: 0, border: '1.5px solid var(--border)', borderRadius: 3, overflow: 'hidden' }}>
-            {(['general', 'projects'] as Tab[]).map(t => (
+          <div className="gal-tabs">
+            {TABS.map(t => (
               <button
-                key={t}
-                onClick={() => setTab(t)}
-                className="font-mono"
-                style={{
-                  padding: '0.7rem 2rem',           // ← taller + wider
-                  fontSize: '0.78rem',              // ← bigger text
-                  letterSpacing: '0.14em',
-                  textTransform: 'uppercase',
-                  background: tab === t ? 'var(--accent-fill)' : 'var(--surface)',
-                  color: tab === t ? 'var(--accent-on)' : 'var(--muted)',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                  fontWeight: tab === t ? 600 : 400,
-                }}
+                key={t.id}
+                onClick={() => setTab(t.id)}
+                className={`blog-filter ${tab === t.id ? 'blog-filter-active' : ''}`}
+                aria-pressed={tab === t.id}
               >
-                {t}
+                {t.label}
               </button>
             ))}
           </div>
         </div>
 
-        {/* ── GENERAL TAB ── */}
-        {tab === 'general' && (
-          <div>
-            {galleryImages.length === 0 ? (
-              <EmptyState message="Add images to galleryImages in portfolioData.ts to populate this gallery." />
-            ) : (
-              <MasonryGrid>
-                {galleryImages.map((img, i) => (
-                  <GalleryTile
-                    key={i}
-                    src={img.src}
-                    caption={img.caption}
-                    onClick={() => setLightbox({ src: img.src, caption: img.caption })}
-                  />
-                ))}
-              </MasonryGrid>
-            )}
+        {items.length === 0 ? (
+          <div className="blog-empty">
+            <p>Nothing in this bucket yet — add entries to <code>galleryItems</code>.</p>
           </div>
-        )}
-
-        {/* ── PROJECTS TAB ── */}
-        {tab === 'projects' && (
-          <div>
-            {projectImages.length === 0 ? (
-              <EmptyState message="Add an images[] array to each project in portfolioData.ts to show project photos here." />
-            ) : (
-              <MasonryGrid>
-                {projectImages.map((img, i) => (
-                  <div
-                    key={i}
-                    style={{ position: 'relative', cursor: 'pointer', breakInside: 'avoid', marginBottom: '0.8rem' }}
-                    onClick={() => setLightbox({ src: img.src, tag: img.projectTitle, projectId: img.projectId })}
-                  >
-                    <GalleryTile
-                      src={img.src}
-                      onClick={() => setLightbox({ src: img.src, tag: img.projectTitle, projectId: img.projectId })}
-                    />
-                    {/* Project tag badge */}
-                    <div style={{
-                      position: 'absolute', bottom: 8, left: 8,
-                      background: 'rgba(36,30,40,0.82)',
-                      backdropFilter: 'blur(6px)',
-                      borderRadius: 2,
-                      padding: '0.2rem 0.55rem',
-                      display: 'flex', alignItems: 'center', gap: '0.4rem',
-                      pointerEvents: 'none',
-                    }}>
-                      {/* sits on a dark badge, so the bright pastel reads better than the ink */}
-                      <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent-fill)', display: 'inline-block', flexShrink: 0 }} />
-                      <span className="font-mono" style={{ fontSize: '0.6rem', letterSpacing: '0.1em', color: '#fff', textTransform: 'uppercase', whiteSpace: 'nowrap', maxWidth: 160, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {img.projectTitle}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </MasonryGrid>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* ── LIGHTBOX ── */}
-      {lightbox && (
-        <div
-          onClick={() => setLightbox(null)}
-          style={{
-            position: 'fixed', inset: 0, zIndex: 200,
-            background: 'rgba(22,18,26,0.88)',
-            backdropFilter: 'blur(8px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '1.5rem',
-          }}
-        >
-          <div onClick={e => e.stopPropagation()} style={{ maxWidth: 860, width: '100%', display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <button onClick={() => setLightbox(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', padding: '0.3rem' }}>
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                  <line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" strokeWidth="1.8"/>
-                  <line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" strokeWidth="1.8"/>
-                </svg>
+        ) : (
+          <>
+            {/* ── Auto-playing stage. Clicking it opens manual mode. ── */}
+            <div className="gal-stage">
+              <button
+                className="gal-slide"
+                onClick={() => setManual(index)}
+                aria-label={`Open "${current.caption}" in the viewer`}
+              >
+                <Media item={current} active />
+                {current.video && <span className="gal-play" aria-hidden="true">▶</span>}
               </button>
+
+              <button className="gal-arrow gal-arrow-l" onClick={() => step(-1)} aria-label="Previous">‹</button>
+              <button className="gal-arrow gal-arrow-r" onClick={() => step(1)} aria-label="Next">›</button>
             </div>
-            <img src={lightbox.src} alt={lightbox.caption ?? lightbox.tag ?? ''} style={{ width: '100%', maxHeight: '75vh', objectFit: 'contain', borderRadius: 4, display: 'block' }} />
-            {(lightbox.caption || lightbox.tag) && (
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-                <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>{lightbox.caption ?? lightbox.tag}</span>
-                {lightbox.projectId && (
+
+            <div className="gal-bar">
+              <p className="gal-caption">{current.caption}</p>
+              <div className="gal-bar-right">
+                <span className="gal-count">{index + 1} / {items.length}</span>
+                {!reduceMotion && items.length > 1 && (
                   <button
-                    onClick={() => scrollToProject(lightbox.projectId!)}
-                    className="font-mono"
-                    style={{
-                      background: 'none', border: '1.5px solid rgba(255,255,255,0.25)',
-                      borderRadius: 2, padding: '0.35rem 0.9rem',
-                      color: 'rgba(255,255,255,0.8)', cursor: 'pointer',
-                      fontSize: '0.66rem', letterSpacing: '0.12em', textTransform: 'uppercase',
-                      transition: 'border-color 0.2s, color 0.2s',
-                    }}
+                    className="gal-pause"
+                    onClick={() => setPlaying(p => !p)}
+                    aria-label={playing ? 'Pause slideshow' : 'Play slideshow'}
                   >
-                    View Project ↗
+                    {playing ? '❙❙ Pause' : '▶ Play'}
                   </button>
                 )}
               </div>
-            )}
+            </div>
+
+            {/* ── Thumbnail strip: jump anywhere, and a view of the whole set ── */}
+            <div className="gal-thumbs">
+              {items.map((it, i) => (
+                <button
+                  key={it.src}
+                  className={`gal-thumb ${i === index ? 'gal-thumb-on' : ''}`}
+                  onClick={() => setIndex(i)}
+                  aria-label={it.caption}
+                  aria-current={i === index}
+                >
+                  <Media item={it} active={false} />
+                  {it.video && <span className="gal-thumb-play" aria-hidden="true">▶</span>}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* ── Manual mode ── */}
+      {open && (
+        <div
+          className="gal-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label={open.caption}
+          onClick={() => setManual(null)}
+        >
+          <div className="gal-modal-inner" onClick={e => e.stopPropagation()}>
+            <div className="gal-modal-top">
+              <span className="gal-count">{(manual ?? 0) + 1} / {items.length}</span>
+              <button ref={closeRef} className="gal-modal-close" onClick={() => setManual(null)} aria-label="Close viewer">✕</button>
+            </div>
+
+            <div className="gal-modal-stage">
+              <button
+                className="gal-arrow gal-arrow-l"
+                onClick={() => setManual(m => (m === null ? m : (m - 1 + items.length) % items.length))}
+                aria-label="Previous"
+              >‹</button>
+
+              <div className="gal-modal-media">
+                <Media item={open} active controls={open.video} />
+              </div>
+
+              <button
+                className="gal-arrow gal-arrow-r"
+                onClick={() => setManual(m => (m === null ? m : (m + 1) % items.length))}
+                aria-label="Next"
+              >›</button>
+            </div>
+
+            <p className="gal-modal-caption">{open.caption}</p>
           </div>
         </div>
       )}
     </section>
-  );
-}
-
-function MasonryGrid({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ columns: '3 260px', gap: '0.8rem' }}>
-      {children}
-    </div>
-  );
-}
-
-function GalleryTile({ src, caption, onClick }: { src: string; caption?: string; onClick: () => void }) {
-  return (
-    <div
-      onClick={onClick}
-      style={{
-        breakInside: 'avoid',
-        marginBottom: '0.8rem',
-        borderRadius: 3,
-        overflow: 'hidden',
-        border: '1.5px solid var(--border)',
-        cursor: 'zoom-in',
-        position: 'relative',
-        display: 'block',
-      }}
-      className="gallery-tile"
-    >
-      <img src={src} alt={caption ?? ''} loading="lazy" style={{ width: '100%', display: 'block', transition: 'transform 0.35s ease' }} />
-      {caption && (
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0,
-          padding: '0.5rem 0.7rem',
-          background: 'linear-gradient(transparent, rgba(22,18,26,0.7))',
-          color: 'rgba(255,255,255,0.85)',
-          fontSize: '0.75rem',
-          opacity: 0,
-          transition: 'opacity 0.25s',
-        }} className="gallery-caption">
-          {caption}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function EmptyState({ message }: { message: string }) {
-  return (
-    <div style={{ border: '1.5px dashed var(--border)', borderRadius: 4, padding: '3.5rem 2rem', textAlign: 'center' }}>
-      <div style={{ fontSize: '2rem', marginBottom: '0.8rem', opacity: 0.3 }}>📷</div>
-      <p className="font-mono" style={{ fontSize: '0.72rem', letterSpacing: '0.1em', color: 'var(--muted)', maxWidth: 420, margin: '0 auto', lineHeight: 1.7 }}>
-        {message}
-      </p>
-    </div>
   );
 }

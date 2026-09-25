@@ -6,6 +6,7 @@ import Projects     from './components/Projects';
 import Skills       from './components/Skills';
 import Gallery      from './components/Gallery';
 import Blog         from './components/Blog';
+import News         from './components/News';
 import Education    from './components/Education';
 import Publications from './components/Publications';
 import Contact      from './components/Contact';
@@ -51,6 +52,7 @@ export default function App() {
             <Skills />
             <Gallery />
             <Blog />
+            <News />
             <Education />
             <Publications />
             <Contact />

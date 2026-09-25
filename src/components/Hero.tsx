@@ -1,12 +1,14 @@
 import { personalInfo, projects } from '../data/portfolioData';
-import { posts, formatDate } from '../lib/posts';
+import { allPosts, formatDate } from '../lib/posts';
 import { navigate } from '../lib/useHashRoute';
 
 export default function Hero() {
   const scroll = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   // Both cards read live data, so they never go stale.
-  const latest = posts[0];
+  // Newest of blog and news together, so the card still has something to show
+  // when there is no published blog post yet.
+  const latest = [...allPosts].sort((a, b) => b.date.localeCompare(a.date))[0];
   const onBench = projects.find(p => p.status === 'in-progress');
 
   return (

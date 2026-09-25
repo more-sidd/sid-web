@@ -1,10 +1,21 @@
 import type { BlogPost } from '../types';
 
 /**
- * Every .md file in src/content/blog is bundled at build time. Adding a post
- * is: drop a new .md file in that folder, commit, push. No config to update.
+ * Posts live in two folders and the folder decides which section shows them:
+ *   src/content/blog/  -> the Blog section
+ *   src/content/news/  -> the News section
+ *
+ * Both render through the same post page and share the same comment system,
+ * so a news item still lives at #/blog/<slug>. Adding one is: drop a .md file
+ * in the right folder, commit, push. No index to update.
  */
-const files = import.meta.glob('../content/blog/*.md', {
+const blogFiles = import.meta.glob('../content/blog/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+const newsFiles = import.meta.glob('../content/news/*.md', {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -64,13 +75,14 @@ function firstParagraph(body: string): string {
   return para.replace(/\s+/g, ' ').slice(0, 200);
 }
 
-function build(): BlogPost[] {
-  const posts = Object.entries(files).map(([path, raw]) => {
+function build(files: Record<string, string>, kind: 'blog' | 'news'): BlogPost[] {
+  const built = Object.entries(files).map(([path, raw]) => {
     const slug = path.split('/').pop()!.replace(/\.md$/, '');
     const { meta, body } = parseFrontmatter(raw);
 
     return {
       slug,
+      kind,
       title: (meta.title as string) || slug,
       date: (meta.date as string) || '',
       excerpt: (meta.excerpt as string) || firstParagraph(body),
@@ -84,18 +96,39 @@ function build(): BlogPost[] {
   });
 
   // Drafts never reach the built site.
-  return posts
-    .filter(p => !p.draft)
+  return built
+    .filter(x => !x.draft)
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
-export const posts: BlogPost[] = build();
+export const posts: BlogPost[] = build(blogFiles, 'blog');
+export const news:  BlogPost[] = build(newsFiles, 'news');
 
-export function getPost(slug: string): BlogPost | undefined {
-  return posts.find(p => p.slug === slug);
+/** Everything, for slug lookup — both kinds share the #/blog/<slug> route. */
+export const allPosts: BlogPost[] = [...posts, ...news];
+
+if (import.meta.env.DEV) {
+  // Both folders feed one URL space, so a shared filename would make one of
+  // the two unreachable. Cheap to catch here rather than as a missing page.
+  const seen = new Set<string>();
+  for (const x of allPosts) {
+    if (seen.has(x.slug)) {
+      console.warn(
+        `[posts] Duplicate slug "${x.slug}" in both content/blog and content/news. ` +
+        'Rename one — they share the #/blog/<slug> URL space.'
+      );
+    }
+    seen.add(x.slug);
+  }
 }
 
-export const allTags: string[] = [...new Set(posts.flatMap(p => p.tags))].sort();
+export function getPost(slug: string): BlogPost | undefined {
+  return allPosts.find(x => x.slug === slug);
+}
+
+const tagsOf = (list: BlogPost[]) => [...new Set(list.flatMap(x => x.tags))].sort();
+export const allTags:  string[] = tagsOf(posts);
+export const newsTags: string[] = tagsOf(news);
 
 export function formatDate(iso: string): string {
   if (!iso) return '';
