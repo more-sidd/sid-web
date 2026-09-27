@@ -1,6 +1,6 @@
 ---
 title: Visiting JW Fishers and Driving Their ROV
-date: 2026-05-16
+date: 2026-05-29
 excerpt: JW Fishers builds underwater search equipment in East Taunton, MA. I toured the shop and got to fly one of their ROVs in the test pool.
 tags: [Robotics, Field Notes]
 cover: /gallery/jw1.jpg

@@ -76,18 +76,6 @@ export const experience: Experience[] = [
       "Modeled and assembled components following technical specifications; gained industry-standard drafting and documentation practices applicable to real manufacturing workflows.",
     ],
   },
-  {
-    id: "exp3",
-    title: "Junior Design and Materials Member",
-    company: "Team Vaayushastra — SAE Aero Design West",
-    location: "Mumbai, India",
-    startDate: "Aug 2021",
-    endDate: "Nov 2021",
-    responsibilities: [
-      "Served as Materials Incharge for SAE Aero Design West competition — selected and sourced materials for wing construction, operated laser cutters and woodworking equipment for structural components, and performed foam cutting for wing profiles.",
-      "Designed landing gear and wings in SolidWorks and ran FEA simulations to validate structural integrity under competition deadlines; iterated rapidly between CAD, simulation, and physical prototype.",
-    ],
-  },
 ];
 
 export const skills: Skill[] = [
@@ -131,10 +119,8 @@ export const projects: Project[] = [
   "Deploy a ROS2 reflex safety layer that reacts to falls in real time.",
   "Retrain the MuJoCo MJX RL policy in simulation with push and IMU-noise domain randomization.",
   "Validate the retrained policy sim-to-real on hardware.",
-  "Apply DOE/ANOVA statistical analysis to quantify push-recovery improvement.",
    ],
 results: [
-  "Brought up the full ROS2 control stack (imu_sensor_broadcaster, joint_state_broadcaster, neural_controller, neural_controller_three_legged) with all controllers activating cleanly on hardware.",
   "Confirmed the deployed policy architecture: a 720-dim observation space with 20-step history feeding a 1024→512→512→512→12 MLP with ELU activations, PD gains kp=5.0 / kd=0.25.",
   "Traced the IMU signal path from the BNO086 to the observation vector, isolating projected gravity vector and angular velocity as the primary disturbance-sensing signals.",
   "Paired a PS5 DualSense controller over Bluetooth for teleoperation and confirmed a camera pipeline dropout is non-blocking to walking.",
@@ -142,7 +128,6 @@ results: [
 keyTakeaways: [
   "Push-recovery failure can be framed as an empirical delay-margin problem on a nonlinear legged system.",
   "A fast-iterating platform like Pupper enables testing disturbance rejection ideas in hours rather than weeks.",
-  "ps aux and ros2 topic list together quickly isolate silent controller crashes in the ROS2 stack.",
   ],
     images: [
     "/gallery/Pupper1.jpg",
@@ -150,7 +135,7 @@ keyTakeaways: [
     "/gallery/Pupper3.jpg",
     
   ],
-    github: "https://github.com/BRH-Pupper",
+    github: "https://bostonrobothackers.com/projects/pupper.html",
   },
 
 

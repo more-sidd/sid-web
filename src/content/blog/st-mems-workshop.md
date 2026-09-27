@@ -1,6 +1,6 @@
 ---
 title: Programming a State Machine Into a Sensor
-date: 2026-09-17
+date: 2026-07-16
 excerpt: At an ST workshop I learned that MEMS sensors can run recognition logic on the sensor itself, so the microcontroller stays asleep until something actually happens.
 tags: [Embedded, Sensors]
 cover: /gallery/STM2.jpg
