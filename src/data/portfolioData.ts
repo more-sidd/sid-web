@@ -339,6 +339,47 @@ keyTakeaways: [
     "/gallery/sink-marks.png",
   ],
   },
+  {
+    id: "proj8",
+    title: "CAD and Engineering Drawing",
+    category: "CAD & Drafting",
+    status: "complete",
+    description: "Coursework drawing sets from Fr. CRCE: AutoCAD orthographic and isometric sheets in first year, then SolidWorks models of standard machine elements in second year.",
+    fullDescription: "Two sets of drawing coursework from Fr. Conceicao Rodrigues College of Engineering. The first year set is AutoCAD: orthographic projection sheets with sectional views, dimensioning and title blocks, plus isometric views built from given orthographic inputs. The second year Mechanical set moves to SolidWorks, modelling standard machine elements from engineering drawings and rendering them as assemblies.",
+    objectives: [
+      "Read an engineering drawing and reconstruct the part it describes, in both directions: orthographic views from an isometric, and an isometric from orthographic views.",
+      "Produce dimensioned sheets with correct sectioning, line types and title blocks to drawing-standard conventions.",
+      "Move from 2D drafting in AutoCAD to parametric solid modelling of standard machine elements in SolidWorks.",
+    ],
+    goals: [
+      "Build the drawing-reading fluency that later design work depends on, so a part can be understood from a sheet rather than from a 3D file.",
+    ],
+    results: [
+      "Eight machine elements modelled in SolidWorks: knuckle joint, universal joint, two drill jigs, clapper block, single tool post, protected type flange coupling and Oldham coupling.",
+      "Six AutoCAD sheets covering orthographic projections with sectional views and isometric reconstructions, each dimensioned and titled.",
+    ],
+    keyTakeaways: [
+      "Sectioning is where most drawing errors show up. Deciding where to cut, and then hatching only what the cut plane actually passes through, is the part that takes practice.",
+      "Modelling a coupling or a jig from its drawing forces you to notice fits and clearances that are easy to skip when designing straight into CAD.",
+    ],
+    images: [
+      "/cad/knuckle-joint.png",
+      "/cad/universal-joint.png",
+      "/cad/drill-jig-1.png",
+      "/cad/drill-jig-2.png",
+      "/cad/clapper-block.png",
+      "/cad/single-tool-post.png",
+      "/cad/flange-coupling.png",
+      "/cad/oldham-coupling.png",
+      "/cad/autocad-1.png",
+      "/cad/autocad-2.png",
+      "/cad/autocad-3.png",
+      "/cad/autocad-4.png",
+      "/cad/autocad-5.png",
+      "/cad/autocad-6.png",
+    ],
+    skills: ["AutoCAD", "SolidWorks", "Orthographic Projection", "Isometric Views", "Sectional Views", "Dimensioning", "Machine Drawing"],
+  },
 ];
 
 export const publications: Publication[] = [
