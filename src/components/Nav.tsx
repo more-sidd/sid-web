@@ -145,9 +145,9 @@ export default function Nav() {
         <button
           onClick={() => (onHome ? window.scrollTo({ top: 0, behavior: 'smooth' }) : goHome())}
           className="nav-logo"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text)' }}
+          aria-label="Back to top"
         >
-          SM<span style={{ color: 'var(--accent)' }}>_</span>
+          <img src="/avatar.png" alt="" width={40} height={40} />
         </button>
 
         {/* Desktop: links + toggle + resume */}
