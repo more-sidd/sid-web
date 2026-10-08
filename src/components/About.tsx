@@ -25,7 +25,7 @@ export default function About() {
           <Reveal delay={120} className="about-bio">
             <div>
               <p className="about-p">
-                I'm a <strong>robotics graduate student at Northeastern University</strong> (MS, May 2027),
+                I'm a <strong>robotics graduate student at Northeastern University</strong> (MS, Dec 2026),
                 with a background in mechanical engineering from Mumbai University. My work bridges
                 physical design, embedded systems, and intelligent autonomy.
               </p>
