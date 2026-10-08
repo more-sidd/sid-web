@@ -1,4 +1,4 @@
-import { personalInfo, projects } from '../data/portfolioData';
+import { personalInfo, projects, education, publications } from '../data/portfolioData';
 import { allPosts, formatDate } from '../lib/posts';
 import { navigate } from '../lib/useHashRoute';
 import { resume } from '../lib/resume';
@@ -11,6 +11,12 @@ export default function Hero() {
   // when there is no published blog post yet.
   const latest = [...allPosts].sort((a, b) => b.date.localeCompare(a.date))[0];
   const onBench = projects.find(p => p.status === 'in-progress');
+
+  // These three were hardcoded and had drifted: the tile still said May 2027
+  // after the data moved to Dec 2026, and claimed 3 publications against 2 in
+  // the list. Deriving them means they cannot disagree with the sections below.
+  const current = education[0];                    // newest first
+  const gpa = current.gpa?.split('/')[0].trim();   // "3.25 / 4.0" -> "3.25"; optional in the type
 
   return (
     <section id="hero" className="hero-section">
@@ -43,9 +49,9 @@ export default function Hero() {
             </div>
 
             <dl className="stat-row">
-              <div className="stat-tile"><dt>GPA</dt><dd>3.25</dd></div>
-              <div className="stat-tile"><dt>Publications</dt><dd>3</dd></div>
-              <div className="stat-tile"><dt>Graduating</dt><dd>May 2027</dd></div>
+              {gpa && <div className="stat-tile"><dt>GPA</dt><dd>{gpa}</dd></div>}
+              <div className="stat-tile"><dt>Publications</dt><dd>{publications.length}</dd></div>
+              <div className="stat-tile"><dt>Graduating</dt><dd>{current.graduationDate}</dd></div>
             </dl>
           </div>
 
