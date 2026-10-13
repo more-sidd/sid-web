@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useHashRoute, goHome } from '../lib/useHashRoute';
+import { useHashRoute, goHome, navigate } from '../lib/useHashRoute';
 import { resume } from '../lib/resume';
 
-/* Eleven sections is too many to list individually, so the bar shows six
-   groups. `target` is where the link scrolls to; `covers` is every section
-   the group owns, so the right item stays highlighted as you scroll through
-   the rest of the group. */
+/* The site map draws four arrows out of the nav, so there are four links.
+   `covers` is every section a link owns, which keeps the right one lit while
+   you scroll through the rest of its group. Projects and the toolbox sit
+   under Work; the gallery has its own button in every section header. */
 const LINKS = [
-  { target: 'about',      label: 'About',      covers: ['about'] },
-  { target: 'education',  label: 'Background', covers: ['education', 'publications'] },
-  { target: 'experience', label: 'Work',       covers: ['experience', 'projects', 'skills'] },
-  { target: 'blog',       label: 'Writing',    covers: ['blog', 'news'] },
-  { target: 'gallery',    label: 'Gallery',    covers: ['gallery'] },
-  { target: 'contact',    label: 'Contact',    covers: ['contact'] },
+  { target: 'about',    label: 'About',      covers: ['about'] },
+  { target: 'academic', label: 'Background', covers: ['academic'] },
+  { target: 'projects', label: 'Work',       covers: ['projects', 'toolbox'] },
+  { target: 'writing',  label: 'Blog',       covers: ['writing'] },
+  { target: 'contact',  label: 'Contact',    covers: ['contact'] },
 ];
 
 /** Which nav group owns the section currently in view. */
@@ -21,7 +20,7 @@ const groupFor = (sectionId: string) =>
 
 function SunIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
       <circle cx="12" cy="12" r="4" />
       <line x1="12" y1="2"  x2="12" y2="5" />
       <line x1="12" y1="19" x2="12" y2="22" />
@@ -37,7 +36,7 @@ function SunIcon() {
 
 function MoonIcon() {
   return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
@@ -47,21 +46,9 @@ function ThemeToggle({ dark, onToggle }: { dark: boolean; onToggle: () => void }
   return (
     <button
       onClick={onToggle}
+      className="theme-toggle"
       title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 36,
-        height: 36,
-        borderRadius: '50%',
-        border: '1.5px solid var(--border)',
-        background: 'var(--surface)',
-        cursor: 'pointer',
-        color: 'var(--accent)',
-        transition: 'border-color 0.2s, color 0.2s, background 0.2s',
-        flexShrink: 0,
-      }}
+      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       {dark ? <MoonIcon /> : <SunIcon />}
     </button>
@@ -88,24 +75,17 @@ export default function Nav() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Which section is 'current' is decided by scroll position, not by an
-  // IntersectionObserver. The observer version set active on every
-  // intersecting entry and let the last one in the batch win, which is
-  // arbitrary when several fire together — so jumping down the page could
-  // leave the wrong link lit. This walks the sections in DOM order and takes
-  // the last one whose top has passed the 40% line: deterministic, and
-  // independent of how tall any section happens to be.
+  // Whichever section fills the most of the screen is the current one.
+  // A fixed scroll line breaks on short sections: centring a short section
+  // leaves a taller neighbour across the top of the viewport, and the line
+  // picks the neighbour.
   useEffect(() => {
     if (!onHome) { setActive(''); return; }
 
-    // Whichever section fills the most of the screen is the current one.
-    // A fixed scroll line breaks on short sections: centring a short section
-    // leaves a taller neighbour across the top of the viewport, and the line
-    // picks the neighbour.
     const pick = () => {
       const vh = window.innerHeight;
       let current = '', mostVisible = 0;
@@ -135,13 +115,12 @@ export default function Nav() {
   const scrollTo = (id: string) => {
     setOpen(false);
     if (onHome) document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    else goHome(id);   // leave the post first, then scroll to the section
+    else goHome(id);   // leave the post or gallery first, then scroll
   };
 
   return (
-    <nav className={`nav-base ${scrolled ? 'nav-scrolled' : ''}`}>
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
+    <nav className={`nav-base ${scrolled || !onHome ? 'nav-scrolled' : ''}`}>
+      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         <button
           onClick={() => (onHome ? window.scrollTo({ top: 0, behavior: 'smooth' }) : goHome())}
           className="nav-logo"
@@ -150,32 +129,33 @@ export default function Nav() {
           <img src="/avatar.png" alt="" width={40} height={40} />
         </button>
 
-        {/* Desktop: links + toggle + resume */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop */}
+        <div className="hidden md:flex items-center gap-7">
           {LINKS.map(l => (
             <button
               key={l.target}
               onClick={() => scrollTo(l.target)}
-              className="font-mono"
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                fontSize: '0.86rem', fontWeight: 500,
-                color: groupFor(active) === l.target ? 'var(--accent)' : 'var(--muted)',
-                transition: 'color 0.2s',
-              }}
+              className={`nav-link ${groupFor(active) === l.target ? 'nav-link-active' : ''}`}
             >
               {l.label}
             </button>
           ))}
 
+          <button
+            onClick={() => navigate('/gallery')}
+            className={`nav-link ${route.name === 'gallery' ? 'nav-link-active' : ''}`}
+          >
+            Gallery
+          </button>
+
           <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
 
-          <a {...resume.linkProps} className="btn-primary" style={{ padding: '0.5rem 1.15rem', fontSize: '0.8rem' }}>
-            {resume.label}
+          <a {...resume.linkProps} className="btn-primary">
+            Resume <span aria-hidden="true">{resume.glyph}</span>
           </a>
         </div>
 
-        {/* Mobile: toggle + hamburger */}
+        {/* Mobile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
           <div className="md:hidden">
             <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
@@ -183,37 +163,38 @@ export default function Nav() {
           <button
             className="md:hidden"
             onClick={() => setOpen(o => !o)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)' }}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text)' }}
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
               {open
-                ? <><line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" strokeWidth="2"/><line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" strokeWidth="2"/></>
-                : <><line x1="2" y1="5"  x2="20" y2="5"  stroke="currentColor" strokeWidth="2"/><line x1="2" y1="11" x2="20" y2="11" stroke="currentColor" strokeWidth="2"/><line x1="2" y1="17" x2="20" y2="17" stroke="currentColor" strokeWidth="2"/></>
+                ? <><line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" strokeWidth="1.6"/><line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" strokeWidth="1.6"/></>
+                : <><line x1="2" y1="5"  x2="20" y2="5"  stroke="currentColor" strokeWidth="1.6"/><line x1="2" y1="11" x2="20" y2="11" stroke="currentColor" strokeWidth="1.6"/><line x1="2" y1="17" x2="20" y2="17" stroke="currentColor" strokeWidth="1.6"/></>
               }
             </svg>
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {open && (
-        <div style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
+        <div className="mobile-menu">
           {LINKS.map(l => (
             <button
               key={l.target}
               onClick={() => scrollTo(l.target)}
-              style={{
-                display: 'block', width: '100%', textAlign: 'left',
-                padding: '0.85rem 1.5rem', background: 'none', border: 'none',
-                borderBottom: '1px solid var(--border)', cursor: 'pointer',
-                fontSize: '0.92rem',
-                fontWeight: 500,
-                color: groupFor(active) === l.target ? 'var(--accent)' : 'var(--muted)',
-              }}
+              className="mobile-link"
+              style={groupFor(active) === l.target ? { color: 'var(--text)' } : undefined}
             >
               {l.label}
             </button>
           ))}
+          <button className="mobile-link" onClick={() => { setOpen(false); navigate('/gallery'); }}>
+            Gallery
+          </button>
+          <a {...resume.linkProps} className="mobile-link" onClick={() => setOpen(false)}>
+            Resume {resume.glyph}
+          </a>
         </div>
       )}
     </nav>

@@ -1,59 +1,62 @@
 import { personalInfo } from '../data/portfolioData';
 import { Reveal } from './Reveal';
+import SectionHead from './SectionHead';
 
+/**
+ * Panel 2 of the site map: copy on both sides of a round portrait, with a
+ * gallery link in the header.
+ *
+ * Keyword colours follow the reference layout. The hues are from the
+ * supplied palette but driven to 4.5:1 on this paper, since the pastels as
+ * given sit between 1.2:1 and 3.1:1 — see the keyword block in index.css.
+ * Weight carries the emphasis alongside hue, so colour is never the only
+ * signal.
+ */
 export default function About() {
-  // Second slot is optional — until a path is set it shows a labelled
-  // placeholder rather than a broken image.
-  const second = personalInfo.photo2?.trim();
-
   return (
-    <section id="about" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
+    <section id="about" className="section-pad">
       <div className="max-w-6xl mx-auto px-6">
-        <Reveal>
-          <p className="label">01 — About</p>
-          <h2 className="heading">Engineer. Researcher. Builder.</h2>
-        </Reveal>
+        <SectionHead num="01" label="About me" />
 
-        {/* Photo, bio, photo — one image on each side of the text. */}
         <div className="about-grid">
-          <Reveal delay={80} className="about-photo">
-            <figure className="photo-frame">
-              <img src={personalInfo.photo} alt="Siddhi Sanjay More" />
-            </figure>
-          </Reveal>
-
-          <Reveal delay={120} className="about-bio">
+          <Reveal className="about-col">
             <div>
               <p className="about-p">
-                I'm a <strong>robotics graduate student at Northeastern University</strong> (MS, Dec 2026),
-                with a background in mechanical engineering from Mumbai University. My work bridges
-                physical design, embedded systems, and intelligent autonomy.
+                Hi! I&rsquo;m Siddhi, a{' '}
+                <span className="kw kw-blue">robotics graduate student at Northeastern University</span>{' '}
+                finishing an MS in December 2026, with a background in{' '}
+                <span className="kw kw-eggplant">mechanical engineering</span> from
+                Mumbai University.
               </p>
               <p className="about-p">
-                I'm motivated by systems that directly help people — wearable assistive devices,
-                prosthetics that restore natural movement, and autonomous robots that take on tasks
-                humans shouldn't have to. I hold the <strong>Global Student Award</strong> at Northeastern
-                and have published in <strong>AIP Conference Proceedings</strong>.
+                My work sits where physical design meets embedded systems and autonomy:{' '}
+                <span className="kw kw-amber">planetary gearboxes</span>,{' '}
+                <span className="kw kw-green">firmware on bare metal</span>, and the
+                control that ties them together.
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={160} className="about-photo">
-            {second ? (
-              <figure className="photo-frame">
-                <img src={second} alt="Siddhi in the lab" />
-              </figure>
-            ) : (
-              <div className="photo-frame photo-frame-empty">
-                <span>
-                  2nd photo
-                  <br />
-                  set <code>photo2</code> in
-                  <br />
-                  portfolioData.ts
-                </span>
-              </div>
-            )}
+          <Reveal delay={90}>
+            <figure className="about-portrait">
+              <img src={personalInfo.photo} alt="Siddhi More" />
+            </figure>
+          </Reveal>
+
+          <Reveal delay={160} className="about-col">
+            <div>
+              <p className="about-p">
+                I&rsquo;m drawn to machines that give something back to the person using
+                them &mdash; <span className="kw kw-pink">wearable assistive devices</span>,{' '}
+                <span className="kw kw-orange">prosthetics that restore natural movement</span>,
+                and robots that take on work nobody should have to do by hand.
+              </p>
+              <p className="about-p">
+                I hold the <span className="kw kw-amber">Global Student Award</span> at
+                Northeastern and have published in{' '}
+                <span className="kw kw-green">AIP Conference Proceedings</span>.
+              </p>
+            </div>
           </Reveal>
         </div>
       </div>

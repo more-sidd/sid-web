@@ -1,6 +1,9 @@
 export interface Project {
   id: string;
   title: string;
+  /** Short label for tiles and the index panel. Falls back to `title`,
+   *  which stays the full line shown in the modal. */
+  shortTitle?: string;
   category: string;
   thumbnail?: string;
   images?: string[];      // photo strip in card + gallery in modal

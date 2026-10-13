@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { galleryItems } from '../data/portfolioData';
 import type { GalleryItem } from '../types';
+import { goHome } from '../lib/useHashRoute';
 
 type Bucket = 'robotics' | 'fun';
 
 const TABS: { id: Bucket; label: string }[] = [
-  { id: 'robotics', label: 'Robotics & Mech' },
-  { id: 'fun',      label: 'Fun & Events' },
+  { id: 'robotics', label: 'Robotics & mech' },
+  { id: 'fun',      label: 'Fun & events' },
 ];
 
 const SLIDE_MS = 4500;
@@ -28,11 +29,16 @@ function Media({ item, active, controls }: { item: GalleryItem; active: boolean;
   );
 }
 
+/**
+ * The gallery is its own page at #/gallery, because the site map reaches it
+ * from a button in every section header. As an inline section those five
+ * buttons would all have been scroll jumps with no linkable address.
+ */
 export default function Gallery() {
   const [tab, setTab] = useState<Bucket>('robotics');
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true);
-  /** Index of the item open in manual mode, or null when the lightbox is shut. */
+  /** Index of the item open in manual mode, or null when the viewer is shut. */
   const [manual, setManual] = useState<number | null>(null);
 
   const items = useMemo(() => galleryItems.filter(i => i.category === tab), [tab]);
@@ -53,7 +59,7 @@ export default function Gallery() {
     setIndex(i => (i + delta + items.length) % items.length);
   }, [items.length]);
 
-  // Auto-advance. Paused while the lightbox is open, and never runs on a video
+  // Auto-advance. Paused while the viewer is open, and never on a video
   // slide — rotating away from something someone might be watching is rude.
   const onVideo = items[index]?.video === true;
   useEffect(() => {
@@ -85,40 +91,52 @@ export default function Gallery() {
   const open = items[manual ?? -1];
 
   return (
-    <section id="gallery" className="section-pad section-alt" style={{ borderBottom: '1px solid var(--border)' }}>
+    <div className="gal-page">
       <div className="max-w-6xl mx-auto px-6">
-        <p className="label">09 — Gallery</p>
+        <div className="sec-head">
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.7rem', flexWrap: 'wrap' }}>
+            <span className="font-mono" style={{ color: 'var(--muted)', fontSize: '0.68rem' }}>07</span>
+            <h1 className="label">Gallery</h1>
+          </div>
+          <button className="btn-ghost" onClick={() => goHome()}>
+            <span aria-hidden="true">←</span> Back
+          </button>
+        </div>
+
         <div className="gal-head">
-          <h2 className="heading" style={{ marginBottom: 0 }}>Visual Archive</h2>
           <div className="gal-tabs">
             {TABS.map(t => (
               <button
                 key={t.id}
                 onClick={() => setTab(t.id)}
-                className={`blog-filter ${tab === t.id ? 'blog-filter-active' : ''}`}
+                className={tab === t.id ? 'btn-primary' : 'btn-ghost'}
                 aria-pressed={tab === t.id}
               >
                 {t.label}
               </button>
             ))}
           </div>
+          <span className="font-mono" style={{ color: 'var(--muted)' }}>
+            {items.length} items
+          </span>
         </div>
 
         {items.length === 0 ? (
-          <div className="blog-empty">
-            <p>Nothing in this bucket yet — add entries to <code>galleryItems</code>.</p>
-          </div>
+          <p className="prose-p">
+            Nothing in this bucket yet. Add entries to <code>galleryItems</code>.
+          </p>
         ) : (
           <>
             {/* ── Auto-playing stage. Clicking it opens manual mode. ── */}
             <div className="gal-stage">
               <button
-                className="gal-slide"
+                className="gal-slide gal-slide-on"
                 onClick={() => setManual(index)}
                 aria-label={`Open "${current.caption}" in the viewer`}
+                style={{ border: 'none', padding: 0, cursor: 'zoom-in', background: 'none' }}
               >
                 <Media item={current} active />
-                {current.video && <span className="gal-play" aria-hidden="true">▶</span>}
+                {current.video && <span className="gal-play" aria-hidden="true">Video</span>}
               </button>
 
               <button className="gal-arrow gal-arrow-l" onClick={() => step(-1)} aria-label="Previous">‹</button>
@@ -135,13 +153,13 @@ export default function Gallery() {
                     onClick={() => setPlaying(p => !p)}
                     aria-label={playing ? 'Pause slideshow' : 'Play slideshow'}
                   >
-                    {playing ? '❙❙ Pause' : '▶ Play'}
+                    {playing ? 'Pause' : 'Play'}
                   </button>
                 )}
               </div>
             </div>
 
-            {/* ── Thumbnail strip: jump anywhere, and a view of the whole set ── */}
+            {/* ── Thumbnail strip: jump anywhere, and see the whole set ── */}
             <div className="gal-thumbs">
               {items.map((it, i) => (
                 <button
@@ -172,7 +190,9 @@ export default function Gallery() {
           <div className="gal-modal-inner" onClick={e => e.stopPropagation()}>
             <div className="gal-modal-top">
               <span className="gal-count">{(manual ?? 0) + 1} / {items.length}</span>
-              <button ref={closeRef} className="gal-modal-close" onClick={() => setManual(null)} aria-label="Close viewer">✕</button>
+              <button ref={closeRef} className="gal-modal-close" onClick={() => setManual(null)} aria-label="Close viewer">
+                Close ✕
+              </button>
             </div>
 
             <div className="gal-modal-stage">
@@ -197,6 +217,6 @@ export default function Gallery() {
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 }

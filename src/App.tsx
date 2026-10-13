@@ -1,24 +1,22 @@
-import Nav          from './components/Nav';
-import Hero         from './components/Hero';
-import About        from './components/About';
-import Experience   from './components/Experience';
-import Projects     from './components/Projects';
-import Skills       from './components/Skills';
-import Gallery      from './components/Gallery';
-import Blog         from './components/Blog';
-import News         from './components/News';
-import Education    from './components/Education';
-import Publications from './components/Publications';
-import Contact      from './components/Contact';
+import Nav      from './components/Nav';
+import Index    from './components/Index';
+import About    from './components/About';
+import Academic from './components/Academic';
+import Projects from './components/Projects';
+import Toolbox  from './components/Toolbox';
+import Writing  from './components/Writing';
+import Contact  from './components/Contact';
 import { lazy, Suspense } from 'react';
 import { useHashRoute } from './lib/useHashRoute';
 import './index.css';
 import './blog.css';
 
-// The markdown renderer and Supabase client are only needed once someone opens
-// a post, so they load on demand instead of weighing down the landing page.
+/* The markdown renderer, the Supabase client and the whole gallery are only
+   needed once someone opens a post or the gallery, so they load on demand
+   instead of weighing down the landing page. */
 const BlogPost      = lazy(() => import('./components/BlogPost'));
 const CommentsAdmin = lazy(() => import('./components/CommentsAdmin'));
+const Gallery       = lazy(() => import('./components/Gallery'));
 
 function RouteFallback() {
   return (
@@ -40,37 +38,28 @@ export default function App() {
         {route.name === 'post' && (
           <Suspense fallback={<RouteFallback />}><BlogPost slug={route.slug} /></Suspense>
         )}
+        {route.name === 'gallery' && (
+          <Suspense fallback={<RouteFallback />}><Gallery /></Suspense>
+        )}
         {route.name === 'admin' && (
           <Suspense fallback={<RouteFallback />}><CommentsAdmin /></Suspense>
         )}
-        {route.name === 'home'  && (
+        {route.name === 'home' && (
           <>
-            <Hero />
+            <Index />
             <About />
-            <Education />
-            <Publications />
-            <Experience />
+            <Academic />
             <Projects />
-            <Skills />
-            <Blog />
-            <News />
-            <Gallery />
+            <Toolbox />
+            <Writing />
             <Contact />
           </>
         )}
       </main>
-      <footer style={{
-        borderTop: '1px solid var(--border)',
-        padding: '1.2rem 1.5rem',
-        display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem',
-      }}>
-        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--muted)', letterSpacing: '0.06em' }}>
-          © 2026 Siddhi More · Boston, MA
-        </span>
-        <span className="font-mono" style={{ fontSize: '0.68rem', color: 'var(--muted)', letterSpacing: '0.06em' }}>
-          React + Vite + Tailwind
-        </span>
+
+      <footer className="site-footer">
+        <span>© {new Date().getFullYear()} Siddhi More · Boston, MA</span>
+        <span>React · Vite · TypeScript</span>
       </footer>
     </>
   );

@@ -105,6 +105,7 @@ export const projects: Project[] = [
  {
     id: "proj1",
     title: "Pupper v3 - A quadruped robot developed by Stamford University, currently learning to take it's baby steps in Boston",
+    shortTitle: "Pupper v3",
     category: "Legged Robots/ Quadrupeds",
     status: "in-progress",
     description: "Pupper v3 is a cute companion robot designed to spark joy and teach robotics and AI.",

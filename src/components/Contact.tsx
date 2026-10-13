@@ -1,63 +1,65 @@
 import { personalInfo } from '../data/portfolioData';
 import { resume } from '../lib/resume';
 import { Reveal } from './Reveal';
+import SectionHead from './SectionHead';
 
+/**
+ * Panel 4 of the site map: four link tiles, then the location line and the
+ * handle underneath.
+ */
 export default function Contact() {
   const links = [
-    { label: 'Email',    href: `mailto:${personalInfo.email}`, icon: '✉' },
-    { label: 'GitHub',   href: personalInfo.github,   icon: 'GH' },
-    { label: 'LinkedIn', href: personalInfo.linkedin, icon: 'LI' },
-    { label: 'Resume',   href: resume.url, icon: resume.glyph, download: !resume.opensInBrowser },
+    { label: 'Email',    value: personalInfo.email, href: `mailto:${personalInfo.email}` },
+    { label: 'GitHub',   value: 'more-sidd',        href: personalInfo.github },
+    { label: 'LinkedIn', value: 'more-siddhi',      href: personalInfo.linkedin },
+    {
+      label: 'Resume',
+      value: resume.opensInBrowser ? 'View PDF' : 'Download',
+      href: resume.url,
+      download: !resume.opensInBrowser,
+    },
   ];
 
   return (
-    <section id="contact" className="section-pad" style={{ borderBottom: '1px solid var(--border)' }}>
-      <div className="max-w-6xl mx-auto px-6" style={{ textAlign: 'center' }}>
+    <section id="contact" className="section-pad section-alt">
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionHead num="06" label="Contact" />
+
         <Reveal>
-          <p className="label" style={{ display: 'inline-block' }}>10 — Contact</p>
-          <h2 className="heading">Let's Work Together</h2>
-          <p style={{ fontSize: '0.97rem', color: 'var(--muted)', maxWidth: 480, margin: '0 auto 2.5rem', lineHeight: 1.8 }}>
-            Open to robotics co-ops, research collaborations, and full-time roles in
-            assistive tech, autonomous systems, and human-robot interaction.
+          <p className="prose-p" style={{ marginBottom: '1.8rem' }}>
+            Open to robotics co-ops, research collaborations and full-time roles in{' '}
+            <span className="kw kw-pink">assistive tech</span>,{' '}
+            <span className="kw kw-blue">autonomous systems</span> and{' '}
+            <span className="kw kw-amber">human-robot interaction</span>.
           </p>
         </Reveal>
 
         <Reveal delay={80}>
-          <a href={`mailto:${personalInfo.email}`} className="font-display" style={{
-            display: 'block', fontSize: 'clamp(1.3rem, 3vw, 2.2rem)',
-            color: 'var(--accent)', textDecoration: 'none',
-            marginBottom: '2.2rem', letterSpacing: '0.04em',
-            transition: 'opacity 0.2s',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')}
-          onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-          >
-            {personalInfo.email}
-          </a>
-        </Reveal>
-
-        <Reveal delay={140}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.8rem', flexWrap: 'wrap' }}>
+          <div className="contact-grid">
             {links.map(l => (
               <a
                 key={l.label}
                 href={l.href}
-                /* A download must not also open a tab, and mailto must not
-                   either — only real external links get _blank. */
+                className="contact-link"
+                /* A download must not also open a tab, and neither must
+                   mailto — only real external links get _blank. */
                 {...(l.download
                   ? { download: '' }
                   : l.href.startsWith('mailto')
                     ? {}
                     : { target: '_blank', rel: 'noreferrer' })}
-                className="btn-ghost"
-                style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
               >
-                <span className="font-mono" style={{ fontSize: '0.62rem' }}>{l.icon}</span>
-                {l.label}
+                <span className="contact-link-label">{l.label}</span>
+                <span className="contact-link-val">{l.value}</span>
               </a>
             ))}
           </div>
         </Reveal>
+
+        <div className="contact-foot">
+          <span>Based in Boston, Massachusetts</span>
+          <span>@more-sidd</span>
+        </div>
       </div>
     </section>
   );
