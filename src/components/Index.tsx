@@ -1,4 +1,4 @@
-import { personalInfo, projects, education, publications } from '../data/portfolioData';
+import { projects, education, publications } from '../data/portfolioData';
 import { allPosts, formatDate } from '../lib/posts';
 import { resume } from '../lib/resume';
 import { navigate } from '../lib/useHashRoute';
@@ -7,17 +7,16 @@ const scrollTo = (id: string) =>
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
 /**
- * Panel 1 of the site map: the name and avatar, the three jump buttons
- * (projects, resume, socials), a fact row, and two live panels on the right.
+ * Panel 1 of the site map: the name and photo, the four jump buttons, a fact
+ * row, and the two highlight panels on the right.
  *
- * Everything on the right is derived from the data rather than typed in, so
- * "currently building" and "recent writing" cannot go stale.
+ * Both panels are derived from the data rather than typed in, so "currently
+ * building" and "recent writing" cannot go stale.
  */
 export default function Index() {
   const building = projects.find(p => p.status === 'in-progress');
   const latest   = [...allPosts].sort((a, b) => b.date.localeCompare(a.date))[0];
-
-  const current = education[0];   // newest first
+  const current  = education[0];   // newest first
 
   return (
     <section id="index" className="idx">
@@ -39,40 +38,42 @@ export default function Index() {
                 More
               </h1>
 
-            <p className="idx-role">
-              Wearable &amp; <span className="kw kw-pink">assistive robotics</span> engineer
-            </p>
+              <p className="idx-role">
+                <span className="kw kw-green">Hardware</span> &amp;{' '}
+                <span className="kw kw-eggplant">mechanical</span> engineer
+              </p>
 
-            <p className="idx-sub">
-              Hardware that restores human mobility. Planetary gearbox design and{' '}
-              <span className="kw kw-green">embedded firmware</span> through to{' '}
-              <span className="kw kw-blue">ROS2 navigation</span> and ML-validated
-              musculoskeletal simulation.
-            </p>
+              <p className="idx-sub">
+                MS Robotics with a mechanical engineering background. My interest is{' '}
+                <span className="kw kw-green">robot hardware</span> — building the
+                simulation, then{' '}
+                <span className="kw kw-blue">validating it on the real thing</span>.
+              </p>
 
-            {/* The three buttons the map puts under the name. */}
-            <div className="idx-cta">
-              <button className="btn-primary" onClick={() => scrollTo('projects')}>
-                Projects <span aria-hidden="true">↓</span>
-              </button>
-              <a {...resume.linkProps} className="btn-ghost">
-                Resume <span aria-hidden="true">{resume.glyph}</span>
-              </a>
-              <button className="btn-ghost" onClick={() => scrollTo('contact')}>
-                Socials <span aria-hidden="true">↓</span>
-              </button>
-            </div>
-
-            <dl className="stat-row">
-              <div className="stat-tile">
-                <dt>Publications</dt>
-                <dd>{publications.length}</dd>
+              {/* Three buttons under the name. Socials drops you at the
+                  profile tiles in the contact section. */}
+              <div className="idx-cta">
+                <button className="btn-primary" onClick={() => scrollTo('projects')}>
+                  Projects <span aria-hidden="true">↓</span>
+                </button>
+                <a {...resume.linkProps} className="btn-ghost">
+                  Resume <span aria-hidden="true">{resume.glyph}</span>
+                </a>
+                <button className="btn-ghost" onClick={() => scrollTo('contact')}>
+                  Socials <span aria-hidden="true">↓</span>
+                </button>
               </div>
-              <div className="stat-tile">
-                <dt>Graduating</dt>
-                <dd>{current?.graduationDate}</dd>
-              </div>
-            </dl>
+
+              <dl className="stat-row">
+                <div className="stat-tile">
+                  <dt>Publications</dt>
+                  <dd>{publications.length}</dd>
+                </div>
+                <div className="stat-tile">
+                  <dt>Graduating</dt>
+                  <dd>{current?.graduationDate}</dd>
+                </div>
+              </dl>
             </div>
 
             <div className="idx-avatar">
@@ -80,7 +81,7 @@ export default function Index() {
             </div>
           </div>
 
-          {/* ── Right: the two panels from the map ── */}
+          {/* ── Right: the two highlights from the map ── */}
           <aside className="idx-side">
             {building && (
               <div className="info-card">
@@ -98,7 +99,9 @@ export default function Index() {
 
             {latest && (
               <div className="info-card">
-                <p className="info-card-label">Recent {latest.kind === 'news' ? 'news' : 'blog'}</p>
+                <p className="info-card-label">
+                  Latest {latest.kind === 'news' ? 'news' : 'writing'}
+                </p>
                 <p className="info-card-title">{latest.title}</p>
                 <p className="info-card-desc">
                   {formatDate(latest.date)} · {latest.readingTime} min read
@@ -108,17 +111,6 @@ export default function Index() {
                 </button>
               </div>
             )}
-
-            <div className="info-card">
-              <p className="info-card-label">Reach me</p>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="info-card-link"
-                style={{ marginTop: 0, fontSize: '0.7rem' }}
-              >
-                {personalInfo.email}
-              </a>
-            </div>
           </aside>
         </div>
       </div>

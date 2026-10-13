@@ -3,7 +3,7 @@ import { Project, Publication, Experience, Education, Skill, GalleryItem } from 
 export const personalInfo = {
   name: "Siddhi More",
   title: "Wearable & Assistive Robotics Engineer",
-  tagline: "Building hardware that restores human mobility!From planetary gearbox design and embedded firmware to ROS2 navigation and ML-validated musculoskeletal simulation.",
+  tagline: "Building hardware that restores human mobility. From planetary gearbox design and embedded firmware to ROS2 navigation and ML-validated musculoskeletal simulation.",
   photo: "/sidd.jpeg",
   photo2: "/sidd2.jpg",
   email: "siddhimorework@gmail.com",
@@ -16,7 +16,7 @@ export const personalInfo = {
 export const education: Education[] = [
   {
     id: "edu1",
-    degree: "MS Robotics(Mechanical Concentration)",
+    degree: "MS Robotics (Mechanical Concentration)",
     institution: "Northeastern University",
     location: "Boston, MA",
     graduationDate: "Dec 2026",
@@ -66,7 +66,7 @@ export const experience: Experience[] = [
   },
  {
     id: "exp2",
-    title: "CAD intern",
+    title: "CAD Intern",
     company: "IIT Bombay & 1Stop.ai",
     location: "Mumbai, India",
     startDate: "May 2022",
@@ -104,16 +104,16 @@ export const skills: Skill[] = [
 export const projects: Project[] = [
  {
     id: "proj1",
-    title: "Pupper v3 - A quadruped robot developed by Stamford University, currently learning to take it's baby steps in Boston",
+    title: "Pupper v3 - A quadruped robot developed by Stanford University, currently learning to take its baby steps in Boston",
     shortTitle: "Pupper v3",
     category: "Legged Robots/ Quadrupeds",
     status: "in-progress",
     description: "Pupper v3 is a cute companion robot designed to spark joy and teach robotics and AI.",
-    fullDescription: "Pupper is an agile quadruped robot developed by Standford University for learning legged robotics (CS 123). It focuses on developing efficient and adaptive locomotion strategies for quadrupedal robots.",
+    fullDescription: "Pupper is an agile quadruped robot developed by Stanford University for learning legged robotics (CS 123). It focuses on developing efficient and adaptive locomotion strategies for quadrupedal robots.",
     objectives: [
       "Develop a comprehensive understanding of legged robotics principles and applications.",
       "Implement and test advanced control algorithms for dynamic locomotion.",
-      "Establish an outreach program for promoting legged robotics education and research in Boston Highschools."
+      "Establish an outreach program for promoting legged robotics education and research in Boston high schools."
     ],
     goals: [
   "Run baseline push tests and characterize disturbance response using the BNO086 IMU.",
@@ -346,22 +346,22 @@ keyTakeaways: [
     category: "CAD & Drafting",
     status: "complete",
     description: "Coursework drawing sets from Fr. CRCE: AutoCAD orthographic and isometric sheets in first year, then SolidWorks models of standard machine elements in second year.",
-    fullDescription: "Two sets of drawing coursework from Fr. Conceicao Rodrigues College of Engineering. The first year set is AutoCAD: orthographic projection sheets with sectional views, dimensioning and title blocks, plus isometric views built from given orthographic inputs. The second year Mechanical set moves to SolidWorks, modelling standard machine elements from engineering drawings and rendering them as assemblies.",
+    fullDescription: "Two sets of drawing coursework from Fr. Conceicao Rodrigues College of Engineering. The first year set is AutoCAD: orthographic projection sheets with sectional views, dimensioning and title blocks, plus isometric views built from given orthographic inputs. The second year Mechanical set moves to SolidWorks, modeling standard machine elements from engineering drawings and rendering them as assemblies.",
     objectives: [
       "Read an engineering drawing and reconstruct the part it describes, in both directions: orthographic views from an isometric, and an isometric from orthographic views.",
       "Produce dimensioned sheets with correct sectioning, line types and title blocks to drawing-standard conventions.",
-      "Move from 2D drafting in AutoCAD to parametric solid modelling of standard machine elements in SolidWorks.",
+      "Move from 2D drafting in AutoCAD to parametric solid modeling of standard machine elements in SolidWorks.",
     ],
     goals: [
       "Build the drawing-reading fluency that later design work depends on, so a part can be understood from a sheet rather than from a 3D file.",
     ],
     results: [
-      "Eight machine elements modelled in SolidWorks: knuckle joint, universal joint, two drill jigs, clapper block, single tool post, protected type flange coupling and Oldham coupling.",
+      "Eight machine elements modeled in SolidWorks: knuckle joint, universal joint, two drill jigs, clapper block, single tool post, protected type flange coupling and Oldham coupling.",
       "Six AutoCAD sheets covering orthographic projections with sectional views and isometric reconstructions, each dimensioned and titled.",
     ],
     keyTakeaways: [
       "Sectioning is where most drawing errors show up. Deciding where to cut, and then hatching only what the cut plane actually passes through, is the part that takes practice.",
-      "Modelling a coupling or a jig from its drawing forces you to notice fits and clearances that are easy to skip when designing straight into CAD.",
+      "Modeling a coupling or a jig from its drawing forces you to notice fits and clearances that are easy to skip when designing straight into CAD.",
     ],
     images: [
       "/cad/knuckle-joint.png",
@@ -427,7 +427,7 @@ export const galleryItems: GalleryItem[] = [
   { src: "/gallery/turtlebot3.jpg",           caption: "TurtleBot3",                                   category: "robotics" },
   { src: "/gallery/custom-env-turtlebot.png", caption: "Custom Gazebo environment for TurtleBot3",     category: "robotics" },
   { src: "/gallery/grid-visualization.png",   caption: "Q-learning grid for the hyacinth cleaner",     category: "robotics" },
-  { src: "/gallery/sink-marks.png",           caption: "Injection moulding sink-mark analysis",        category: "robotics" },
+  { src: "/gallery/sink-marks.png",           caption: "Injection molding sink-mark analysis",        category: "robotics" },
   { src: "/gallery/SIH-2.png",                caption: "Smart India Hackathon build",                  category: "robotics" },
   { src: "/gallery/STM2.jpg",                 caption: "IKS5A1 sensor shield on a NUCLEO-F401RE",      category: "robotics" },
   { src: "/gallery/jw1.jpg",                  caption: "JW Fishers ROV in the shop",                   category: "robotics" },

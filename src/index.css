@@ -561,6 +561,18 @@ body {
    Map panel 2: copy either side of a round portrait.
    ────────────────────────────────────────────────────────────────────── */
 
+/* The three-word line that opens the section, under the bracket label. */
+.about-tagline {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);

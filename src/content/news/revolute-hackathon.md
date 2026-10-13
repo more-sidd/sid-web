@@ -28,4 +28,4 @@ Vassar Robotics.
 
 The point wasn't the competition. It was building Boston into somewhere the
 robotics and physical AI community actually gathers — which only happens if
-people keep showing up to organise it.
+people keep showing up to organize it.

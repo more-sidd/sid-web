@@ -17,7 +17,7 @@ of talks, demos, and the hallway conversations that are genuinely the point of
 going.
 
 Showing up consistently over a year is most of the value. You start
-recognising people, the conversations get past the introductory stage, and you
+recognizing people, the conversations get past the introductory stage, and you
 end up with a real network across labs and startups rather than a stack of
 business cards.
 
