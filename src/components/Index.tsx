@@ -28,18 +28,16 @@ export default function Index() {
         </div>
 
         <div className="idx-grid">
-          {/* ── Left: identity ── */}
-          <div>
-            <div className="idx-namerow">
+          {/* ── Left: identity. The photo takes its own column beside the
+               copy rather than sitting inline with the name, which leaves
+               no dead space under it. ── */}
+          <div className="idx-left">
+            <div className="idx-copy">
               <h1 className="idx-name">
                 Siddhi
                 <br />
                 More
               </h1>
-              <div className="idx-avatar">
-                <img src="/avatar.png" alt="Siddhi More" width={124} height={124} />
-              </div>
-            </div>
 
             <p className="idx-role">
               Wearable &amp; <span className="kw kw-pink">assistive robotics</span> engineer
@@ -75,6 +73,11 @@ export default function Index() {
                 <dd>{current?.graduationDate}</dd>
               </div>
             </dl>
+            </div>
+
+            <div className="idx-avatar">
+              <img src="/gallery/sidd3.jpg" alt="Siddhi More" width={320} height={320} />
+            </div>
           </div>
 
           {/* ── Right: the two panels from the map ── */}
