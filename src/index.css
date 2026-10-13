@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,6 +23,8 @@
   /* ── Type ── */
   --display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
   --body:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  /* Mono is kept, but only for small meta: the running index numbers, dates
+     and counts. It is no longer used for anything you actually read. */
   --mono:    'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
 
   /* ── Surfaces ── */
@@ -35,9 +37,11 @@
   --ink-2: #5E5E5E;
 
   /* ── Rules ── */
-  --rule:        #C9C9C4;
-  --rule-soft:   #DCDCD8;
-  --rule-strong: var(--ink);
+  --rule:        #DDDDD9;
+  --rule-soft:   #E8E8E4;
+  /* Was --ink, which drew a solid black bar under every section heading.
+     A hairline is what the reference uses to separate bands. */
+  --rule-strong: #C9C9C4;
   --rule-w: 1px;
 
   /* Sharp by default. 2px is the most any corner gets. */
@@ -87,9 +91,9 @@ html.dark {
   --ink:   #EDEDEA;
   --ink-2: #9A9A95;
 
-  --rule:        #34342F;
-  --rule-soft:   #262622;
-  --rule-strong: var(--ink);
+  --rule:        #2C2C28;
+  --rule-soft:   #222220;
+  --rule-strong: #3C3C36;
 
   --border:        var(--rule);
   --border-2:      #4A4A43;
@@ -118,8 +122,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--body);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   font-feature-settings: 'kern' 1;
 }
@@ -139,25 +143,24 @@ body {
 
 .font-display {
   font-family: var(--display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .font-mono {
   font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
-/* The bracket label, as in the mockup: [.ABOUT ] */
+/* The bracket label, kept from the mockup but set in the serif and left
+   lowercase, which is what stops it shouting. */
 .label {
   font-family: var(--display);
-  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
-  font-weight: 700;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 600;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
   color: var(--text);
   display: inline-block;
   margin: 0;
@@ -168,12 +171,11 @@ body {
 .heading {
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(2rem, 4.4vw, 3.4rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
   color: var(--text);
-  margin: 0 0 1.6rem;
+  margin: 0 0 1.4rem;
 }
 
 .prose-p {
@@ -189,7 +191,7 @@ body {
    map, a button to the gallery on the right, sitting on a heavy rule.
    ────────────────────────────────────────────────────────────────────── */
 
-.section-pad { padding: 4.5rem 0; }
+.section-pad { padding: 6rem 0; }
 .section-alt { background: var(--bg-alt); }
 
 .sec-head {
@@ -198,9 +200,9 @@ body {
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  padding-bottom: 0.7rem;
-  border-bottom: 2px solid var(--rule-strong);
-  margin-bottom: 2.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--rule-strong);
+  margin-bottom: 2.6rem;
 }
 
 /* ── BUTTONS ──────────────────────────────────────────────────────────── */
@@ -210,10 +212,9 @@ body {
 .btn-line {
   font-family: var(--mono);
   font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.6rem 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  padding: 0.55rem 1rem;
   border-radius: 0;
   cursor: pointer;
   text-decoration: none;
@@ -234,7 +235,7 @@ body {
 .btn-ghost {
   background: transparent;
   color: var(--text);
-  border: 1px solid var(--ink);
+  border: 1px solid var(--border-2);
 }
 .btn-ghost:hover { background: var(--ink); color: var(--accent-on); }
 
@@ -259,12 +260,11 @@ body {
 .card:hover { border-color: var(--ink); }
 
 .tag {
-  font-family: var(--mono);
-  font-size: 0.64rem;
+  font-family: var(--body);
+  font-size: 0.72rem;
   font-weight: 400;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.18rem 0.5rem;
+  letter-spacing: 0.01em;
+  padding: 0.2rem 0.5rem;
   background: transparent;
   border: 1px solid var(--rule);
   border-radius: 0;
@@ -290,23 +290,27 @@ body {
 .nav-scrolled {
   background: color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
 }
 
 .nav-logo {
   display: block;
-  width: 40px; height: 40px;
   padding: 0; flex-shrink: 0;
-  border: none; background: none; cursor: pointer; line-height: 0;
+  border: none; background: none; cursor: pointer;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  line-height: 1;
 }
-.nav-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.nav-logo:hover { opacity: 0.6; }
 
 .nav-link {
   font-family: var(--mono);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
   background: none;
   border: none;
@@ -336,8 +340,7 @@ body {
   display: block; width: 100%; text-align: left;
   font-family: var(--mono);
   font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
   padding: 0.8rem 1.5rem;
   background: none; border: none;
@@ -355,8 +358,8 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid var(--rule-strong);
-  padding: 7rem 0 3.5rem;
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 7rem 0 4rem;
 }
 
 .idx-grid {
@@ -377,12 +380,11 @@ body {
   flex-wrap: wrap;
   font-family: var(--mono);
   font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.7rem;
   border-bottom: 1px solid var(--rule);
-  margin-bottom: 1.6rem;
+  margin-bottom: 2.4rem;
 }
 
 /* Copy on the left, photo on its own column to the right. Centring the
@@ -400,34 +402,35 @@ body {
   .idx-left { grid-template-columns: 1fr; gap: 1.6rem; }
 }
 
+/* The reference keeps the name small and lets whitespace carry the page.
+   At 7rem uppercase this was the loudest thing on the screen by a wide
+   margin, which is the opposite of a reading surface. */
 .idx-name {
   font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(3rem, 9vw, 7rem);
-  line-height: 0.86;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: var(--text);
 }
 
 .idx-role {
-  font-family: var(--display);
-  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-  font-weight: 600;
+  font-family: var(--body);
+  font-size: 0.8rem;
+  font-weight: 400;
   letter-spacing: 0.01em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-top: 1.4rem;
-  padding-top: 1rem;
-  border-top: 2px solid var(--rule-strong);
+  color: var(--muted);
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
 }
 
 .idx-sub {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.8;
   color: var(--muted);
-  margin-top: 0.9rem;
-  max-width: 60ch;
+  margin-top: 1rem;
+  max-width: 56ch;
 }
 
 .idx-cta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.8rem; }
@@ -458,8 +461,7 @@ body {
 .info-card-label {
   font-family: var(--mono);
   font-size: 0.56rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
   padding-bottom: 0.4rem;
   margin-bottom: 0.5rem;
@@ -475,11 +477,10 @@ body {
    whole screen. */
 .info-card-title {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.8rem;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
   color: var(--text);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -501,8 +502,7 @@ body {
 .info-card-link {
   font-family: var(--mono);
   font-size: 0.58rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--accent);
   text-decoration: none;
   display: inline-block;
@@ -528,33 +528,37 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: fit-content;
-  margin-top: 2.4rem;
-  border-top: 2px solid var(--rule-strong);
+  margin-top: 2.8rem;
+  border-top: 1px solid var(--rule);
 }
 /* Sized to their content rather than stretched across the column: with
-   only two tiles left, flex-grow spread them over 800px of empty paper. */
+   only two tiles left, flex-grow spread them over 800px of empty paper.
+
+   No min-width and no trailing padding on the last tile, so the row's own
+   width is exactly content-to-content. Both were making the rule above
+   overhang the final value — a 128px floor on a ~90px value, plus 26px of
+   padding past the end of "Dec 2026". */
 .stat-tile {
   flex: 0 0 auto;
-  min-width: 128px;
-  padding: 0.9rem 1.6rem 0.9rem 0;
+  min-width: 0;
+  padding: 0.9rem 1.5rem 0.9rem 0;
   border-right: 1px solid var(--rule);
 }
-.stat-tile:last-child { border-right: none; }
+.stat-tile:last-child { border-right: none; padding-right: 0; }
 .stat-tile dt {
   font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 0.62rem;
+  letter-spacing: 0.01em;
   color: var(--muted);
 }
 .stat-tile dd {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   color: var(--text);
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
 }
 
 /* ── ABOUT ────────────────────────────────────────────────────────────────
@@ -564,11 +568,10 @@ body {
 /* The three-word line that opens the section, under the bracket label. */
 .about-tagline {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: clamp(1.5rem, 3.2vw, 2.4rem);
   line-height: 1.05;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--text);
   margin-bottom: 2rem;
 }
@@ -615,7 +618,7 @@ body {
 }
 .photo-frame-empty span {
   font-family: var(--mono);
-  font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  font-size: 0.6rem; letter-spacing: 0.01em; color: var(--muted);
 }
 
 /* ── ENTRY LIST ───────────────────────────────────────────────────────────
@@ -651,18 +654,16 @@ body {
 
 .entry-title {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1rem;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
   color: var(--text);
 }
 .entry-sub {
   font-family: var(--mono);
   font-size: 0.68rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
   margin-top: 0.3rem;
 }
@@ -696,8 +697,7 @@ body {
   font-family: var(--mono);
   font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--text);
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--ink);
@@ -744,8 +744,7 @@ body {
   gap: 0.6rem;
   font-family: var(--mono);
   font-size: 0.64rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--rule);
@@ -753,11 +752,10 @@ body {
 
 .proj-tile-title {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.95rem;
   line-height: 1.22;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--text);
 }
 
@@ -771,8 +769,7 @@ body {
 .proj-tile-foot {
   font-family: var(--mono);
   font-size: 0.62rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--accent);
   margin-top: auto;
 }
@@ -791,12 +788,12 @@ body {
 .skill-row { padding: 0.9rem 0; border-bottom: 1px solid var(--rule); }
 .skill-row:first-child { border-top: 1px solid var(--rule); }
 .skill-cat {
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-family: var(--display);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   color: var(--text);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 /* ── CONTACT ──────────────────────────────────────────────────────────── */
@@ -823,8 +820,7 @@ body {
 .contact-link-label {
   font-family: var(--mono);
   font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
 }
 .contact-link-val {
@@ -832,7 +828,6 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: -0.01em;
-  text-transform: uppercase;
   color: var(--text);
   word-break: break-word;
 }
@@ -845,8 +840,7 @@ body {
   margin-top: 1.6rem;
   font-family: var(--mono);
   font-size: 0.7rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
 }
 
@@ -862,8 +856,7 @@ body {
   gap: 0.5rem;
   font-family: var(--mono);
   font-size: 0.66rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
 }
 
@@ -923,8 +916,7 @@ body {
   top: 0.6rem; left: 0.6rem;
   font-family: var(--mono);
   font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   background: var(--ink);
   color: var(--accent-on);
   padding: 0.15rem 0.4rem;
@@ -962,15 +954,14 @@ body {
 .gal-count {
   font-family: var(--mono);
   font-size: 0.68rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
   color: var(--muted);
   white-space: nowrap;
 }
 .gal-pause {
   font-family: var(--mono);
   font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   background: none;
   border: 1px solid var(--rule);
   color: var(--text);
@@ -1017,8 +1008,7 @@ body {
 .gal-modal-close {
   font-family: var(--mono);
   font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   background: none;
   border: 1px solid rgba(255,255,255,0.4);
   color: #fff;
@@ -1174,8 +1164,7 @@ html.dark {
   gap: 0.35rem;
   font-family: var(--mono);
   font-size: 0.62rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
   padding-bottom: 0.45rem;
   border-bottom: 1px solid var(--rule);
@@ -1183,11 +1172,10 @@ html.dark {
 
 .write-card-title {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.95rem;
   line-height: 1.22;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: var(--text);
 }
 
@@ -1201,8 +1189,7 @@ html.dark {
 .write-card-link {
   font-family: var(--mono);
   font-size: 0.62rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--accent);
   margin-top: auto;
 }
@@ -1242,8 +1229,7 @@ code {
 .edu-year {
   font-family: var(--mono);
   font-size: 0.64rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   color: var(--muted);
   padding-bottom: 0.5rem;
   margin-bottom: 0.7rem;

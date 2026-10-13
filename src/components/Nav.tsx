@@ -126,7 +126,7 @@ export default function Nav() {
           className="nav-logo"
           aria-label="Back to top"
         >
-          <img src="/avatar.png" alt="" width={40} height={40} />
+          siddhi more
         </button>
 
         {/* Desktop */}
