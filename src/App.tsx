@@ -1,11 +1,8 @@
 import Nav      from './components/Nav';
 import Index    from './components/Index';
-import About    from './components/About';
 import Academic from './components/Academic';
-import Projects from './components/Projects';
-import Toolbox  from './components/Toolbox';
 import Writing  from './components/Writing';
-import Contact  from './components/Contact';
+import Footer   from './components/Footer';
 import { lazy, Suspense } from 'react';
 import { useHashRoute } from './lib/useHashRoute';
 import './index.css';
@@ -17,6 +14,7 @@ import './blog.css';
 const BlogPost      = lazy(() => import('./components/BlogPost'));
 const CommentsAdmin = lazy(() => import('./components/CommentsAdmin'));
 const Gallery       = lazy(() => import('./components/Gallery'));
+const Portfolio     = lazy(() => import('./components/Portfolio'));
 
 function RouteFallback() {
   return (
@@ -41,26 +39,22 @@ export default function App() {
         {route.name === 'gallery' && (
           <Suspense fallback={<RouteFallback />}><Gallery /></Suspense>
         )}
+        {route.name === 'portfolio' && (
+          <Suspense fallback={<RouteFallback />}><Portfolio /></Suspense>
+        )}
         {route.name === 'admin' && (
           <Suspense fallback={<RouteFallback />}><CommentsAdmin /></Suspense>
         )}
         {route.name === 'home' && (
           <>
             <Index />
-            <About />
             <Academic />
-            <Projects />
-            <Toolbox />
             <Writing />
-            <Contact />
           </>
         )}
       </main>
 
-      <footer className="site-footer">
-        <span>© {new Date().getFullYear()} Siddhi More · Boston, MA</span>
-        <span>React · Vite · TypeScript</span>
-      </footer>
+      <Footer />
     </>
   );
 }

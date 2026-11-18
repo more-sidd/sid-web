@@ -4,6 +4,7 @@ export type Route =
   | { name: 'home' }
   | { name: 'post'; slug: string }
   | { name: 'gallery' }
+  | { name: 'portfolio' }
   | { name: 'admin' };
 
 /**
@@ -11,6 +12,7 @@ export type Route =
  * Netlify, Vercel) with no server rewrite rules and no router dependency.
  *   #/blog/my-post  →  { name: 'post', slug: 'my-post' }
  *   #/gallery       →  { name: 'gallery' }
+ *   #/portfolio     →  { name: 'portfolio' }
  *   #/blog-admin    →  { name: 'admin' }
  *   anything else   →  { name: 'home' }
  *
@@ -24,6 +26,7 @@ function parse(hash: string): Route {
   const postMatch = path.match(/^\/blog\/([A-Za-z0-9._-]+)\/?$/);
   if (postMatch) return { name: 'post', slug: postMatch[1] };
   if (/^\/gallery\/?$/.test(path)) return { name: 'gallery' };
+  if (/^\/portfolio\/?$/.test(path)) return { name: 'portfolio' };
   if (/^\/blog-admin\/?$/.test(path)) return { name: 'admin' };
   return { name: 'home' };
 }

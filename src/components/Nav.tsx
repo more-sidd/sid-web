@@ -2,21 +2,27 @@ import { useState, useEffect } from 'react';
 import { useHashRoute, goHome, navigate } from '../lib/useHashRoute';
 import { resume } from '../lib/resume';
 
-/* The site map draws four arrows out of the nav, so there are four links.
-   `covers` is every section a link owns, which keeps the right one lit while
-   you scroll through the rest of its group. Projects and the toolbox sit
-   under Work; the gallery has its own button in every section header. */
-const LINKS = [
-  { target: 'about',    label: 'About',      covers: ['about'] },
-  { target: 'academic', label: 'Background', covers: ['academic'] },
-  { target: 'projects', label: 'Work',       covers: ['projects', 'toolbox'] },
-  { target: 'writing',  label: 'Blog',       covers: ['writing'] },
-  { target: 'contact',  label: 'Contact',    covers: ['contact'] },
+/* One ordered list so routes and scroll targets can interleave: Portfolio
+   is a page of its own but belongs after Background in the reading order,
+   not tacked on after Contact.
+
+   `covers` is every section a scroll link owns, which keeps the right one
+   lit while you scroll through the rest of its group. */
+type NavItem =
+  | { kind: 'scroll'; label: string; target: string; covers: string[] }
+  | { kind: 'route';  label: string; to: string; route: string };
+
+const LINKS: NavItem[] = [
+  { kind: 'scroll', label: 'About',      target: 'index',    covers: ['index'] },
+  { kind: 'scroll', label: 'Background', target: 'academic', covers: ['academic'] },
+  { kind: 'route',  label: 'Portfolio',  to: '/portfolio',   route: 'portfolio' },
+  { kind: 'scroll', label: 'Blog',       target: 'writing',  covers: ['writing'] },
+  { kind: 'route',  label: 'Gallery',    to: '/gallery',     route: 'gallery' },
 ];
 
 /** Which nav group owns the section currently in view. */
 const groupFor = (sectionId: string) =>
-  LINKS.find(l => l.covers.includes(sectionId))?.target ?? '';
+  LINKS.find(l => l.kind === 'scroll' && l.covers.includes(sectionId))?.label ?? '';
 
 function SunIcon() {
   return (
@@ -133,20 +139,16 @@ export default function Nav() {
         <div className="hidden md:flex items-center gap-7">
           {LINKS.map(l => (
             <button
-              key={l.target}
-              onClick={() => scrollTo(l.target)}
-              className={`nav-link ${groupFor(active) === l.target ? 'nav-link-active' : ''}`}
+              key={l.label}
+              onClick={() => (l.kind === 'route' ? navigate(l.to) : scrollTo(l.target))}
+              className={`nav-link ${
+                (l.kind === 'route' ? route.name === l.route : groupFor(active) === l.label)
+                  ? 'nav-link-active' : ''
+              }`}
             >
               {l.label}
             </button>
           ))}
-
-          <button
-            onClick={() => navigate('/gallery')}
-            className={`nav-link ${route.name === 'gallery' ? 'nav-link-active' : ''}`}
-          >
-            Gallery
-          </button>
 
           <ThemeToggle dark={dark} onToggle={() => setDark(d => !d)} />
 
@@ -181,17 +183,20 @@ export default function Nav() {
         <div className="mobile-menu">
           {LINKS.map(l => (
             <button
-              key={l.target}
-              onClick={() => scrollTo(l.target)}
+              key={l.label}
+              onClick={() => {
+                if (l.kind === 'route') { setOpen(false); navigate(l.to); }
+                else scrollTo(l.target);
+              }}
               className="mobile-link"
-              style={groupFor(active) === l.target ? { color: 'var(--text)' } : undefined}
+              style={
+                (l.kind === 'route' ? route.name === l.route : groupFor(active) === l.label)
+                  ? { color: 'var(--text)' } : undefined
+              }
             >
               {l.label}
             </button>
           ))}
-          <button className="mobile-link" onClick={() => { setOpen(false); navigate('/gallery'); }}>
-            Gallery
-          </button>
           <a {...resume.linkProps} className="mobile-link" onClick={() => setOpen(false)}>
             Resume {resume.glyph}
           </a>
