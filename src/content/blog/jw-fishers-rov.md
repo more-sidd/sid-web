@@ -1,30 +1,29 @@
 ---
 title: Visiting JW Fishers and Driving Their ROV
 date: 2026-05-29
-excerpt: JW Fishers builds underwater search equipment in East Taunton, MA. I toured the shop and got to fly one of their ROVs in the test pool.
+excerpt: JW Fishers has built underwater search gear in East Taunton for over sixty years. I toured the shop and flew one of their ROVs in the test pool.
 tags: [Robotics, Field Notes]
 cover: /gallery/jw1.jpg
 coverAlt: A yellow JW Fishers ROV on a workbench in the shop
 draft: false
 ---
 
-I visited JW Fishers in East Taunton, about 45 miles south of Boston. They
-build underwater search equipment including sonar, metal detectors and
-cameras. It is a family business and has been running for over sixty years.
+I visited JW Fishers in East Taunton, roughly 45 miles south of Boston. For more
+than sixty years, this family-owned company has built underwater search gear
+like sonar systems, metal detectors, and marine cameras.
 
-They design and build their ROV in house. It has seven thrusters, two HD
-cameras, lights, a gripper, a swappable payload bay, and a depth rating of
-1,000 feet. Communications run on ROS2.
-
-The ROV is smaller in person than the spec sheet suggests. It has a yellow
-pressure hull, a domed acrylic port with the camera behind it, thrusters in
-black cowls, and buoyancy floats strapped to a PVC skid.
+They handle the full design and fabrication of their ROV in house. The system
+features seven thrusters, dual HD cameras, lights, a gripper, a modular payload
+bay, and a 1,000-foot depth rating, with ROS2 handling internal communications.
+Up close on the workbench, it feels surprisingly compact for a vehicle with that
+capability. Its layout pairs a yellow pressure housing and domed acrylic camera
+port with black-cowled thrusters and buoyancy floats mounted onto a PVC skid.
 
 ![The surface control unit opened up beside the pool](/gallery/jw2.jpg)
 
-The surface control unit is a single case holding the power supply, a small
-single-board computer, several custom boards and a lot of ribbon cable. That
-case is the operator's whole interface to the vehicle.
+The entire operator interface fits inside one portable surface control case
+containing the power supply, a small single-board computer, custom circuit
+boards, and dense ribbon cable routing.
 
 <div class="post-video">
   <video controls preload="metadata" playsinline>
@@ -33,11 +32,12 @@ case is the operator's whole interface to the vehicle.
   </video>
 </div>
 
-We then got to drive the ROV around the test pool. There is lag down the
-tether and the thrusters take a moment to respond, so the vehicle drifts while
-you are deciding what to do. It got easier after about ten minutes.
+We then spent time driving the vehicle in their test pool. Because of tether
+latency and thruster spin-up lag, the ROV drifts noticeably between commands,
+making it easy to overshoot at first. After ten minutes of getting a feel for
+the fluid drag and response delay, maneuvering became much more intuitive.
 
 ![The ROV's own camera looking up from a foot and a half of water](/gallery/jw4.jpg)
 
-That image is the view from the ROV's own camera looking back up at the group,
-at a depth of 1.4 feet.
+Here is the live view from the ROV's camera peering back up at the group from a
+depth of 1.4 feet.

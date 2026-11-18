@@ -4,6 +4,8 @@ export interface Project {
   /** Short label for tiles and the index panel. Falls back to `title`,
    *  which stays the full line shown in the modal. */
   shortTitle?: string;
+  /** Free text date range, e.g. "January 2026 to July 2026". */
+  dates?: string;
   category: string;
   thumbnail?: string;
   images?: string[];      // photo strip in card + gallery in modal
@@ -37,6 +39,8 @@ export interface Experience {
   startDate: string;
   endDate: string;
   responsibilities: string[];
+  /** Rendered as tags under the bullets. */
+  tools?: string[];
 }
 
 export interface Education {

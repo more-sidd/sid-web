@@ -53,28 +53,17 @@ export const education: Education[] = [
 export const experience: Experience[] = [
   {
     id: "exp1",
-    title: "Robotics Intern",
-    company: "IIT Bombay & 1Stop.ai",
+    title: "4-DOF SCARA Robot: Kinematics & Structural Design",
+    company: "Robotics & CAD Intern · IIT Bombay (via 1Stop.ai)",
     location: "Mumbai, India",
     startDate: "Feb 2022",
     endDate: "Apr 2022",
     responsibilities: [
-      "Developed forward and inverse kinematic solvers for a 4-DOF SCARA robot in MATLAB; applied DH parameter analysis for full workspace characterization and validated motion configurations in Robo-Analyzer.",
-      "Independently designed the complete SCARA robot assembly in SolidWorks — modeled arm links, base, end effector, and board with full part documentation and multi-view engineering renders.",
-      "Validated structural integrity and payload capacity under static load cases in ANSYS Workbench, evaluating max stress and deformation margins.",
+      "Modeled, simulated, and structurally validated a 4-DOF SCARA robotic arm from kinematic derivation to production-ready CAD.",
+      "Kinematics & Path Validation: Derived DH parameters and built forward/inverse kinematics solvers in MATLAB, hitting sub-millimeter end-effector accuracy across the full workspace in Robo-Analyzer.",
+      "Structural Optimization & DFM: Ran max-payload static FEA in ANSYS Workbench to catch and eliminate a critical stress concentration, then delivered SolidWorks models with full GD&T and manufacturing tolerances.",
     ],
-  },
- {
-    id: "exp2",
-    title: "CAD Intern",
-    company: "IIT Bombay & 1Stop.ai",
-    location: "Mumbai, India",
-    startDate: "May 2022",
-    endDate: "Aug 2022",
-    responsibilities: [
-       "Created and refined 3D mechanical component models in AutoCAD and CAD/CAM software; developed precision engineering drawings and part documentation aligned with manufacturing standards.",
-      "Modeled and assembled components following technical specifications; gained industry-standard drafting and documentation practices applicable to real manufacturing workflows.",
-    ],
+    tools: ["MATLAB", "SolidWorks", "ANSYS Workbench", "Robo-Analyzer", "GD&T"],
   },
 ];
 
@@ -102,244 +91,174 @@ export const skills: Skill[] = [
 ];
 
 export const projects: Project[] = [
- {
-    id: "proj1",
-    title: "Pupper v3 - A quadruped robot developed by Stanford University, currently learning to take its baby steps in Boston",
-    shortTitle: "Pupper v3",
-    category: "Legged Robots/ Quadrupeds",
+  {
+    id: "proj-auv",
+    title: "AUV GPS-Denied Navigation",
+    category: "Autonomous Navigation",
+    dates: "September 2026 to Present",
     status: "in-progress",
-    description: "Pupper v3 is a cute companion robot designed to spark joy and teach robotics and AI.",
-    fullDescription: "Pupper is an agile quadruped robot developed by Stanford University for learning legged robotics (CS 123). It focuses on developing efficient and adaptive locomotion strategies for quadrupedal robots.",
-    objectives: [
-      "Develop a comprehensive understanding of legged robotics principles and applications.",
-      "Implement and test advanced control algorithms for dynamic locomotion.",
-      "Establish an outreach program for promoting legged robotics education and research in Boston high schools."
+    description: "This project focused on solving underwater localization for an autonomous underwater vehicle (AUV) operating without GPS at Northeastern University. From this work, I gained practical experience in state estimation, sensor noise modeling, and building Extended Kalman Filters from scratch.",
+    fullDescription: "Underwater vehicles lose GPS access immediately below the surface, which makes relying on onboard inertial and velocity sensors prone to severe drift over long missions. The goal of this project was to simulate a realistic underwater survey environment and develop a sensor fusion pipeline capable of keeping position estimates accurate using acoustic beacons and onboard sensors.",
+    objectives: [],
+    goals: [],
+    keyTakeaways: [],
+    results: [
+      "Built a Python simulation of an AUV running a 100 x 100 m lawnmower survey at roughly 1 m/s, generating ground truth poses alongside noisy IMU, DVL, depth, and acoustic beacon range data with adjustable noise levels, ping rates, and beacon counts.",
+      "Implemented a dead reckoning baseline that rotates DVL velocity by IMU heading to measure and visualize unbounded position drift against ground truth.",
+      "Developed an Extended Kalman Filter (EKF) with analytic Jacobians to fuse DVL, IMU heading, depth, and nonlinear acoustic beacon ranges, validating the math on clean data before introducing sensor noise.",
     ],
-    goals: [
-  "Run baseline push tests and characterize disturbance response using the BNO086 IMU.",
-  "Deploy a ROS2 reflex safety layer that reacts to falls in real time.",
-  "Retrain the MuJoCo MJX RL policy in simulation with push and IMU-noise domain randomization.",
-  "Validate the retrained policy sim-to-real on hardware.",
-   ],
-results: [
-  "Confirmed the deployed policy architecture: a 720-dim observation space with 20-step history feeding a 1024→512→512→512→12 MLP with ELU activations, PD gains kp=5.0 / kd=0.25.",
-  "Traced the IMU signal path from the BNO086 to the observation vector, isolating projected gravity vector and angular velocity as the primary disturbance-sensing signals.",
-  "Paired a PS5 DualSense controller over Bluetooth for teleoperation and confirmed a camera pipeline dropout is non-blocking to walking.",
-    ],
-keyTakeaways: [
-  "Push-recovery failure can be framed as an empirical delay-margin problem on a nonlinear legged system.",
-  "A fast-iterating platform like Pupper enables testing disturbance rejection ideas in hours rather than weeks.",
-  ],
-    images: [
-    "/gallery/Pupper1.jpg",
-    "/gallery/Pupper2.jpg",
-    "/gallery/Pupper3.jpg",
-    
-  ],
-    github: "https://bostonrobothackers.com/projects/pupper.html",
   },
-
-
+  {
+    id: "proj1",
+    title: "Stanford University Pupper V3 Research",
+    shortTitle: "Pupper V3",
+    category: "Legged Robots/ Quadrupeds",
+    dates: "June 2026 to Present",
+    status: "in-progress",
+    description: "This ongoing research project in Boston involves building and programming a Stanford Pupper V3 quadruped robot for community robotics education. Through this project, I have been bridging physical hardware assembly with simulation validation and reinforcement learning for legged locomotion.",
+    fullDescription: "Legged robots require careful mechanical assembly and adaptive control policies to walk reliably outside of controlled environments. The goal of this project is to get a physical Pupper V3 platform running smoothly for educational demonstrations while exploring whether reinforcement learning policies can outperform traditional, hand-tuned gait schedules.",
+    objectives: [],
+    goals: [],
+    keyTakeaways: [],
+    results: [
+      "Executed the physical hardware assembly of the Stanford Pupper V3 quadruped and implemented low-level gait control algorithms.",
+      "Validated robot kinematics and joint behavior using URDF-based simulations in MuJoCo before testing on physical hardware.",
+      "Currently training a reinforcement learning locomotion policy in simulation to replace manually tuned gait scheduling, with real-world hardware deployment underway.",
+    ],
+    images: [
+      "/gallery/Pupper4.jpg",
+      "/gallery/Pupper1.jpg",
+      "/gallery/Pupper2.jpg",
+      "/gallery/Pupper3.jpg",
+    ],
+  },
   {
     id: "proj2",
-    title: "Powered Ankle Prosthesis — Predictive Bilateral Control",
+    title: "Smart Ankle Prosthetics",
     category: "Wearable Robotics",
-    status: "in-progress",
-    description: "Closed-loop impedance-controlled prosthetic ankle with a 36:1 planetary gearbox, 200Hz ESP32 gait phase estimator, and OpenSim-validated ML terrain classification at 85.9% accuracy.",
-    fullDescription: "Below-knee amputees face significant challenges adapting to varying terrain. Current passive prostheses cannot adjust ankle stiffness across activities, resulting in excessive metabolic cost and increased fall risk. This project addresses that through a powered ankle prosthesis combining phase-portrait gait estimation with predictive control to deliver biomechanically timed assistive torque.",
-    objectives: [
-      "Design and fabricate a backdrivable, compact 36:1 compound planetary gearbox for ankle actuation.",
-      "Build a 200Hz real-time gait phase estimation pipeline fusing IMU and FSR data on ESP32-S2.",
-      "Validate system performance against OpenSim Gait2392 musculoskeletal simulation across varied terrain.",
-    ],
-    goals: [
-      "Deliver biomechanically timed assistive torque across varied terrain.",
-      "Demonstrate reliable real-time gait estimation and predictive control on embedded hardware.",
-      "Establish a validated foundation for a robust, deployable powered ankle prosthesis.",
-    ],
+    dates: "January 2026 to July 2026",
+    status: "complete",
+    description: "This project centered on building an embedded control and sensing pipeline for a powered ankle prosthesis at Northeastern University. Working on this system gave me hands-on experience debugging real-time microcontroller sensor data, compensating for hardware latency, and validating biomechanical models.",
+    fullDescription: "Powered ankle prosthetics need to detect where a user is in their walking stride and apply torque at the exact right moment without noticeable lag. The goal was to build a reliable real-time gait-phase classifier on an embedded microcontroller, compensate for communication delays, and verify the control strategy across different walking terrains.",
+    objectives: [],
+    goals: [],
+    keyTakeaways: [],
     results: [
-      "Designed 36:1 Bilateral Drive compound planetary gearbox in Fusion 360 (61.9 Nm theoretical, 44.6 Nm realistic at η=72%); 3D printed in PLA, integrated with Moteus C1 brushless controller via CAN-FD at 100Hz command loop.",
-      "Built 200Hz gait phase pipeline: complementary filter (α=0.98) fusing MPU6050 IMU + heel FSR; 4th-order Butterworth LPF at 4Hz; central-difference angular velocity reconstruction eliminating ±250°/s gyro clipping artifact; 75ms linear predictive model compensating CAN-FD command latency.",
-      "OpenSim ML validation: 85.9% terrain classification accuracy across 7 activity classes; ankle angle RMSE 3.91°; MOCO stair-climbing peak dorsiflexion 12.5° vs. predicted 11.7°.",
-    ],
-    keyTakeaways: [
-      "Replacing raw gyroscope output with central-difference derivative of filtered angle eliminated a critical 54%/45% Mid-Stance/Push-Off distribution artifact.",
-      "A 75ms predictive model is necessary to compensate end-to-end CAN-FD pipeline latency and correctly time torque delivery at push-off.",
-      "PLA gearbox teeth fracture under repeated impact loading at heel strike — PETG or Nylon required for physical deployment.",
+      "Built an ESP32-S2 sensor fusion pipeline combining an MPU6050 IMU and heel FSR with a 100 Hz complementary filter for real-time gait-phase classification.",
+      "Diagnosed a gyroscope clipping bug where 11.8% of samples saturated at plus or minus 250 deg/s and skewed gait distribution to 54%/45%, resolving it with central-difference velocity reconstruction to restore the expected 25% split across all four gait states.",
+      "Implemented 75 ms latency-compensated predictive control and sent 2.0 Nm feedforward torque commands to a Moteus C1 motor controller over CAN-FD in a stable 100 Hz loop.",
+      "Validated the control architecture in OpenSim (Gait2392 model) paired with a machine learning terrain classifier, hitting 85.9% accuracy across 7 activity classes and 3.91 deg ankle-angle RMSE.",
     ],
     images: [
-    "/gallery/pros-v2-hand.jpg",
-    "/gallery/pros-v2-bench.jpg",
-    "/gallery/pros-cad.jpg",
-    "/gallery/fsr-data.jpg",
-  ],
-    github: "https://github.com/more-sidd/Predictive-Bilateral-Control-for-a-Powered-Ankle-Prosthesis",
+      "/gallery/pros-v2-hand.jpg",
+      "/gallery/pros-v2-bench.jpg",
+      "/gallery/pros-cad.jpg",
+      "/gallery/fsr-data.jpg",
+    ],
   },
-
   {
     id: "proj3",
-    title: "Wearable Hearing System — GCC-PHAT Sound Triangulation",
+    title: "Sound Triangulation & Doppler Detection",
     category: "Assistive Robotics",
+    dates: "September 2025 to December 2025",
     status: "complete",
-    description: "Wearable assistive device for hearing-impaired users that classifies safety-critical sounds and delivers real-time directional haptic feedback using GCC-PHAT TDOA localization — ±10° accuracy, <100ms latency.",
-    fullDescription: "430 million people worldwide live with disabling hearing loss, creating a critical safety gap in urban environments where auditory cues from approaching vehicles are inaccessible. This project developed a wearable system combining microphone array triangulation with Doppler effect analysis to identify specific safety sounds, pinpoint their source, and determine if they are approaching.",
-    objectives: [
-      "Classify safety-critical sounds (horns, sirens) against urban ambient noise in real time.",
-      "Localize sound source direction to within ±10° using a wearable microphone array.",
-      "Classify source motion as Approaching or Receding and estimate Closest Point of Approach.",
-    ],
-    goals: [
-      "Provide hearing-impaired users with reliable awareness of safety-critical sounds.",
-      "Deliver accurate real-time directional haptic feedback with low end-to-end latency.",
-      "Demonstrate robust sound localization and motion classification in realistic urban noise.",
-    ],
+    description: "This project involved building an acoustic localization and motion detection system at Northeastern University. Through this work, I gained practical insight into array signal processing, microphone geometry trade-offs, and real-time audio classification.",
+    fullDescription: "Identifying where a sound is coming from and whether it is moving toward or away from a sensor is critical for assistive devices and autonomous awareness. The goal was to design an optimal microphone array geometry and build a low-latency processing pipeline capable of accurately triangulating sound sources and classifying Doppler shifts.",
+    objectives: [],
+    goals: [],
+    keyTakeaways: [],
     results: [
-      "Built FFT/STFT pipeline (90ms frames) achieving 95% classification accuracy for horns (505–516 Hz) and sirens (400–1300 Hz) against ambient urban noise.",
-      "Implemented GCC-PHAT TDOA with 4-microphone square array — 0.13° angular error with 4 mics (optimal); ±10° across practical outdoor range; validated 0.5° error at 45°/10m.",
-      "Doppler motion analysis via polynomial curve-fitting for CPA identification; validated on real police siren recordings; fused output: direction 6.3°, speed 25.0 m/s, <100ms end-to-end pipeline latency.",
+      "Implemented GCC-PHAT time-difference-of-arrival (TDOA) localization, achieving 0.5 deg angular error during validation testing (44.5 deg estimated vs. 45 deg true angle) at a 10 m distance.",
+      "Ran a sensitivity study across microphone spacings (10 to 90 mm) and array sizes (2 to 8 mics), identifying a 4-microphone square layout with 50 to 90 mm spacing as the sweet spot (0.13 deg simulated error compared to 20 to 26 deg at tighter spacings).",
+      "Built a parallel FFT-based Doppler motion classifier using a 400 to 1300 Hz bandpass filter to distinguish approaching from receding sources, validated on real police siren recordings with under 100 ms end-to-end latency.",
     ],
-    keyTakeaways: [
-      "4-microphone square array is optimal — 2-mic arrays produce 180° ambiguity unsolvable for 2D localization.",
-      "GCC-PHAT outperforms standard cross-correlation in noisy outdoor environments by relying solely on phase information.",
-      "Doppler frequency shift analysis reliably distinguishes stationary from approaching sources even in real urban noise conditions.",
-    ],
-
-  images: [
-    "/gallery/car-horn-detection.png",
-  ],
-    github: "https://github.com/more-sidd/A-Doppler-Based-Wearable-device-for-Directional-Awareness",
+    images: ["/gallery/car-horn-detection.png"],
   },
-
   {
     id: "proj4",
-    title: "Autonomous SLAM Navigation — ROS2 & TurtleBot3",
+    title: "ROS2/Gazebo TurtleBot3 SLAM Trajectory Generation",
+    shortTitle: "TurtleBot3 SLAM Trajectory Generation",
     category: "Autonomous Navigation",
+    dates: "January 2025 to April 2025",
     status: "complete",
-    description: "Custom ROS2 control package replacing manual teleoperation with automated closed-loop trajectory execution for consistent autonomous SLAM map generation. Report: 97/100.",
-    fullDescription: "Manual teleoperation for SLAM mapping is unreliable — human error causes collisions, inconsistent coverage, and poor map quality. This project developed turtlebot3_control, a ROS2 package that automates trajectory execution with Cartographer SLAM and Nav2 running in parallel, enabling consistent, reproducible autonomous mapping.",
-    objectives: [
-      "Replace manual teleoperation with automated closed-loop trajectory control for SLAM.",
-      "Achieve consistent map density and trajectory accuracy across varied environments.",
-      "Validate odometry performance and characterize drift through rosbag analysis.",
-    ],
-    goals: [
-      "Enable reliable, repeatable autonomous SLAM map generation without manual teleoperation.",
-      "Minimize trajectory error and collisions across varied simulated environments.",
-      "Use odometry and rosbag analysis to validate navigation performance and diagnose drift.",
-    ],
+    description: "This project focused on automating indoor mapping and navigation for a TurtleBot3 mobile robot in ROS2 and Gazebo at Northeastern University. From this project, I learned how to tune closed-loop controllers around real hardware velocity limits and validate autonomous trajectories.",
+    fullDescription: "Standard SLAM workflows often rely on manual keyboard teleoperation, which is slow and hard to reproduce. The goal of this project was to replace manual driving with an autonomous waypoint-following controller that avoids obstacles and hits repeatable target poses.",
+    objectives: [],
+    goals: [],
+    keyTakeaways: [],
     results: [
-      "Developed turtlebot3_control ROS2 package with distance/heading control modes (10Hz callback), Cartographer SLAM + Nav2 in parallel, LIDAR collision detection, and velocity clamping at 0.22 m/s.",
-      "Achieved centimeter-level translation error (square: 0.053m, hash: 0.070m) and milliradian yaw error (0.093 rad); validated across 10-sample spawn pose characterization.",
-      "Rosbag frequency analysis: /odom 9.49Hz, /tf 20.2Hz; designed custom Gazebo environment with narrow paths to stress-test LiDAR SLAM performance.",
+      "Built a closed-loop waypoint controller in ROS2 using a distance and heading control law running on a 10 Hz callback, complete with LIDAR-based collision detection.",
+      "Diagnosed a velocity clamping issue where the feedforward control law conflicted with the TurtleBot3's 0.22 m/s hardware speed limit and caused trajectory instability, fixing it by retuning the control gains.",
+      "Achieved repeatable final-pose accuracy within 5.3 to 7.0 cm of translation error and roughly 93 mrad of yaw error across independent trajectories, validated against 10 ground-truth spawn samples.",
     ],
-    keyTakeaways: [
-      "Hash trajectory covers more interior map points but accumulates more odometry error than perimeter-focused square trajectory.",
-      "Velocity clamping at hardware spec (0.22 m/s) is critical — removing it causes exponential response instability and collision.",
-      "Rosbag frequency histograms are a practical tool for diagnosing odometry drift and sensor update rate issues.",
-    ],
-
-    images: [
-    "/gallery/custom-env-turtlebot.png",
-  ],
-
-    github: "https://github.com/more-sidd/Turtlebot3-Navigation-using-SLAM",
-  },
-  {
-    id: "proj5",
-    title: "Aquatic Hyacinth Cleaner — Q-Learning Navigation Agent",
-    category: "Reinforcement Learning",
-    status: "complete",
-    description: "Q-learning agent with partial observability solving autonomous aquatic navigation for invasive species removal — 100% completion rate from episode 400 of 5000, clearing all 20 targets in 94 steps.",
-    fullDescription: "A physical aquatic robot can only sense what its sensors detect within a certain range — it cannot see the entire pond at once. This project designed a Q-learning agent operating under partial observability constraints to navigate a grid-based pond simulation, avoid obstacles, and efficiently remove invasive water hyacinth.",
-    objectives: [
-      "Train an autonomous agent to navigate a partially observable grid environment.",
-      "Solve the blind navigation problem using zone-based state representation.",
-      "Achieve 100% hyacinth removal without global map knowledge.",
-    ],
-    goals: [
-      "Train an autonomous agent to navigate a partially observable grid environment.",
-      "Solve the blind navigation problem using zone-based state representation.",
-      "Achieve 100% hyacinth removal without global map knowledge.",
-    ],
-    results: [
-      "Q-learning agent (ε=1.0 decaying at 0.995/episode, lr=0.2, γ=0.95) on 20×20 grid with 30 obstacles and 20 targets; 100% completion rate sustained from episode 400 of 5000.",
-      "Solved partial observability with 4×4 position zone encoding (16 blind-navigation policies) + coverage-scaled exploration bonus inspired by SLAM discovery phases.",
-      "Final greedy evaluation: cleared all 20 hyacinths in 94 steps; multi-robot coordination ready via shared visited-cells map.",
-    ],
-    keyTakeaways: [
-      "Naive global-state representation fails under partial observability — zone encoding with 16 policies resolves navigation deadlocks the prior approach could not.",
-      "Map reshuffling every 500 episodes balances stable Q-table convergence with generalizability to novel obstacle layouts.",
-      "Coverage-scaled exploration bonus, inspired by SLAM, actively prevents the agent from revisiting already-cleared regions.",
-    ],
-
-    images: [
-    "/gallery/grid-visualization.png",
-  ],
-
-    github: "https://github.com/more-sidd/hyacinth-cleaner-bot",
+    images: ["/gallery/custom-env-turtlebot.png"],
   },
   {
     id: "proj6",
-    title: "Semi-Autonomous Aquatic Robot — Smart India Hackathon",
+    title: "Semi-Autonomous Aquatic Cleanup Robot",
     category: "Autonomous Systems",
+    dates: "July 2023 to October 2023",
     status: "complete",
-    description: "Multi-microcontroller aquatic robot with CNN-based hyacinth classification (87.5% accuracy), full EasyEDA circuit schematic, and end-to-end hyacinth-to-textile processing pipeline.",
-    fullDescription: "Invasive water hyacinth causes severe ecological damage to freshwater bodies across India. This Smart India Hackathon project designed a semi-autonomous robot to remove and process the plant — combining multi-microcontroller embedded electronics, computer vision, SolidWorks FEA, and textile fabrication into a single end-to-end system.",
-    objectives: [
-      "Design a multi-microcontroller architecture for coordinated aquatic robot control.",
-      "Build and train a CNN classifier to identify hyacinth vs. clear water in real time.",
-      "Validate crusher mechanism structural integrity and design hyacinth processing pipeline.",
-    ],
-    goals: [
-      "Design a multi-microcontroller architecture for coordinated aquatic robot control.",
-      "Build and train a CNN classifier to identify hyacinth vs. clear water in real time.",
-      "Validate crusher mechanism structural integrity and design hyacinth processing pipeline.",
-    ],
+    description: "This project was built for the Smart India Hackathon to tackle invasive water hyacinth growth in local waterways. Through this experience, I learned how to coordinate multi-microcontroller hardware systems and validate mechanical assemblies under real operating loads.",
+    fullDescription: "Clearing dense water hyacinth manually is slow and labor-intensive. The goal was to design and build an aquatic robot capable of navigating waterways, collecting surface weeds with a rotating drum, and crushing them onboard for compact storage.",
+    objectives: [],
+    goals: [],
+    keyTakeaways: [],
     results: [
-      "Designed complete multi-microcontroller architecture and drew full circuit schematic in EasyEDA — ESP32 master node controlling 4 Arduino Nano slaves over I2C for propulsion, drum/crusher, servo, and ultrasonic obstacle avoidance; L298N motor drivers, rotary encoders, buck converters (24V→12V/5V).",
-      "Built and trained CNN (TensorFlow 2.0, Keras) on 991 images — 87.5% test accuracy for hyacinth vs. clear water classification; ran SolidWorks FEA (von Mises stress analysis) on crusher drum to validate structural integrity under load.",
-      "Designed end-to-end hyacinth processing pipeline from harvesting and crushing through textile fiber production; worked directly with textile fabrication machinery.",
+      "Designed a distributed embedded control architecture using one ESP32 master and four Arduino Nano slaves communicating over I2C to coordinate propulsion, crushing, and drum-servo subsystems.",
+      "Ran static finite element analysis (von Mises nodal stress) in SolidWorks on the collection drum assembly to verify structural safety margins under heavy collection loads.",
     ],
-    keyTakeaways: [
-      "I2C master-slave architecture with ESP32 as master enables clean separation of subsystem control across multiple Arduino Nano nodes.",
-      "Buck converters (24V→12V/5V) are essential for powering mixed-voltage embedded systems from a single battery source.",
-      "Von Mises stress FEA on the crusher drum identified stress concentrations that informed structural reinforcement before fabrication.",
-      ],
-      images: [
-    "/gallery/SIH-2.png",
-    ],
+    images: ["/gallery/SIH-2.png"],
   },
-
   {
     id: "proj7",
-    title: "Injection Molding FEA & DOE Optimization",
+    title: "Plastic Injection Molding Optimization via FEA & DOE",
+    shortTitle: "Injection Molding Optimization",
     category: "Manufacturing Simulation",
+    dates: "July 2023 to July 2024",
     status: "complete",
-    description: "Systematic DOE and ANOVA optimization of automotive airbag housing injection molding in SolidWorks Plastics — reduced sink marks by 20% and warpage by 11%. Published in AIP Conference Proceedings, ICAPSM 2024.",
-    fullDescription: "Automotive airbag housings are safety-critical components that must withstand high pressures during deployment. Defects like sink marks and warpage compromise both structural integrity and dimensional accuracy. This research applied Design of Experiments and ANOVA to identify the critical process parameter interactions driving these defects.",
-    objectives: [
-      "Identify critical process parameter interactions affecting sink marks and warpage in thin-shell injection molded components.",
-      "Apply DOE methodology to systematically explore the parameter space with minimum trials.",
-      "Publish validated optimization strategies for high-pressure automotive safety components.",
+    description: "This research project at Mumbai University focused on improving manufacturing quality for automotive plastic components through simulation and statistical testing. Completing this work gave me deep experience in Design of Experiments (DOE), molding simulation, and academic publishing.",
+    fullDescription: "Injection molding defects like sink marks and long cooling cycles drive up manufacturing costs and scrap rates. The goal was to systematically isolate which molding parameters actually control part quality and cycle time for an automotive airbag housing.",
+    objectives: [],
+    goals: [],
+    keyTakeaways: [],
+    results: [
+      "Authored a peer-reviewed paper as first author (published in AIP Conference Proceedings 3397, 2026) applying Design of Experiments and ANOVA to optimize injection molding parameters in SolidWorks Plastics.",
+      "Proved statistically that melt temperature (F = 159.0) and mold temperature (F = 440.0) are the primary drivers of cooling time compared to the F-critical threshold of 7.7.",
+      "Identified melt temperature (F = 10.8) and mold temperature (F = 8.2) as the key drivers behind sink-mark defects, while showing that injection pressure had no statistically significant effect.",
     ],
-    goals: [
-      "Identify critical process parameter interactions affecting sink marks and warpage in thin-shell injection molded components.",
-      "Apply DOE methodology to systematically explore the parameter space with minimum trials.",
-      "Publish validated optimization strategies for high-pressure automotive safety components.",
+    images: ["/gallery/sink-marks.png"],
+  },
+
+  /* ── Not in the latest content pass ──────────────────────────────────────
+     These two were on the site before and were not included in the rewrite.
+     Left in place rather than deleted, since removing work is not something
+     to do by inference. Delete these two entries if they are meant to go.
+     ─────────────────────────────────────────────────────────────────────── */
+  {
+    id: "proj5",
+    title: "Aquatic Hyacinth Cleaner — Q-Learning Navigation Agent",
+    shortTitle: "Q-Learning Navigation Agent",
+    category: "Reinforcement Learning",
+    status: "complete",
+    description: "Q-learning agent with partial observability solving autonomous aquatic navigation for invasive species removal: 100% completion rate from episode 400 of 5000, clearing all 20 targets in 94 steps.",
+    fullDescription: "A physical aquatic robot can only sense what its sensors detect within a certain range, so it cannot see the entire pond at once. This project designed a Q-learning agent operating under partial observability constraints to navigate a grid-based pond simulation, avoid obstacles, and efficiently remove invasive water hyacinth.",
+    objectives: [
+      "Train an autonomous agent to navigate a partially observable grid environment.",
+      "Solve the blind navigation problem using zone-based state representation.",
+      "Achieve 100% hyacinth removal without global map knowledge.",
+    ],
+    goals: [],
+    keyTakeaways: [
+      "Naive global-state representation fails under partial observability: zone encoding with 16 policies resolves navigation deadlocks the prior approach could not.",
+      "Map reshuffling every 500 episodes balances stable Q-table convergence with generalizability to novel obstacle layouts.",
     ],
     results: [
-      "Ran 2³ full-factorial DOE (8 trials) in SolidWorks Plastics varying melt temperature (275/300°C), mold temperature (75/95°C), and injection pressure (150/180 MPa) on PA6 Wellamid Nylon airbag housing.",
-      "ANOVA revealed melt temperature (F=159.0) and mold temperature (F=440.0) as statistically significant drivers of both cooling time and sink marks vs. F_crit=7.709; injection pressure non-significant.",
-      "Identified optimal parameter set reducing sink marks by 20% and warpage by 11%; authored and published peer-reviewed paper in AIP Conference Proceedings, ICAPSM 2024.",
+      "Q-learning agent on a 20x20 grid with 30 obstacles and 20 targets; 100% completion rate sustained from episode 400 of 5000.",
+      "Solved partial observability with 4x4 position zone encoding (16 blind-navigation policies) plus a coverage-scaled exploration bonus inspired by SLAM discovery phases.",
+      "Final greedy evaluation: cleared all 20 hyacinths in 94 steps; multi-robot coordination ready via a shared visited-cells map.",
     ],
-    keyTakeaways: [
-      "Mold temperature is the dominant factor (F=440.0) controlling both cooling time and sink mark formation — more influential than injection pressure.",
-      "Full-factorial DOE reveals critical two-factor interactions that single-variable analysis completely misses.",
-      "Cooling time accounts for ~70% of total cycle time, making it the highest-leverage target for production efficiency improvements.",
-    ],
-    images: [
-    "/gallery/sink-marks.png",
-  ],
+    images: ["/gallery/grid-visualization.png"],
   },
   {
     id: "proj8",
@@ -356,13 +275,22 @@ keyTakeaways: [
     goals: [
       "Build the drawing-reading fluency that later design work depends on, so a part can be understood from a sheet rather than from a 3D file.",
     ],
+    keyTakeaways: [
+      "Sectioning is where most drawing errors show up. Deciding where to cut, and then hatching only what the cut plane actually passes through, is the part that takes practice.",
+      "Modeling a coupling or a jig from its drawing forces you to notice fits and clearances that are easy to skip when designing straight into CAD.",
+    ],
     results: [
       "Eight machine elements modeled in SolidWorks: knuckle joint, universal joint, two drill jigs, clapper block, single tool post, protected type flange coupling and Oldham coupling.",
       "Six AutoCAD sheets covering orthographic projections with sectional views and isometric reconstructions, each dimensioned and titled.",
     ],
-    keyTakeaways: [
-      "Sectioning is where most drawing errors show up. Deciding where to cut, and then hatching only what the cut plane actually passes through, is the part that takes practice.",
-      "Modeling a coupling or a jig from its drawing forces you to notice fits and clearances that are easy to skip when designing straight into CAD.",
+    skills: [
+      "AutoCAD",
+      "SolidWorks",
+      "Orthographic Projection",
+      "Isometric Views",
+      "Sectional Views",
+      "Dimensioning",
+      "Machine Drawing",
     ],
     images: [
       "/cad/knuckle-joint.png",
@@ -380,7 +308,6 @@ keyTakeaways: [
       "/cad/autocad-5.png",
       "/cad/autocad-6.png",
     ],
-    skills: ["AutoCAD", "SolidWorks", "Orthographic Projection", "Isometric Views", "Sectional Views", "Dimensioning", "Machine Drawing"],
   },
 ];
 

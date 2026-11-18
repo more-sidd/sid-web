@@ -22,11 +22,21 @@ const GROUPS: {
    *  hues come from the verified keyword palette, so they already clear
    *  4.5:1 as text on every background this page uses. */
   tone: 'blue' | 'pink' | 'amber';
+  /** The display photo in the overview column. Swap the path to change it —
+   *  these are a first pass at the most representative shot in each set. */
+  hero: string;
+  heroAlt: string;
+  /** Focal point for the crop, as `object-position`. A fixed-ratio frame
+   *  crops hard, and the subject is rarely dead centre. */
+  heroPos?: string;
 }[] = [
   {
     id: 'robotics',
     title: 'Robotics & autonomy',
     tone: 'blue',
+    hero: '/gallery/Pupper4.jpg',
+    heroAlt: 'Wiring the Pupper v3 quadruped at a lab bench',
+    heroPos: '52% 68%',   // the robot, not the shoulder above it
     blurb: 'Legged locomotion, SLAM navigation and agents that decide where to go next.',
     categories: ['Legged Robots/ Quadrupeds', 'Autonomous Navigation',
                  'Reinforcement Learning', 'Autonomous Systems'],
@@ -35,6 +45,9 @@ const GROUPS: {
     id: 'wearable',
     title: 'Wearable & assistive',
     tone: 'pink',
+    hero: '/gallery/pros-v2-hand.jpg',
+    heroAlt: 'The powered ankle prosthesis linkage held in one hand',
+    heroPos: '50% 55%',   // the linkage sits below centre in a tall frame
     blurb: 'Hardware worn on the body, built to give something back to the person wearing it.',
     categories: ['Wearable Robotics', 'Assistive Robotics'],
   },
@@ -42,6 +55,9 @@ const GROUPS: {
     id: 'design',
     title: 'Design & manufacturing',
     tone: 'amber',
+    hero: '/gallery/sink-marks.png',
+    heroAlt: 'SolidWorks Plastics sink-mark analysis of an airbag housing',
+    heroPos: '48% 50%',
     blurb: 'CAD, drafting, FEA and the simulation work behind parts that get made.',
     categories: ['Manufacturing Simulation', 'CAD & Drafting'],
   },
@@ -107,6 +123,17 @@ export default function Portfolio() {
                 {g.title}
                 <span className="pf-ov-count">{g.items.length}</span>
               </button>
+              <figure className="pf-ov-hero">
+                <img
+                  src={g.hero}
+                  alt={g.heroAlt}
+                  loading="lazy"
+                  style={g.heroPos ? { objectPosition: g.heroPos } : undefined}
+                />
+              </figure>
+
+              <p className="pf-ov-label">Project list</p>
+
               <ul className="pf-ov-list">
                 {g.items.map(p => (
                   <li key={p.id}>
@@ -150,6 +177,7 @@ export default function Portfolio() {
                       {p.status === 'in-progress' && <span className="status-dot" aria-hidden="true" />}
                       {p.status === 'in-progress' ? 'In progress' : 'Complete'}
                     </span>
+                    {p.dates && <span className="pf-dates">{p.dates}</span>}
                   </p>
 
                   <h3 className="pf-entry-title">{p.shortTitle ?? p.title}</h3>

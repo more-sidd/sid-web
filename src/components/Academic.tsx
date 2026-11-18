@@ -70,6 +70,12 @@ export default function Academic() {
                     <ul className="entry-bullets">
                       {x.responsibilities.map((r, ri) => <li key={ri}>{r}</li>)}
                     </ul>
+
+                    {x.tools && x.tools.length > 0 && (
+                      <div className="tag-wrap" style={{ marginTop: '0.8rem' }}>
+                        {x.tools.map(t => <span key={t} className="tag tag-sm">{t}</span>)}
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}

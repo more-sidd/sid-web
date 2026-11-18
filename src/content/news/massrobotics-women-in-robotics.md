@@ -1,25 +1,27 @@
 ---
 title: MassRobotics Women in Robotics Meetups
 date: 2026-04-01
-excerpt: A year of showing up to the MassRobotics Women in Robotics meetups in Boston, as an active member and regular attendee.
+excerpt: A year of showing up to the MassRobotics Women in Robotics meetups in Boston, where the value is in the months rather than any one evening.
 tags: [Community, Events]
 cover: /gallery/massrob1.jpg
 coverAlt: A MassRobotics Women in Robotics meetup in Boston
 draft: false
 ---
 
-For the past year I've been an active member and regular attendee of the
-**MassRobotics Women in Robotics** meetups in Boston.
+Over the past year, I have been an active member and regular attendee of the
+**MassRobotics Women in Robotics** meetups here in Boston.
 
-MassRobotics is the Boston area's robotics hub, and this series is its
-recurring gathering for women working across robotics and engineering — a mix
-of talks, demos, and the hallway conversations that are genuinely the point of
-going.
+MassRobotics serves as the core robotics hub for the Boston area, and this
+meetup series is its recurring gathering for women working across engineering,
+research, and industry. Every session features a mix of technical talks, live
+hardware demos, and the informal hallway conversations that are honestly the
+main reason to go.
 
-Showing up consistently over a year is most of the value. You start
-recognizing people, the conversations get past the introductory stage, and you
-end up with a real network across labs and startups rather than a stack of
-business cards.
+The real value comes from simply showing up consistently over months. After a
+year, you stop seeing strangers and start recognizing familiar faces, the
+discussions move right past surface-level introductions, and you build a
+genuine, lasting network spanning local university labs and robotics startups
+instead of walking away with a stack of forgotten business cards.
 
 ![A MassRobotics Women in Robotics meetup](/gallery/massrob2.png)
 

@@ -48,20 +48,21 @@ export default function Index() {
 
             <div className="idx-bio">
               <p>
-                I have been a <span className="kw kw-blue">curious learner</span> for as
-                long as I can remember — opening up toys and computers, with a soft spot
-                for <span className="kw kw-amber">astronomy and mechanics</span>. That
-                turned into mechanical engineering, and then into robotics.
+                I&rsquo;m a mechanical engineer who likes building real, physical machines
+                that work reliably and efficiently. My background spans{' '}
+                <span className="kw kw-green">CAD, prototyping, and manufacturing</span>,
+                alongside{' '}
+                <span className="kw kw-blue">sensor fusion and control systems</span>.
               </p>
               <p>
-                Now I build <span className="kw kw-green">robot hardware</span>: the
-                simulation first, then{' '}
-                <span className="kw kw-blue">validating it on the real thing</span>.
-                TurtleBot, a robot arm, Pupper v3, or my own builds. I am especially
-                drawn to <span className="kw kw-pink">medical robotics</span>. I hold the{' '}
-                <span className="kw kw-amber">Global Student Award</span> at Northeastern
-                and have published in{' '}
-                <span className="kw kw-orange">AIP Conference Proceedings</span>.
+                Right now, I&rsquo;m focused on robotics and physical AI&mdash;specifically
+                the messy, rewarding work of{' '}
+                <span className="kw kw-pink">closing the sim-to-real gap</span>. With
+                software and AI tools becoming so accessible, the real bottleneck
+                isn&rsquo;t writing code; it&rsquo;s getting{' '}
+                <span className="kw kw-amber">traditional hardware and mechanical systems</span>{' '}
+                to actually perform in the real world. That&rsquo;s the problem I want to
+                solve.
               </p>
             </div>
 

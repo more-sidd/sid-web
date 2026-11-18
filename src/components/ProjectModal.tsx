@@ -81,7 +81,7 @@ export default function ProjectModal({ project, onClose }: Props) {
 
             {[
               { label: 'Objectives',    items: project.objectives },
-              { label: 'Results',       items: project.results },
+              { label: 'Personal contributions', items: project.results },
               { label: 'Key Takeaways', items: project.keyTakeaways },
               { label: 'Goals', items: project.goals },
             ]
