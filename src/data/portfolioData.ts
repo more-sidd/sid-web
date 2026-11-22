@@ -231,35 +231,9 @@ export const projects: Project[] = [
   },
 
   /* ── Not in the latest content pass ──────────────────────────────────────
-     These two were on the site before and were not included in the rewrite.
-     Left in place rather than deleted, since removing work is not something
-     to do by inference. Delete these two entries if they are meant to go.
+     Still on the site but absent from the rewrite. Left in place rather than
+     deleted, since removing work is not something to do by inference.
      ─────────────────────────────────────────────────────────────────────── */
-  {
-    id: "proj5",
-    title: "Aquatic Hyacinth Cleaner — Q-Learning Navigation Agent",
-    shortTitle: "Q-Learning Navigation Agent",
-    category: "Reinforcement Learning",
-    status: "complete",
-    description: "Q-learning agent with partial observability solving autonomous aquatic navigation for invasive species removal: 100% completion rate from episode 400 of 5000, clearing all 20 targets in 94 steps.",
-    fullDescription: "A physical aquatic robot can only sense what its sensors detect within a certain range, so it cannot see the entire pond at once. This project designed a Q-learning agent operating under partial observability constraints to navigate a grid-based pond simulation, avoid obstacles, and efficiently remove invasive water hyacinth.",
-    objectives: [
-      "Train an autonomous agent to navigate a partially observable grid environment.",
-      "Solve the blind navigation problem using zone-based state representation.",
-      "Achieve 100% hyacinth removal without global map knowledge.",
-    ],
-    goals: [],
-    keyTakeaways: [
-      "Naive global-state representation fails under partial observability: zone encoding with 16 policies resolves navigation deadlocks the prior approach could not.",
-      "Map reshuffling every 500 episodes balances stable Q-table convergence with generalizability to novel obstacle layouts.",
-    ],
-    results: [
-      "Q-learning agent on a 20x20 grid with 30 obstacles and 20 targets; 100% completion rate sustained from episode 400 of 5000.",
-      "Solved partial observability with 4x4 position zone encoding (16 blind-navigation policies) plus a coverage-scaled exploration bonus inspired by SLAM discovery phases.",
-      "Final greedy evaluation: cleared all 20 hyacinths in 94 steps; multi-robot coordination ready via a shared visited-cells map.",
-    ],
-    images: ["/gallery/grid-visualization.png"],
-  },
   {
     id: "proj8",
     title: "CAD and Engineering Drawing",

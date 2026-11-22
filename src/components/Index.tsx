@@ -26,6 +26,17 @@ export default function Index() {
 
   return (
     <section id="index" className="idx">
+      {/* Outside the max-width container on purpose: this one runs edge to
+          edge, which is what makes it read as a banner rather than a figure. */}
+      <figure className="idx-banner">
+        <img
+          src="/gallery/soldering.webp"
+          alt="Siddhi soldering a small circuit board at a workbench"
+          width={2000}
+          height={1125}
+        />
+      </figure>
+
       <div className="max-w-6xl mx-auto px-6" style={{ width: '100%' }}>
         <div className="idx-meta">
           <span>Portfolio / {new Date().getFullYear()}</span>
@@ -90,12 +101,8 @@ export default function Index() {
             </dl>
           </div>
 
-          {/* ── Right: portrait, then the two live panels ── */}
+          {/* ── Right: the two live panels ── */}
           <aside className="idx-side">
-            <div className="idx-avatar">
-              <img src={personalInfo.photo} alt="Siddhi More" width={300} height={300} />
-            </div>
-
             {building && (
               <div className="info-card">
                 <p className="info-card-label">
@@ -124,6 +131,18 @@ export default function Index() {
                 </button>
               </div>
             )}
+
+            {/* Square, which is the photo's own ratio, so the headshot is
+                uncropped. */}
+            <figure className="idx-headshot">
+              <img
+                src={personalInfo.photo}
+                alt="Siddhi More"
+                width={800}
+                height={800}
+                loading="lazy"
+              />
+            </figure>
           </aside>
         </div>
       </div>

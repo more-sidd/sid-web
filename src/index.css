@@ -355,13 +355,53 @@ body {
    ────────────────────────────────────────────────────────────────────── */
 
 .idx {
-  min-height: auto;
-  display: flex;
-  align-items: center;
+  display: block;
   border-bottom: 1px solid var(--rule-strong);
-  padding: 7rem 0 4rem;
+  /* Top padding clears the fixed nav so the banner starts below it rather
+     than running underneath, where the nav text would sit on the photo. */
+  padding: 4.2rem 0 4rem;
 }
 
+/* Full-bleed: this sits outside the max-width container, so it spans the
+   window. Capped against viewport height so it stays a banner on a wide
+   monitor instead of swallowing the first screen. */
+.idx-banner {
+  width: 100%;
+  /* The band still spans the window, but only as a paper backdrop: the photo
+     itself is a centred block roughly 45% of the width, with page colour
+     either side. Narrowing the image is also what rescues the crop — at full
+     bleed a 3.7:1 frame kept only 41% of the photo and the breadboard fell
+     off the bottom; at this width it keeps most of the height. */
+  aspect-ratio: 21 / 9;
+  max-height: 40vh;
+  overflow: hidden;
+  background: var(--bg);
+  line-height: 0;
+  margin-bottom: 2.4rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  justify-content: center;
+}
+.idx-banner img {
+  height: 100%;
+  width: min(46%, 820px);
+  flex-shrink: 0;
+  object-fit: cover;
+  /* This photo is 16:9, slightly wider than the ~1.68:1 block, so the crop
+     is horizontal and only takes 5% off the sides. The full height is kept,
+     which is why the whole frame survives here where a full-bleed banner
+     was cutting it badly. */
+  object-position: 50% 50%;
+  display: block;
+}
+
+@media (max-width: 760px) {
+  .idx-banner { aspect-ratio: 16 / 9; max-height: 32vh; margin-bottom: 1.8rem; }
+  /* On a phone the side margins would leave the photo too small to read. */
+  .idx-banner img { width: 100%; }
+}
+
+/* Native 2:3, so nothing is cropped. */
 .idx-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(240px, 0.8fr);
@@ -452,6 +492,18 @@ body {
 
 /* The two right-hand panels: currently building, most recent writing. */
 .idx-side { display: flex; flex-direction: column; gap: 0.9rem; }
+
+/* Headshot under the two panels, filling the rail. 1:1 is the photo's own
+   ratio, so nothing is cropped. */
+.idx-headshot {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--bg-alt);
+  line-height: 0;
+}
+.idx-headshot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .info-card {
   border: 1px solid var(--rule);
